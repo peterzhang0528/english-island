@@ -1,0 +1,130 @@
+{
+"door": {
+"f": "w-door.mp3",
+"d": 0.68
+},
+"tree": {
+"f": "w-tree.mp3",
+"d": 0.74
+},
+"log": {
+"f": "w-log.mp3",
+"d": 0.86
+},
+"plank": {
+"f": "w-plank.mp3",
+"d": 0.78
+},
+"stick": {
+"f": "w-stick.mp3",
+"d": 0.88
+},
+"stone": {
+"f": "w-stone.mp3",
+"d": 0.88
+},
+"axe": {
+"f": "w-axe.mp3",
+"d": 0.92
+},
+"chop": {
+"f": "w-chop.mp3",
+"d": 0.84
+},
+"timber": {
+"f": "w-timber.mp3",
+"d": 1.6
+},
+"flower": {
+"f": "w-flower.mp3",
+"d": 0.7
+},
+"sheep": {
+"f": "w-sheep.mp3",
+"d": 0.8
+},
+"water": {
+"f": "w-water.mp3",
+"d": 0.78
+},
+"cloud": {
+"f": "w-cloud.mp3",
+"d": 0.7
+},
+"sun": {
+"f": "w-sun.mp3",
+"d": 0.92
+},
+"grass": {
+"f": "w-grass.mp3",
+"d": 0.84
+},
+"table": {
+"f": "w-table.mp3",
+"d": 0.74
+},
+"open the door!": {
+"f": "s-open.mp3",
+"d": 1.24
+},
+"hi! i'm jj. welcome to my world.": {
+"f": "s-hi.mp3",
+"d": 3.4
+},
+"look! a tree. tap the tree!": {
+"f": "s-look-tree.mp3",
+"d": 2.72
+},
+"you got a log!": {
+"f": "s-got-log.mp3",
+"d": 1.4
+},
+"put the log on the table.": {
+"f": "s-put-log.mp3",
+"d": 1.98
+},
+"one log makes four planks.": {
+"f": "s-one-log.mp3",
+"d": 2.32
+},
+"two planks make sticks.": {
+"f": "s-two-planks.mp3",
+"d": 1.9
+},
+"we need stone. tap the rocks!": {
+"f": "s-need-stone.mp3",
+"d": 2.64
+},
+"three stones! back to the table.": {
+"f": "s-three-stones.mp3",
+"d": 2.32
+},
+"tap the table!": {
+"f": "s-tap-table.mp3",
+"d": 1.14
+},
+"let's see what we can make!": {
+"f": "s-lets-see.mp3",
+"d": 1.56
+},
+"you made an axe!": {
+"f": "s-made-axe.mp3",
+"d": 1.54
+},
+"now chop the tree. fast!": {
+"f": "s-now-chop.mp3",
+"d": 2.28
+},
+"good job! that's day one.": {
+"f": "s-good-job.mp3",
+"d": 1.84
+},
+"timber!": {
+"f": "s-timber.mp3",
+"d": 1.12
+},
+"tomorrow, let's make a cake for the zombie!": {
+"f": "s-tomorrow.mp3",
+"d": 2.96
+}
+}
