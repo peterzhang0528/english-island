@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 
 export type IslandProgress = {
+  level?: 1 | 2;
   ready: boolean;
   step: number;
   busy: boolean;
@@ -14,19 +15,28 @@ export type IslandProgress = {
 
 export default function IslandGame({
   className = "",
+  level = 1,
+  onNavigate,
   onProgress,
 }: {
   className?: string;
+  level?: 1 | 2;
+  onNavigate?: (level: 1 | 2) => void;
   onProgress?: (progress: IslandProgress) => void;
 }) {
   const frame = useRef<HTMLIFrameElement>(null);
   const onProgressRef = useRef(onProgress);
+  const onNavigateRef = useRef(onNavigate);
+  useEffect(() => { onNavigateRef.current = onNavigate; }, [onNavigate]);
 
   useEffect(() => { onProgressRef.current = onProgress; }, [onProgress]);
   useEffect(() => {
     const receive = (event: MessageEvent) => {
       if (event.origin !== window.location.origin || event.source !== frame.current?.contentWindow) return;
+      if (event.data?.type === "island-navigate" && (event.data.level === 1 || event.data.level === 2)) { onNavigateRef.current?.(event.data.level); return; }
       if (event.data?.type !== "island-status") return;
+      if (event.data.level && event.data.level !== level) return;
+      event.data.level = level;
       onProgressRef.current?.(event.data);
       window.dispatchEvent(new CustomEvent("island-status", { detail: event.data }));
     };
@@ -45,7 +55,7 @@ export default function IslandGame({
       window.removeEventListener("message", receive);
       window.removeEventListener("island-command", command);
     };
-  }, []);
+  }, [level]);
 
-  return <iframe ref={frame} src="/game/index.html" title="英语小岛 · 互动英语冒险" className={className} style={{ width: "100%", height: "100%", border: 0, display: "block" }} allow="autoplay; fullscreen" allowFullScreen />;
+  return <iframe ref={frame} src={level === 2 ? "/game/day2.html" : "/game/index.html"} title={level === 2 ? "第二关 · 给僵尸做蛋糕" : "第一关 · 第一把斧头"} className={className} style={{ width: "100%", height: "100%", border: 0, display: "block" }} allow="autoplay; fullscreen" allowFullScreen />;
 }

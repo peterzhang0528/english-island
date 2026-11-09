@@ -1,0 +1,51 @@
+.day-two .loading { background:#e6e6cd;color:#6a7f50; }
+.day-two .title { background:linear-gradient(90deg,#283b235e,#30462412 70%),linear-gradient(0deg,#25362640,transparent 60%); }
+.day-two .title h1 { font-size:clamp(32px,4.1vw,59px); }
+.day-two .intro-tag { color:#fff2c8; }
+.day-two .pocket { max-width:calc(100% - 250px); }
+.day-two .pocket li { padding-left:9px; }
+.recipe { position:absolute;z-index:2;top:67px;left:22px;width:204px;padding:13px 14px 10px;background:#faf8eee8;color:#536449;border:1px solid #ffffffb8;border-radius:11px;box-shadow:0 5px 18px #30411e0e;pointer-events:none;transition:opacity .2s; }
+.recipe p { font-size:8px;letter-spacing:1.3px;font-weight:800;margin:0 0 11px;color:#8c9976; }
+.recipe p span { display:block;letter-spacing:0;font-size:10px;font-weight:500;margin-top:2px; }
+.recipe ol { list-style:none;padding:0;margin:0;display:grid;gap:9px; }
+.recipe li { display:flex;align-items:center;gap:9px;opacity:.55;transition:opacity .25s; }
+.recipe li.collected { opacity:1; }
+.recipe li>span { width:24px;font-size:22px;text-align:center; }
+.recipe b { font-size:11px;line-height:1.4;letter-spacing:.6px;flex:1; }
+.recipe small { display:block;font-size:9px;font-weight:400;letter-spacing:0;color:#849173; }
+.recipe i { font-size:12px;font-style:normal;color:#6b8c4c; }
+.recipe-note { margin-top:11px;padding-top:9px;border-top:1px solid #dee4d3;font-size:8px;color:#98a187; }
+.day-two .loot { bottom:145px; }
+.day-two .loot-label { color:#fff8d7;text-shadow:0 2px 8px #314228; }
+.day-two .loot b { color:#ffdf82; }
+.day-two .loot i { opacity:1; }
+.friend-exchange { display:grid;gap:7px;margin:0 0 23px; }
+.friend-exchange button { text-align:left;background:none;border:0;padding:0;color:#627a4c;font-size:12px;font-weight:700; }
+.friend-exchange span { font-size:10px;font-weight:400;color:#98a286;margin-left:5px; }
+.sum-links { display:flex;justify-content:space-between;gap:12px; }
+.standalone-tools { position:absolute;top:14px;right:15px;z-index:6;display:flex;gap:6px; }
+.standalone-tools button,.standalone-tools #snd { border:1px solid #ffffffb9;border-radius:7px;background:#f9f7eee8;color:#5d7248;padding:7px 10px;font-size:10px;height:auto;width:auto;box-shadow:0 2px 8px #17362515; }
+.standalone .pocket { top:58px; }
+.standalone .recipe { top:102px; }
+.standalone #task-action { top:58px; }
+.day-two .say.zombie-speaking .guide-avatar>span { background:#93a76d; }
+.day-two .say.zombie-speaking { border-color:#d5e1be; }
+@media(max-width:700px) {
+ .day-two .pocket { max-width:calc(100% - 24px);gap:4px; }
+ .day-two .pocket li { padding:0 6px;height:24px; }
+ .recipe { top:78px;left:12px;width:165px;padding:10px; }
+ .recipe p { font-size:7px;margin-bottom:8px; }
+ .recipe p span { display:none; }
+ .recipe ol { gap:5px; }
+ .recipe li>span { font-size:17px;width:20px; }
+ .recipe b { font-size:9px; }
+ .recipe small { display:inline;font-size:8px;margin-left:4px; }
+ .recipe-note { font-size:7px;margin-top:7px;padding-top:7px; }
+ .day-two .loot { bottom:165px; }
+ .day-two .title h1 { font-size:clamp(31px,7.5vw,46px); }
+ .friend-exchange span { display:block;margin:2px 0 0; }
+ .standalone .recipe { top:106px; }
+ .standalone #task-action { top:auto; }
+ .standalone-tools { top:10px;right:12px; }
+}
+@media(max-height:500px) and (min-width:701px) { .recipe { width:174px;padding:9px 11px;top:65px; }.recipe ol{gap:4px}.recipe p{margin-bottom:7px}.recipe-note{display:none}.day-two .loot{bottom:110px} }

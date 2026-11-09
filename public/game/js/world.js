@@ -612,3 +612,9 @@ function updateStatus() {
 }
 setInterval(updateStatus, 150); updateStatus();
 window.addEventListener("pagehide", () => { voice.stop(); renderer.setAnimationLoop(null); renderer.dispose(); });
+
+$("#sum-next-level").addEventListener("click", () => {
+  voice.stop();
+  if (parent !== window) parent.postMessage({ type: "island-navigate", level: 2 }, location.origin);
+  else location.href = "./day2.html";
+});
