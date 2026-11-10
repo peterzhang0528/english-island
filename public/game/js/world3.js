@@ -236,6 +236,7 @@ async function makeCard(){const button=$('#sum-card');button.disabled=true;butto
  const url=c.toDataURL('image/png');$('#sum-img').src=url;$('#sum-img').hidden=false;const link=$('#sum-dl');link.href=url;link.download=`english-island-day-three-${Date.now()}.png`;link.hidden=false;button.textContent='卡片已生成 ↓';sfx.ding();$('#sum-img').scrollIntoView({behavior:reduced?'auto':'smooth',block:'nearest'});
  }catch(error){console.error(error);button.textContent='生成失败，点击重试';}finally{button.disabled=false;}}
 function goPrevious(){voice.stop();if(parent!==window)parent.postMessage({type:'island-navigate',level:2},location.origin);else location.href='./day2.html';}
+$('#sum-next').addEventListener('click',()=>{voice.stop();if(parent!==window)parent.postMessage({type:'island-navigate',level:4},location.origin);else location.href='./story.html?level=4';});
 $('#sum-card').addEventListener('click',()=>void makeCard());$('#sum-again').addEventListener('click',()=>location.reload());$('#sum-previous').addEventListener('click',goPrevious);$('#back-level').addEventListener('click',goPrevious);$('#sum-close').addEventListener('click',()=>{ui.summary.hidden=true;canvas.focus({preventScroll:true});void say('What else can you find?','留在花园，点花朵、溪流、树和朋友，继续发现英语。',{remember:false});updateStatus();});
 // Pause reasons compose: closing help never resumes a still-hidden or externally paused game.
 const helpDialog=$('#help-dialog'),pauseReasons=new Set();

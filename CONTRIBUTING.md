@@ -14,16 +14,16 @@
 
 ## 一次提交的完整过程
 
-1. Fork 仓库，将自己的 Fork 克隆到本地。已有 Fork 可以先在 GitHub 点击 **Sync fork** 同步原仓库的最新 `main`。按照 [README](README.md#完整网站) 安装依赖并运行。
+1. Fork 仓库，将自己的 Fork 克隆到本地。已有 Fork 可以先在 GitHub 点击 **Sync fork** 同步原仓库的最新 `main`。按照 [README](README.md#本地开始) 安装依赖并运行。
 2. 从最新 `main` 创建分支，例如：
 
    ```sh
    git switch main
    git pull --ff-only
-   git switch -c feat/day3-garden
+   git switch -c feat/day11-story
    ```
 
-3. 完成一个范围清楚的改动。新关卡参照 [关卡开发指南](docs/ADDING_LEVELS.md)，优先新增独立文件；修改共享模块时同时检查现有关卡。
+3. 完成一个范围清楚的改动。新关卡参照 [关卡开发指南](docs/ADDING_LEVELS.md)，优先复用故事流程、添加关卡数据与场景；修改共享模块时同时检查现有关卡。
 4. 运行 `npm run typecheck`、`npm test`、`npm run build`，并实际体验受影响的流程。
 5. 用 `git diff` 检查即将提交的内容，分清源码与本地产物。按实际改动选择文件后提交：
 
@@ -36,13 +36,13 @@
 
    ```sh
    git diff --cached
-   git commit -m "feat(level3): add a garden adventure"
-   git push -u origin feat/day3-garden
+   git commit -m "feat(level11): add the next story adventure"
+   git push -u origin feat/day11-story
    ```
 6. 在 GitHub 打开 PR，目标分支选择原仓库的 `main`。按模板说明改了什么、关联哪个 Issue、如何验证；界面改动附截图，音色改动附可比较的前后样例或文件名。
 7. 根据评审补充改动。维护者检查后合并；合并到仓库与发布线上网站是两个独立步骤。
 
-首次协作时可以保持 PR 很小，例如只修一个按钮或一句字幕。尚未完成的工作可以开 Draft PR，并写清待办。
+首次协作时可以保持 PR 很小，例如只修一个按钮或一句字幕。自动修复任务也遵循一个问题一个 PR；合并与发布均等待维护者针对该次改动确认。尚未完成的工作可以开 Draft PR，并写清待办。
 
 ## 代码与素材约定
 
@@ -51,7 +51,7 @@
 - 旁白统一使用共享语音模块。新增配音要维护清单并核对声线，不要在单个关卡里另建默认系统朗读器。
 - 只提交自己有权贡献的代码和素材，标注来源与许可。AI 生成内容也要说明工具或来源，不要把他人的素材一并标成自己原创。
 - 不提交密钥、`.env`、`node_modules/`、构建输出、临时录音或本地工具状态。新增依赖时同时提交 `package.json` 与 `package-lock.json`。
-- 不随意替换 Three.js 或其压缩文件；升级时保留版权声明，并单独验证两个关卡。
+- 不随意替换 Three.js 或其压缩文件；升级时保留版权声明，并验证所有受影响的关卡。
 
 ## 分支、提交和版本
 

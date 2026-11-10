@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { chapters, dayNames, gamePath, isLevel, type Level } from "../lib/chapters";
 
 export type IslandProgress = {
-  level?: 1 | 2 | 3;
+  level?: Level;
   ready: boolean;
   step: number;
   busy: boolean;
@@ -20,8 +21,8 @@ export default function IslandGame({
   onProgress,
 }: {
   className?: string;
-  level?: 1 | 2 | 3;
-  onNavigate?: (level: 1 | 2 | 3) => void;
+  level?: Level;
+  onNavigate?: (level: Level) => void;
   onProgress?: (progress: IslandProgress) => void;
 }) {
   const frame = useRef<HTMLIFrameElement>(null);
@@ -33,7 +34,7 @@ export default function IslandGame({
   useEffect(() => {
     const receive = (event: MessageEvent) => {
       if (event.origin !== window.location.origin || event.source !== frame.current?.contentWindow) return;
-      if (event.data?.type === "island-navigate" && (event.data.level === 1 || event.data.level === 2 || event.data.level === 3)) { onNavigateRef.current?.(event.data.level); return; }
+      if (event.data?.type === "island-navigate" && isLevel(event.data.level)) { onNavigateRef.current?.(event.data.level); return; }
       if (event.data?.type !== "island-status") return;
       if (event.data.level && event.data.level !== level) return;
       event.data.level = level;
@@ -57,5 +58,5 @@ export default function IslandGame({
     };
   }, [level]);
 
-  return <iframe ref={frame} src={level === 1 ? "/game/index.html" : `/game/day${level}.html`} title={level === 3 ? "第三关 · 和新朋友种花园" : level === 2 ? "第二关 · 给僵尸做蛋糕" : "第一关 · 第一把斧头"} className={className} style={{ width: "100%", height: "100%", border: 0, display: "block" }} allow="autoplay; fullscreen" allowFullScreen />;
+  return <iframe ref={frame} src={gamePath(level)} title={`${dayNames[level].replace("天", "关")} · ${chapters[level].title}`} className={className} style={{ width: "100%", height: "100%", border: 0, display: "block" }} allow="autoplay; fullscreen" allowFullScreen />;
 }

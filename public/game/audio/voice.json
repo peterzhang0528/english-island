@@ -326,5 +326,477 @@
   "bee": {
     "f": "l3-jj-w-bee.mp3",
     "d": 0.765
+  },
+  "our flowers need a bridge!": {
+    "f": "l4-jj-s-our-flowers-need-a-bridge-b7716fa6.mp3",
+    "d": 1.81
+  },
+  "find three planks.": {
+    "f": "l4-jj-s-find-three-planks-bfefc9d8.mp3",
+    "d": 1.715
+  },
+  "three planks for our bridge.": {
+    "f": "l4-jj-s-three-planks-for-our-bridge-04b6d4d7.mp3",
+    "d": 1.977
+  },
+  "tie the rope.": {
+    "f": "l4-jj-s-tie-the-rope-0e52f3eb.mp3",
+    "d": 0.935
+  },
+  "the planks stay together!": {
+    "f": "l4-jj-s-the-planks-stay-together-38cb0fb8.mp3",
+    "d": 1.721
+  },
+  "tap the hammer.": {
+    "f": "l4-jj-s-tap-the-hammer-5645f667.mp3",
+    "d": 1.368
+  },
+  "tap, tap! strong and safe.": {
+    "f": "l4-jj-s-tap-tap-strong-and-safe-e4e0d4b1.mp3",
+    "d": 3.111
+  },
+  "step onto the bridge.": {
+    "f": "l4-jj-s-step-onto-the-bridge-ce289ea8.mp3",
+    "d": 1.377
+  },
+  "we can cross the river!": {
+    "f": "l4-jj-s-we-can-cross-the-river-af0d31d3.mp3",
+    "d": 1.462
+  },
+  "push the flower cart.": {
+    "f": "l4-jj-s-push-the-flower-cart-f26ceef7.mp3",
+    "d": 1.113
+  },
+  "our flowers are ready for the market.": {
+    "f": "l4-jj-s-our-flowers-are-ready-for-3b818a36.mp3",
+    "d": 1.989
+  },
+  "we built a bridge together!": {
+    "f": "l4-jj-s-we-built-a-bridge-together-620fbbe2.mp3",
+    "d": 1.889
+  },
+  "let's take our flowers to the market!": {
+    "f": "l4-jj-s-let-s-take-our-flowers-38ada370.mp3",
+    "d": 1.894
+  },
+  "rope": {
+    "f": "l4-jj-w-rope-fe4d55b9.mp3",
+    "d": 0.945
+  },
+  "hammer": {
+    "f": "l4-jj-w-hammer-3ef81cb1.mp3",
+    "d": 0.845
+  },
+  "bridge": {
+    "f": "l4-jj-w-bridge-17f29b07.mp3",
+    "d": 0.835
+  },
+  "cart": {
+    "f": "l4-jj-w-cart-1c42ddc0.mp3",
+    "d": 0.588
+  },
+  "welcome to the market!": {
+    "f": "l5-jj-s-welcome-to-the-market-b6a025db.mp3",
+    "d": 1.194
+  },
+  "give our flowers to the shopkeeper.": {
+    "f": "l5-jj-s-give-our-flowers-to-the-37b070f4.mp3",
+    "d": 1.976
+  },
+  "thank you for the lovely flowers!": {
+    "f": "l5-jj-s-thank-you-for-the-lovely-78b113d9.mp3",
+    "d": 1.899
+  },
+  "pick up the basket.": {
+    "f": "l5-jj-s-pick-up-the-basket-aa7f2c20.mp3",
+    "d": 1.194
+  },
+  "a basket for our food.": {
+    "f": "l5-jj-s-a-basket-for-our-food-4793d7f5.mp3",
+    "d": 1.719
+  },
+  "put an apple in the basket.": {
+    "f": "l5-jj-s-put-an-apple-in-the-b853bd90.mp3",
+    "d": 1.723
+  },
+  "a red apple for our journey.": {
+    "f": "l5-jj-s-a-red-apple-for-our-334966a4.mp3",
+    "d": 1.723
+  },
+  "take a loaf of bread.": {
+    "f": "l5-jj-s-take-a-loaf-of-bread-6aac3c19.mp3",
+    "d": 1.628
+  },
+  "bread for our hungry friends.": {
+    "f": "l5-jj-s-bread-for-our-hungry-friends-752191c4.mp3",
+    "d": 2.498
+  },
+  "open the map.": {
+    "f": "l5-jj-s-open-the-map-b012c653.mp3",
+    "d": 0.945
+  },
+  "a little sheep is missing!": {
+    "f": "l5-jj-s-a-little-sheep-is-missing-a6efaf05.mp3",
+    "d": 1.889
+  },
+  "let's help the little sheep.": {
+    "f": "l5-jj-s-let-s-help-the-little-347de8b4.mp3",
+    "d": 1.802
+  },
+  "follow the path beyond the market.": {
+    "f": "l5-jj-s-follow-the-path-beyond-the-186442e8.mp3",
+    "d": 1.82
+  },
+  "basket": {
+    "f": "l5-jj-w-basket-fa76d99a.mp3",
+    "d": 0.595
+  },
+  "apple": {
+    "f": "l5-jj-w-apple-3a7bd3e2.mp3",
+    "d": 0.776
+  },
+  "bread": {
+    "f": "l5-jj-w-bread-985604c2.mp3",
+    "d": 0.845
+  },
+  "map": {
+    "f": "l5-jj-w-map-60be9861.mp3",
+    "d": 1.106
+  },
+  "the map leads to the meadow.": {
+    "f": "l6-jj-s-the-map-leads-to-the-be82efa3.mp3",
+    "d": 1.807
+  },
+  "look for the footprints.": {
+    "f": "l6-jj-s-look-for-the-footprints-89bf716b.mp3",
+    "d": 1.725
+  },
+  "small footprints in the grass.": {
+    "f": "l6-jj-s-small-footprints-in-the-grass-f653a2a7.mp3",
+    "d": 2.062
+  },
+  "open the gate.": {
+    "f": "l6-jj-s-open-the-gate-6e84c411.mp3",
+    "d": 1.279
+  },
+  "the path is open!": {
+    "f": "l6-jj-s-the-path-is-open-e72baf16.mp3",
+    "d": 1.123
+  },
+  "find the little sheep.": {
+    "f": "l6-jj-s-find-the-little-sheep-31219a99.mp3",
+    "d": 1.455
+  },
+  "there you are, little sheep!": {
+    "f": "l6-jj-s-there-you-are-little-sheep-9417fa4d.mp3",
+    "d": 2.167
+  },
+  "give the sheep some hay.": {
+    "f": "l6-jj-s-give-the-sheep-some-hay-2927827c.mp3",
+    "d": 1.279
+  },
+  "yummy hay! the sheep is happy.": {
+    "f": "l6-jj-s-yummy-hay-the-sheep-is-38ee670c.mp3",
+    "d": 3.041
+  },
+  "pick up the soft wool.": {
+    "f": "l6-jj-s-pick-up-the-soft-wool-8c6f2f76.mp3",
+    "d": 1.186
+  },
+  "thank you! here is some wool.": {
+    "f": "l6-jj-s-thank-you-here-is-some-5e454166.mp3",
+    "d": 1.986
+  },
+  "our little friend is safe.": {
+    "f": "l6-jj-s-our-little-friend-is-safe-36fffc84.mp3",
+    "d": 1.455
+  },
+  "let's make a sail with the wool.": {
+    "f": "l6-jj-s-let-s-make-a-sail-5f301f80.mp3",
+    "d": 1.55
+  },
+  "footprint": {
+    "f": "l6-jj-w-footprint-4ba8deed.mp3",
+    "d": 0.856
+  },
+  "gate": {
+    "f": "l6-jj-w-gate-c974e17b.mp3",
+    "d": 0.498
+  },
+  "hay": {
+    "f": "l6-jj-w-hay-4e30ea25.mp3",
+    "d": 0.498
+  },
+  "wool": {
+    "f": "l6-jj-w-wool-feb672a2.mp3",
+    "d": 0.688
+  },
+  "let's sail across the bay!": {
+    "f": "l7-jj-s-let-s-sail-across-the-188a4495.mp3",
+    "d": 1.628
+  },
+  "put the wood on the dock.": {
+    "f": "l7-jj-s-put-the-wood-on-the-76dc89f2.mp3",
+    "d": 1.542
+  },
+  "wood for a little boat.": {
+    "f": "l7-jj-s-wood-for-a-little-boat-3f53155a.mp3",
+    "d": 1.455
+  },
+  "raise the wool sail.": {
+    "f": "l7-jj-s-raise-the-wool-sail-5f82ce4e.mp3",
+    "d": 1.47
+  },
+  "look! a white sail.": {
+    "f": "l7-jj-s-look-a-white-sail-6ab1366d.mp3",
+    "d": 2.225
+  },
+  "step into the boat.": {
+    "f": "l7-jj-s-step-into-the-boat-ec8c7791.mp3",
+    "d": 1.107
+  },
+  "all aboard, my friend!": {
+    "f": "l7-jj-s-all-aboard-my-friend-70c23dab.mp3",
+    "d": 1.208
+  },
+  "catch the wind.": {
+    "f": "l7-jj-s-catch-the-wind-fb6a6ed7.mp3",
+    "d": 1.291
+  },
+  "the wind is pushing our boat.": {
+    "f": "l7-jj-s-the-wind-is-pushing-our-33ff2d78.mp3",
+    "d": 1.698
+  },
+  "sail to the island.": {
+    "f": "l7-jj-s-sail-to-the-island-ff3304f7.mp3",
+    "d": 1.271
+  },
+  "look! a lighthouse on the island.": {
+    "f": "l7-jj-s-look-a-lighthouse-on-the-7d4f3285.mp3",
+    "d": 2.162
+  },
+  "we crossed the bay together.": {
+    "f": "l7-jj-s-we-crossed-the-bay-together-a84dc21e.mp3",
+    "d": 1.455
+  },
+  "let's help the lighthouse shine.": {
+    "f": "l7-jj-s-let-s-help-the-lighthouse-8e23de16.mp3",
+    "d": 1.982
+  },
+  "wood": {
+    "f": "l7-jj-w-wood-99f7855e.mp3",
+    "d": 0.597
+  },
+  "sail": {
+    "f": "l7-jj-w-sail-d0350a60.mp3",
+    "d": 1.021
+  },
+  "boat": {
+    "f": "l7-jj-w-boat-25cdb46d.mp3",
+    "d": 1.108
+  },
+  "wind": {
+    "f": "l7-jj-w-wind-9b58e681.mp3",
+    "d": 0.761
+  },
+  "island": {
+    "f": "l7-jj-w-island-28cd2c5c.mp3",
+    "d": 0.855
+  },
+  "the lighthouse is dark.": {
+    "f": "l8-jj-s-the-lighthouse-is-dark-da13f250.mp3",
+    "d": 1.464
+  },
+  "climb the stairs.": {
+    "f": "l8-jj-s-climb-the-stairs-a581c94b.mp3",
+    "d": 1.383
+  },
+  "up, up! one step at a time.": {
+    "f": "l8-jj-s-up-up-one-step-at-e976f460.mp3",
+    "d": 2.426
+  },
+  "find the little key.": {
+    "f": "l8-jj-s-find-the-little-key-88bd78d4.mp3",
+    "d": 1.628
+  },
+  "a key for the lighthouse door.": {
+    "f": "l8-jj-s-a-key-for-the-lighthouse-576cbf21.mp3",
+    "d": 2.236
+  },
+  "open the door.": {
+    "f": "l8-jj-s-open-the-door-25e12aad.mp3",
+    "d": 0.943
+  },
+  "we found the lantern!": {
+    "f": "l8-jj-s-we-found-the-lantern-2c94ad3f.mp3",
+    "d": 1.372
+  },
+  "turn on the light.": {
+    "f": "l8-jj-s-turn-on-the-light-b10ebfcb.mp3",
+    "d": 0.839
+  },
+  "the light shows the way home.": {
+    "f": "l8-jj-s-the-light-shows-the-way-3ef43a61.mp3",
+    "d": 1.636
+  },
+  "ring the bell.": {
+    "f": "l8-jj-s-ring-the-bell-7cb74651.mp3",
+    "d": 1.021
+  },
+  "ding, ding! the boats are safe.": {
+    "f": "l8-jj-s-ding-ding-the-boats-are-3a867ef5.mp3",
+    "d": 2.672
+  },
+  "our lighthouse is shining!": {
+    "f": "l8-jj-s-our-lighthouse-is-shining-68f1df9a.mp3",
+    "d": 1.976
+  },
+  "clouds are coming. let's help our friends.": {
+    "f": "l8-jj-s-clouds-are-coming-let-s-cae5634c.mp3",
+    "d": 2.42
+  },
+  "stairs": {
+    "f": "l8-jj-w-stairs-0eeea780.mp3",
+    "d": 1.542
+  },
+  "key": {
+    "f": "l8-jj-w-key-2c70e12b.mp3",
+    "d": 1.289
+  },
+  "light": {
+    "f": "l8-jj-w-light-99a70261.mp3",
+    "d": 0.599
+  },
+  "bell": {
+    "f": "l8-jj-w-bell-f683740c.mp3",
+    "d": 0.672
+  },
+  "a rainy day on our island!": {
+    "f": "l9-jj-s-a-rainy-day-on-our-057dd14e.mp3",
+    "d": 2.236
+  },
+  "look at the clouds.": {
+    "f": "l9-jj-s-look-at-the-clouds-d7b73569.mp3",
+    "d": 1.279
+  },
+  "the wind moved the roof.": {
+    "f": "l9-jj-s-the-wind-moved-the-roof-7ffb2f87.mp3",
+    "d": 2.078
+  },
+  "fix the little roof.": {
+    "f": "l9-jj-s-fix-the-little-roof-d4997275.mp3",
+    "d": 1.202
+  },
+  "a dry home for our friends.": {
+    "f": "l9-jj-s-a-dry-home-for-our-6042f7b7.mp3",
+    "d": 2.323
+  },
+  "carry the box inside.": {
+    "f": "l9-jj-s-carry-the-box-inside-60d58cfc.mp3",
+    "d": 1.976
+  },
+  "the food is warm and dry.": {
+    "f": "l9-jj-s-the-food-is-warm-and-a0654df9.mp3",
+    "d": 1.976
+  },
+  "share the umbrella.": {
+    "f": "l9-jj-s-share-the-umbrella-e0019263.mp3",
+    "d": 1.368
+  },
+  "friends stay dry together.": {
+    "f": "l9-jj-s-friends-stay-dry-together-8045ecda.mp3",
+    "d": 1.552
+  },
+  "open the letter.": {
+    "f": "l9-jj-s-open-the-letter-c48f01fb.mp3",
+    "d": 0.838
+  },
+  "you are invited to our island party!": {
+    "f": "l9-jj-s-you-are-invited-to-our-58d667fd.mp3",
+    "d": 2.311
+  },
+  "we helped our friends through the rain.": {
+    "f": "l9-jj-s-we-helped-our-friends-through-c7d04471.mp3",
+    "d": 1.73
+  },
+  "let's bring everyone to the party.": {
+    "f": "l9-jj-s-let-s-bring-everyone-to-cc6a27bb.mp3",
+    "d": 1.976
+  },
+  "roof": {
+    "f": "l9-jj-w-roof-d1a0d6f4.mp3",
+    "d": 1.202
+  },
+  "box": {
+    "f": "l9-jj-w-box-26f8567f.mp3",
+    "d": 0.672
+  },
+  "umbrella": {
+    "f": "l9-jj-w-umbrella-29747449.mp3",
+    "d": 1.106
+  },
+  "letter": {
+    "f": "l9-jj-w-letter-f80105ef.mp3",
+    "d": 0.758
+  },
+  "welcome to our island party!": {
+    "f": "l10-jj-s-welcome-to-our-island-party-1bb04eac.mp3",
+    "d": 1.715
+  },
+  "raise the flag.": {
+    "f": "l10-jj-s-raise-the-flag-7a7af4ac.mp3",
+    "d": 1.1
+  },
+  "our island is full of friends!": {
+    "f": "l10-jj-s-our-island-is-full-of-eb8a5f24.mp3",
+    "d": 2.151
+  },
+  "set the table.": {
+    "f": "l10-jj-s-set-the-table-18983cb1.mp3",
+    "d": 1.01
+  },
+  "flowers from our little garden.": {
+    "f": "l10-jj-s-flowers-from-our-little-garden-b0ada3fe.mp3",
+    "d": 1.55
+  },
+  "share the cake.": {
+    "f": "l10-jj-s-share-the-cake-f7f225f2.mp3",
+    "d": 1.542
+  },
+  "a cake for every friend!": {
+    "f": "l10-jj-s-a-cake-for-every-friend-ee167e53.mp3",
+    "d": 2.149
+  },
+  "play the music.": {
+    "f": "l10-jj-s-play-the-music-b0950869.mp3",
+    "d": 0.943
+  },
+  "clap, clap! let's dance together.": {
+    "f": "l10-jj-s-clap-clap-let-s-dance-ac8607ff.mp3",
+    "d": 3.042
+  },
+  "gather our friends.": {
+    "f": "l10-jj-s-gather-our-friends-55d65c01.mp3",
+    "d": 1.468
+  },
+  "we made this island together!": {
+    "f": "l10-jj-s-we-made-this-island-together-9e89b80d.mp3",
+    "d": 2.149
+  },
+  "ten adventures. one big family!": {
+    "f": "l10-jj-s-ten-adventures-one-big-family-bb8ea0f6.mp3",
+    "d": 2.759
+  },
+  "what shall we build next?": {
+    "f": "l10-jj-s-what-shall-we-build-next-7e3fee4b.mp3",
+    "d": 1.461
+  },
+  "flag": {
+    "f": "l10-jj-w-flag-807d0fbc.mp3",
+    "d": 1.106
+  },
+  "music": {
+    "f": "l10-jj-w-music-80f18998.mp3",
+    "d": 1.208
   }
 }

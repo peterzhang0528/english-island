@@ -5,9 +5,9 @@ import { fileURLToPath } from 'node:url';
 import { gameURL, parseGameScript, readGameFile, ts } from './helpers/source.mjs';
 
 const chapters = readdirSync(gameURL)
-  .filter(name => name === 'index.html' || /^day\d+\.html$/.test(name))
+  .filter(name => name === 'index.html' || name === 'story.html' || /^day\d+\.html$/.test(name))
   .sort()
-  .map(page => ({ page, script: page === 'index.html' ? 'js/world.js' : `js/world${page.match(/^day(\d+)/)[1]}.js` }));
+  .map(page => ({ page, script: page === 'index.html' ? 'js/world.js' : page === 'story.html' ? 'js/world-story.js' : `js/world${page.match(/^day(\d+)/)[1]}.js` }));
 
 test('all chapters have complete local resource and module dependencies', () => {
   assert.ok(chapters.some(chapter => chapter.page === 'index.html'), 'The first chapter must exist');
@@ -23,7 +23,7 @@ test('all chapters have complete local resource and module dependencies', () => 
     const references = [];
     if (url.pathname.endsWith('.html')) {
       const html = readFileSync(url, 'utf8');
-      for (const match of html.matchAll(/(?:src|href)="([^"#]+)"/g)) references.push(match[1]);
+      for (const match of html.matchAll(/<(?:script|img|source|audio|video|link)\b[^>]*?\b(?:src|href)="([^"#]+)"/gi)) references.push(match[1]);
     } else if (url.pathname.endsWith('.js')) {
       const ast = ts.createSourceFile(url.pathname, readFileSync(url, 'utf8'), ts.ScriptTarget.Latest, true, ts.ScriptKind.JS);
       assert.equal(ast.parseDiagnostics.length, 0, `JavaScript syntax: ${url.pathname}`);

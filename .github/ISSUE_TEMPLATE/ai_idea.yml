@@ -1,0 +1,42 @@
+name: AI 共创点子
+description: 一起探索 AI 可以怎样帮助这段英语冒险。
+title: "[AI 共创] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        小岛目前没有接入 AI 服务。欢迎老师、同学和开发者提出具体体验，一起讨论适合游戏的 AI 功能。
+        不需要先选模型，也不需要提供个人信息或任何密钥。
+  - type: input
+    id: moment
+    attributes:
+      label: 在哪一刻，你希望得到帮助？
+      placeholder: 例如第六关找到小羊后，我想用自己的英语问候它
+    validations:
+      required: true
+  - type: textarea
+    id: experience
+    attributes:
+      label: 请演一小段玩家与游戏的互动
+      description: 写出玩家做什么、游戏怎样回应；一两句话就可以。
+    validations:
+      required: true
+  - type: textarea
+    id: benefit
+    attributes:
+      label: 这会让学习或故事哪里更好？
+      description: 可以是开口表达、理解词句、产生新故事或参与设计关卡。
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: 你希望怎样试玩和判断它有帮助？
+  - type: dropdown
+    id: participation
+    attributes:
+      label: 你想怎样参与？
+      options:
+        - 分享想法或试玩反馈
+        - 一起设计英语与故事
+        - 一起实现代码
