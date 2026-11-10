@@ -14,6 +14,7 @@ body:
       options:
         - 第一关 · 第一把斧头
         - 第二关 · 给僵尸做蛋糕
+        - 第三关 · 和新朋友种花园
         - 关卡菜单或网站外层
         - 新增关卡／其他
     validations:
@@ -23,7 +24,7 @@ body:
     attributes:
       label: 试玩地址或版本
       description: 在线试玩可粘贴页面地址；本地开发可填写版本或提交编号。
-      placeholder: 在线地址，或 v0.2.0 / 提交编号
+      placeholder: 在线地址，或 v0.3.0 / 提交编号
     validations:
       required: true
   - type: textarea

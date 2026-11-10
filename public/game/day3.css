@@ -1,0 +1,46 @@
+.day-three .loading { background:#dce8da;color:#66816d; }
+.day-three .loading-cube { border-color:#799c72; }
+.day-three .title { background:linear-gradient(90deg,#233e3d6b,#2d594010 72%),linear-gradient(0deg,#2e4b3a3d,transparent 60%); }
+.day-three .intro-tag { color:#eaf6d9; }
+.day-three .title h1 { font-size:clamp(31px,4.1vw,59px); }
+.day-three .pocket { max-width:calc(100% - 245px); }
+.day-three .pocket li { padding-left:9px; }
+.day-three .say { border-color:#f5f9ed; }
+.day-three .loot { bottom:145px; }
+.day-three .loot-label { color:#fff9d9;text-shadow:0 2px 8px #2c4b37; }
+.day-three .loot b { color:#ffdd8b; }
+.day-three .loot i { opacity:1; }
+.garden-journal { position:absolute;left:22px;top:67px;z-index:2;width:186px;padding:13px 14px 12px;background:#fafbf1ed;border:1px solid #ffffffbd;border-radius:11px;color:#536a4f;box-shadow:0 5px 18px #304b2a10;pointer-events:none; }
+.garden-journal>p { color:#91a18b;font-size:8px;letter-spacing:1.2px;font-weight:800;margin:0 0 12px; }
+.garden-journal>p>span { display:block;letter-spacing:0;font-size:10px;font-weight:400;margin-top:2px; }
+.garden-journal ol { display:grid;gap:10px;padding:0;margin:0;list-style:none; }
+.garden-journal li { display:flex;align-items:center;gap:9px;opacity:.45;transition:opacity .3s; }
+.garden-journal li.done,.garden-journal li.active { opacity:1; }
+.garden-journal li>span { width:21px;height:21px;border-radius:5px;background:#e8edde;color:#879b79;display:grid;place-items:center;font-size:8px;font-weight:700; }
+.garden-journal li.active>span { background:#f3dca6;color:#8f7439; }
+.garden-journal li.done>span { background:#dce8d2;color:#6f8e59; }
+.garden-journal b { flex:1;font-size:10px;letter-spacing:.7px;line-height:1.3; }
+.garden-journal small { display:block;font-size:9px;letter-spacing:0;font-weight:400;color:#91a087;margin-top:2px; }
+.garden-journal i { font-size:11px;font-style:normal;color:#78965e; }
+.garden-exchange { display:grid;gap:9px;margin:0 0 23px; }
+.garden-exchange button { text-align:left;background:none;border:0;padding:0;color:#627e53;font-size:12px;font-weight:700; }
+.garden-exchange span { display:block;font-size:10px;font-weight:400;color:#98a78c;margin-top:2px; }
+.sum-links { display:flex;justify-content:space-between;gap:12px; }
+.day-three .success-icon { background:#e7eedc;color:#879c69; }
+.standalone-tools { position:absolute;top:14px;right:15px;z-index:6;display:flex;gap:6px; }
+.standalone-tools button,.standalone-tools #snd { border:1px solid #ffffffb9;border-radius:7px;background:#f9f9eee8;color:#587450;padding:7px 10px;font-size:10px;height:auto;width:auto;box-shadow:0 2px 8px #17362515; }
+.standalone .pocket { top:58px; }
+.standalone .garden-journal { top:102px; }
+.standalone #task-action { top:58px; }
+@media(max-width:700px){
+ .day-three .pocket { max-width:calc(100% - 24px);gap:4px; }
+ .day-three .pocket li { padding:0 6px;height:24px; }
+ .garden-journal { top:78px;left:12px;width:calc(100% - 24px);padding:8px 10px; }
+ .garden-journal>p { font-size:7px;margin-bottom:7px; }.garden-journal>p>span{display:none}
+ .garden-journal ol { gap:5px;grid-template-columns:repeat(5,minmax(0,1fr)); }.garden-journal li{gap:4px;flex-direction:column}.garden-journal li>span{width:17px;height:17px;font-size:7px}
+ .garden-journal b{font-size:8px}.garden-journal small,.garden-journal i{display:none}
+ .day-three .title h1 { font-size:clamp(31px,7.5vw,46px); }
+ .day-three .loot { bottom:163px; }
+ .standalone #task-action{top:auto}.standalone-tools{top:10px;right:12px}
+}
+@media(max-height:500px) and (min-width:701px){.garden-journal{width:165px;padding:10px}.garden-journal>p{margin-bottom:8px}.garden-journal>p>span,.garden-journal small{display:none}.garden-journal ol{gap:5px}.day-three .loot{bottom:110px}}
