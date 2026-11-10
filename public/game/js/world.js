@@ -560,14 +560,17 @@ window.__yf = { state, openDoor, goShot, cam, hot, ORDER, treeA, table, rocks, s
 
 // Isolated game-to-app bridge: only accept same-origin messages from the embedding app.
 const helpDialog = $("#help-dialog");
-function pauseGame(value) {
-  if (paused === value) return;
-  if (value) { paused = true; pausedAt = performance.now(); }
+const pauseReasons = new Set();
+function pauseGame(value, reason = "external") {
+  if (value) pauseReasons.add(reason); else pauseReasons.delete(reason);
+  const next = pauseReasons.size > 0;
+  if (paused === next) return;
+  if (next) { paused = true; pausedAt = performance.now(); }
   else { const elapsed = performance.now() - pausedAt; for (const w of tweens) w.t0 += elapsed; paused = false; state.lastAct = performance.now(); }
-  sfx.paused = value; voice.setPaused(value);
+  sfx.paused = next; voice.setPaused(next); updateStatus();
 }
-function showHelp() { pauseGame(true); helpDialog.showModal(); }
-helpDialog.addEventListener("close", () => pauseGame(false));
+function showHelp() { pauseGame(true, "help"); helpDialog.showModal(); }
+helpDialog.addEventListener("close", () => pauseGame(false, "help"));
 const taskButton = $("#task-action");
 const taskLabels = { 1: "敲一敲树", 2: "制作木板与木棍", 3: "收集石头", 4: "合成石斧", 5: "挥动斧头" };
 function taskAction() {
@@ -588,6 +591,8 @@ window.addEventListener("message", (event) => {
   if (command === "restart") location.reload();
   if (command === "help") { if (helpDialog.open) helpDialog.close(); else showHelp(); }
   if (command === "act") taskAction();
+  if (command === "pause") pauseGame(true, "external");
+  if (command === "resume") pauseGame(false, "external");
   if (command === "summary" && state.step === 6) showSummary();
   if (command === "speak" && typeof event.data.word === "string") speak(event.data.word.toLowerCase(), 0.9, { interrupt: true });
 });
@@ -603,10 +608,10 @@ let lastStatus = "";
 function updateStatus() {
   const active = state.step >= 1 && state.step <= 5;
   taskButton.hidden = !active || lootOn || !ui.summary.hidden;
-  taskButton.disabled = state.busy;
+  taskButton.disabled = state.busy || paused;
   const count = state.step === 1 ? state.hits : state.step === 3 ? state.stones : state.step === 5 ? state.chops : null;
   $("#action-label").textContent = state.busy ? "跟着 JJ，看看会发生什么…" : (taskLabels[state.step] || "") + (count === null ? "" : ` · ${count}/3`);
-  const status = { type: "island-status", ready: true, step: state.step, busy: state.busy, words: [...state.words], muted: sfx.muted, completed: state.step === 6, hits: state.hits, stones: state.stones, chops: state.chops };
+  const status = { type: "island-status", ready: true, step: state.step, busy: state.busy, words: [...state.words], muted: sfx.muted, completed: state.step === 6, hits: state.hits, stones: state.stones, chops: state.chops, paused };
   const next = JSON.stringify(status);
   if (next !== lastStatus) { lastStatus = next; parent.postMessage(status, location.origin); }
 }
