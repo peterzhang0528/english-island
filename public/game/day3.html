@@ -2,21 +2,34 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#dfe9dd">
-<title>英语方块岛 · 一起种一座花园</title><link rel="stylesheet" href="./game.css"><link rel="stylesheet" href="./day3.css"><link rel="modulepreload" href="./js/vendor/three.module.min.js">
+<title>英语方块岛 · 自由探索小岛</title><link rel="stylesheet" href="./game.css"><link rel="stylesheet" href="./day3.css"><link rel="modulepreload" href="./js/vendor/three.module.min.js">
 </head>
 <body>
-<main class="stage day-three" id="stage" data-step="0" aria-label="第三关：和新朋友种一座花园，互动英语冒险">
-<canvas id="world" tabindex="0" aria-label="方块花园。拖动环顾，点击金色光圈中的花床、种子、水壶、太阳摇柄和蜜蜂；也可按空格完成当前动作。"></canvas>
-<div class="loading" id="loading" role="status"><span class="loading-cube"></span><span>溪流边的小花园，正在等你…</span></div>
+<main class="stage day-three" id="stage" data-step="0" aria-label="第三关：在小岛上自由走动，按任务提醒一件一件完成">
+<canvas id="world" tabindex="0" aria-label="开放小岛。用方向键或 WASD 走动，手机可使用屏幕摇杆。走近金色光圈中的目标再点击，或按空格完成当前动作；拖动画面可以环顾。"></canvas>
+<div class="loading" id="loading" role="status"><span class="loading-cube"></span><span>清晨的小岛，正在等你来探索…</span></div>
 <div class="stage-fallback" id="fallback" hidden><span>3D 场景暂时无法启动</span><p>请在支持 WebGL 的浏览器中打开，或刷新后重试。</p><button class="btn gold" type="button" onclick="location.reload()">重新加载</button></div>
 <nav class="standalone-tools" aria-label="冒险工具" hidden><button id="back-level" type="button">← 第二关</button><button id="help-button" type="button">玩法</button><button id="snd" type="button" aria-label="声音开关" aria-pressed="false">声音：开</button><button id="restart-button" type="button">重玩</button></nav>
 <ul class="pocket" id="pocket" hidden aria-label="发现的英语词，点击朗读"></ul>
-<aside class="garden-journal" id="journal" hidden aria-label="我的花园成长记录"><p>A LITTLE GARDEN <span>花园成长记录</span></p><ol><li id="journal-soil"><span>01</span><b>DIG<small>松一松土</small></b><i>○</i></li><li id="journal-seed"><span>02</span><b>PLANT<small>种下一颗种子</small></b><i>○</i></li><li id="journal-water"><span>03</span><b>WATER<small>喝一点点水</small></b><i>○</i></li><li id="journal-sun"><span>04</span><b>GROW<small>在阳光里长大</small></b><i>○</i></li><li id="journal-bee"><span>05</span><b>SHARE<small>邀请小蜜蜂</small></b><i>○</i></li></ol></aside>
+<aside class="quest-board" id="journal" hidden aria-label="今天的任务提醒，可按自己的顺序完成">
+<p>TODAY'S QUESTS <span>今日任务 · 会一直显示</span></p>
+<ol>
+<li id="quest-cones"><span>01</span><b>PINE CONE<small>捡松果 · 0/3</small></b><i>○</i></li>
+<li id="quest-logs"><span>02</span><b>LOG<small>收集木头 · 0/2</small></b><i>○</i></li>
+<li id="quest-house"><span>03</span><b>BIRDHOUSE<small>在工作台上做鸟屋</small></b><i>○</i></li>
+<li id="quest-watch"><span>04</span><b>WATCH<small>走近看看小动物</small></b><i>○</i></li>
+<li id="quest-invite"><span>05</span><b>INVITE<small>邀请小鸟住进鸟屋</small></b><i>○</i></li>
+</ol>
+</aside>
 <div class="say" id="say" hidden aria-live="polite"><div class="guide-avatar"><img src="./assets/guide.svg" width="56" height="56" alt="英语伙伴 JJ"><span>JJ</span></div><div class="say-text"><span class="guide-label" id="guide-label">YOUR GUIDE · 你的冒险伙伴</span><p class="en" id="say-en"></p><p class="zh" id="say-zh"></p></div><button type="button" id="say-spk" aria-label="再听一遍"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4Z" fill="currentColor"/><path d="M17 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button></div>
-<button id="task-action" type="button" hidden><span id="action-label">给花床松土</span><span class="action-key">SPACE</span></button>
-<div class="loot" id="loot" hidden aria-live="polite"><span class="loot-label">A LITTLE WONDER · 小小的奇迹</span><b id="loot-en"></b><i id="loot-zh"></i></div>
-<div class="title" id="title"><div class="title-in"><p class="intro-tag"><span></span> CHAPTER 03 · 一起种一座花园</p><h1>种下一点期待，<br>长出整个春天。</h1><p class="lead">昨天一起分享蛋糕的朋友，今天想种花。<br>松土、播种、浇水，等一只小蜜蜂来做客。</p><button type="button" class="btn gold big" disabled>正在准备花园… <span aria-hidden="true">↗</span></button><p class="fine"><span class="intro-dot"></span> 约 3 分钟 &nbsp; · &nbsp; 无需登录 &nbsp; · &nbsp; 打开声音更有趣</p></div></div>
-<div class="summary" id="summary" hidden role="dialog" aria-modal="true" aria-labelledby="summary-title"><div class="card"><div class="success-icon" aria-hidden="true">✿</div><p class="kicker">DAY THREE COMPLETE</p><h2 id="summary-title">你种下的不只是花，<br>还有小小的善意。</h2><p class="sum-stats" id="sum-stats"></p><div class="achievement"><span aria-hidden="true">✓</span><div><b>花园小园丁</b><p>一颗种子、一些照顾，给朋友们一个有花的家。</p></div></div><h3>跟着花朵一起长大的单词 <small>点一下再听</small></h3><ul class="sum-words" id="sum-words"></ul><div class="garden-exchange"><button type="button" data-say="We grew a garden together!">“We grew a garden together!” <span>我们一起种出了一座花园！</span></button><button type="button" data-say="Flowers help our little friends.">“Flowers help our little friends.” <span>花朵也能帮助我们的小伙伴。</span></button></div><div class="sum-actions"><button type="button" class="btn gold" id="sum-card">保存我的花园卡片 ↓</button><button type="button" class="btn ghost" id="sum-again">再种一座花园</button></div><div class="sum-links"><button type="button" class="explore-link" id="sum-close">留在花园，继续探索 →</button><button type="button" class="explore-link" id="sum-previous">← 回第二关做蛋糕</button></div><img id="sum-img" alt="我的花园冒险单词卡" hidden><a id="sum-dl" hidden>下载图片（手机可长按保存）</a></div></div>
-<dialog id="help-dialog" class="help-dialog"><button type="button" class="dialog-close" id="help-close" aria-label="关闭玩法说明">×</button><p class="kicker">CHAPTER 03 · HOW TO PLAY</p><h2>照顾一颗种子，<br>认识一个新世界。</h2><ol><li><span>01</span><div><b>跟着金色光圈，听 JJ 说</b><p>先点花床松土，再点种子袋和水壶。每次动作都会照顾整座小花床，英文配有中文，也可以点喇叭重听。</p></div></li><li><span>02</span><div><b>让阳光进来，让花朵长大</b><p>点太阳形的摇柄打开遮阳棚。花开后，点小蜜蜂邀请它采花蜜，完成今天的冒险。</p></div></li><li><span>03</span><div><b>空格也能玩，拖动看看四周</b><p>动作按钮和空格会完成当前动作。拖动画面环顾，点树、溪流、云和朋友，还能复习英语。</p></div></li></ol><button type="button" id="help-done" class="btn gold">知道了，继续冒险</button></dialog>
+<button id="task-action" type="button" hidden><span id="action-label">走近发光的目标</span><span class="action-key">SPACE</span></button>
+<button id="ask-friend" type="button" hidden>问问朋友 · H</button>
+<div class="joystick" id="joy" hidden aria-label="移动摇杆">
+<div class="joystick-base"><div class="joystick-knob" id="joy-knob"></div></div>
+</div>
+<div class="loot" id="loot" hidden aria-live="polite"><span class="loot-label">A LITTLE WONDER · 小小的发现</span><b id="loot-en"></b><i id="loot-zh"></i></div>
+<div class="title" id="title"><div class="title-in"><p class="intro-tag"><span></span> CHAPTER 03 · 自由探索小岛</p><h1>自己走路，<br>一件一件完成。</h1><p class="lead">这不是一条锁定的小路。捡松果、收集木头、做鸟屋、看看小动物，<br>任务板会一直提醒你还可以做什么。</p><button type="button" class="btn gold big" disabled>正在准备小岛… <span aria-hidden="true">↗</span></button><p class="fine"><span class="intro-dot"></span> 用 WASD 或方向键走动 &nbsp; · &nbsp; 打开声音更有趣</p></div></div>
+<div class="summary" id="summary" hidden role="dialog" aria-modal="true" aria-labelledby="summary-title"><div class="card"><div class="success-icon" aria-hidden="true">☼</div><p class="kicker">DAY THREE COMPLETE</p><h2 id="summary-title">你走遍了小岛，<br>也完成了今天的任务。</h2><p class="sum-stats" id="sum-stats"></p><div class="achievement"><span aria-hidden="true">✓</span><div><b>开放小岛探险家</b><p>自由走动，听英语、做事情，再给小鸟一个家。</p></div></div><h3>在路上发现的单词 <small>点一下再听</small></h3><ul class="sum-words" id="sum-words"></ul><div class="garden-exchange"><button type="button" data-say="You finished every quest!">“You finished every quest!” <span>今天的任务都完成啦！</span></button><button type="button" data-say="The bird likes the birdhouse!">“The bird likes the birdhouse!” <span>小鸟喜欢这座鸟屋！</span></button></div><div class="sum-actions"><button type="button" class="btn gold" id="sum-card">保存我的探索卡片 ↓</button><button type="button" class="btn ghost" id="sum-again">再探索一次</button></div><div class="sum-links"><button type="button" class="explore-link" id="sum-close">留在小岛，继续走走 →</button><button type="button" class="explore-link" id="sum-previous">← 回第二关做蛋糕</button></div><img id="sum-img" alt="我的小岛探索单词卡" hidden><a id="sum-dl" hidden>下载图片（手机可长按保存）</a></div></div>
+<dialog id="help-dialog" class="help-dialog"><button type="button" class="dialog-close" id="help-close" aria-label="关闭玩法说明">×</button><p class="kicker">CHAPTER 03 · HOW TO PLAY</p><h2>自由走动，<br>按任务板完成冒险。</h2><ol><li><span>01</span><div><b>自己在小岛上走</b><p>电脑用 WASD 或方向键，手机用左下角摇杆。拖动画面环顾。这不是一条只能往前走的路，也不是没有目标的闲逛。</p></div></li><li><span>02</span><div><b>看任务提醒，走近再做</b><p>左上角任务板会一直显示进度。先走近金色光圈，再点击或按空格。松果和木头可以按自己的顺序收集；做鸟屋需要先收齐材料。</p></div></li><li><span>03</span><div><b>听听英语，也可以问朋友</b><p>JJ 会在情境里说出要用的英语。点右下角「问问朋友」，或按 H，朋友会用英语给你一句提醒。这里没有真人联机。</p></div></li></ol><button type="button" id="help-done" class="btn gold">知道了，继续探索</button></dialog>
 </main><script type="module" src="./js/bootstrap3.js"></script>
 </body></html>

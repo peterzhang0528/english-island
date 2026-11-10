@@ -68,7 +68,7 @@ for (const chapter of chapters) {
       for (const name of ['egg', 'milk', 'wheat']) assert.ok(ids.has(`ingredient-${name}`));
     }
     if (chapter.page === 'day3.html') {
-      for (const name of ['soil', 'seed', 'water', 'sun', 'bee']) assert.ok(ids.has(`journal-${name}`));
+      for (const name of ['cones', 'logs', 'house', 'watch', 'invite']) assert.ok(ids.has(`quest-${name}`));
     }
   });
 }

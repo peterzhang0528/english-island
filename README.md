@@ -2,13 +2,13 @@
 
 [![CI](https://github.com/peterzhang0528/english-island/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/peterzhang0528/english-island/actions/workflows/ci.yml)
 
-在一个小小的方块世界里，通过行动学英语：砍树、收集材料、分享蛋糕，再和新朋友一起种花、邀请蜜蜂。
+在一个小小的方块世界里，通过行动学英语：砍树、收集材料、分享蛋糕，再到开放小岛上自由走动、完成任务。
 
 欢迎叶老师、杨老师和同学们一起建设这座小岛。你可以提出新故事、纠正一句英文、体验手机操作，或者亲手制作下一关。一个清楚的反馈，也是一次有价值的贡献。
 
 **[在线试玩](https://english-island-zhang-1109.lulabs.chatgpt.site) · [第一关](https://english-island-zhang-1109.lulabs.chatgpt.site/?level=1) · [第二关](https://english-island-zhang-1109.lulabs.chatgpt.site/?level=2) · [第三关](https://english-island-zhang-1109.lulabs.chatgpt.site/?level=3)**
 
-[参与贡献](CONTRIBUTING.md) · [开发新关卡](docs/ADDING_LEVELS.md) · [配音维护](docs/AUDIO.md) · [反馈协作流程](docs/FEEDBACK_LOOP.md) · [更新记录](CHANGELOG.md) · [素材与许可说明](THIRD_PARTY_NOTICES.md)
+[参与贡献](CONTRIBUTING.md) · [开发新关卡](docs/ADDING_LEVELS.md) · [配音维护](docs/AUDIO.md) · [配音拆分说明](docs/VOICE_SPLIT.md) · [A/B 试玩与发布说明](docs/AB_OPEN_ISLAND.md) · [反馈协作流程](docs/FEEDBACK_LOOP.md) · [更新记录](CHANGELOG.md) · [素材与许可说明](THIRD_PARTY_NOTICES.md)
 
 [查看 Issues](https://github.com/peterzhang0528/english-island/issues) · [反馈问题或提出新关卡](https://github.com/peterzhang0528/english-island/issues/new/choose) · [查看 Pull Requests](https://github.com/peterzhang0528/english-island/pulls)
 
@@ -18,9 +18,9 @@
 | --- | --- | --- |
 | 01 · 第一把斧头 | 推门、收集木材与石头、合成石斧、砍树 | TREE、LOG、PLANK、STICK、STONE、AXE |
 | 02 · 给僵尸做蛋糕 | 鸡蛋、牛奶、三束麦子，做蛋糕送给友善的新朋友 | CHICKEN、EGG、COW、MILK、WHEAT、CAKE、FRIEND |
-| 03 · 和新朋友种花园 | 松土、播种、浇水、打开遮阳棚，花开后邀请蜜蜂 | SOIL、DIG、SEED、PLANT、WATER、SUN、GROW、FLOWER、BEE |
+| 03 · 自由探索小岛 | 自由走动，按任务提醒捡松果、收集木头、做鸟屋、观察动物并邀请小鸟 | PINE CONE、LOG、BIRDHOUSE、BIRD、SHEEP、TABLE、FRIEND |
 
-听 JJ 的英文，看中文提示，点击金色光圈中的目标。也可以按空格或点击动作按钮；拖动画面可以环顾。单词可以反复点读，通关后可以保存自己的冒险卡片。第二关使用小岛的简化蛋糕配方；第三关每个动作照顾整座花床，并用成长记录展示进度。
+听 JJ 的英文，看中文提示，点击金色光圈中的目标。也可以按空格或点击动作按钮；拖动画面可以环顾。单词可以反复点读，通关后可以保存自己的冒险卡片。第二关仍是线性剧情，使用小岛的简化蛋糕配方，场景为月夜农场。第三关改为开放小岛：用 WASD、方向键或手机摇杆走动，左上角任务板会一直提醒未完成的任务。
 
 ## 五分钟开始贡献
 
@@ -75,7 +75,7 @@ GitHub Actions 会对提交到 `main` 的代码和 Pull Request 执行安装、�
 | `components/IslandGame.tsx` | iframe 加载与网站／游戏消息桥 |
 | `public/game/index.html`、`js/world.js` | 第一关页面与场景 |
 | `public/game/day2.html`、`js/world2.js` | 第二关页面与场景 |
-| `public/game/day3.html`、`js/world3.js` | 第三关页面与场景 |
+| `public/game/day3.html`、`js/world3.js` | 第三关开放小岛页面与场景 |
 | `public/game/js/voice.js`、`sfx.js` | 共享配音队列、静音、暂停与音效 |
 | `public/game/audio/voice.json` | 英文文本到本地音频的索引 |
 | `public/game/js/textures.js`、`vendor/` | 贴图生成与本地 Three.js |
@@ -87,7 +87,7 @@ GitHub Actions 会对提交到 `main` 的代码和 Pull Request 执行安装、�
 
 ## 关于 JJ 的声音
 
-第一关原有 32 段配音保留，第二关 27 段按第一关参考声音重新生成，第三关沿用同一参考方案并复用已有词句。由于原始 voice ID 不可得，声线属于近似匹配，不承诺完全一致。新关卡请按 [配音维护指南](docs/AUDIO.md) 延续同一参考声音，避免提示句突然切换成设备的系统声音。
+第一关原有 32 段配音保留，第二关 27 段按第一关参考声音重新生成。第三关开放小岛新增了临时占位录音，并请须翊恒按 [配音拆分说明](docs/VOICE_SPLIT.md) 把僵尸朋友和 JJ 的声音分开。由于原始 voice ID 不可得，声线属于近似匹配，不承诺完全一致。新关卡请按 [配音维护指南](docs/AUDIO.md) 延续同一参考声音，避免提示句突然切换成设备的系统声音。
 
 ## 一起把小岛做大
 

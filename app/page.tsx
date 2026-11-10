@@ -7,12 +7,12 @@ type Level = 1 | 2 | 3;
 const chapters = {
   1: { title: "第一把斧头", subtitle: "森林小匠人", description: "收集原木和石头，亲手做一把斧头。", steps: ["推开木门", "收集原木", "制作木棍", "寻找石头", "合成石斧", "砍倒大树"] },
   2: { title: "给僵尸做蛋糕", subtitle: "小岛烘焙师", description: "去夜晚的农场找食材，在暖灯下为朋友做蛋糕。", steps: ["认识新朋友", "寻找鸡蛋", "收集牛奶", "收割小麦", "制作蛋糕", "分享蛋糕"] },
-  3: { title: "和新朋友种花园", subtitle: "小岛园艺师", description: "播下一颗种子，和小蜜蜂一起等花开。", steps: ["重逢新朋友", "松开泥土", "播下种子", "给种子浇水", "迎接阳光", "邀请小蜜蜂"] },
+  3: { title: "自由探索小岛", subtitle: "开放小岛探险", description: "在小岛上自由走动，按任务提醒捡松果、收集木头、做鸟屋，再看看小动物。", steps: ["捡起松果", "收集木头", "搭建鸟屋", "观察动物", "邀请小鸟"] },
 };
 const chapterNumbers: Level[] = [1, 2, 3];
 const dayNames = { 1: "第一天", 2: "第二天", 3: "第三天" };
 const gameVersion = "0.3.0";
-type GameStatus = { level?: Level; ready?: boolean; step?: number; words?: string[]; muted?: boolean; completed?: boolean; busy?: boolean };
+type GameStatus = { level?: Level; ready?: boolean; step?: number; words?: string[]; muted?: boolean; completed?: boolean; busy?: boolean; questFlags?: Record<string, "done" | "active" | "locked"> };
 function Icon({ name }: { name: string }) {
   const paths: Record<string, React.ReactNode> = {
     sound: <><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></>,
@@ -90,7 +90,7 @@ export default function Home() {
     <section className="game-shell" aria-label="英语互动冒险"><IslandGame key={level} level={level} onNavigate={selectLevel} /></section>
     <footer className="journey-footer">
       <div className="journey-caption"><span className="journey-eyebrow">YOUR LITTLE ADVENTURE</span><strong>{status.completed ? `${dayNames[level]}，完成！` : "每一步，都是新发现。"}</strong></div>
-      <ol className="journey-steps" aria-label="任务进度">{steps.map((s,i) => <li key={s} className={current > i ? "done" : current === i ? "active" : ""} aria-current={current === i ? "step" : undefined}><span className="step-node">{current > i ? "✓" : `0${i+1}`}</span><span>{s}</span></li>)}</ol>
+      <ol className="journey-steps" aria-label="任务进度">{steps.map((s,i) => { const flag = level === 3 ? status.questFlags?.[["cones","logs","house","watch","invite"][i]] : undefined; const done = flag === "done" || (!flag && current > i); const active = flag ? flag !== "done" : current === i; return <li key={s} className={done ? "done" : active ? "active" : ""} aria-current={active && !done ? "step" : undefined}><span className="step-node">{done ? "✓" : `0${i+1}`}</span><span>{s}</span></li>; })}</ol>
       <div className="journey-note"><Icon name="leaf"/><span>在玩耍中，<br/>让英语自然发生。</span></div>
     </footer>
     <dialog ref={chapterDialog} className="chapter-dialog" aria-labelledby="chapter-dialog-title" onClick={e => { if(e.target === e.currentTarget) { const r=e.currentTarget.getBoundingClientRect(); if(e.clientX<r.left || e.clientX>r.right || e.clientY<r.top || e.clientY>r.bottom) e.currentTarget.close(); } }}>

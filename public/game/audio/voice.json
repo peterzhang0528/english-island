@@ -326,5 +326,85 @@
   "bee": {
     "f": "l3-jj-w-bee.mp3",
     "d": 0.765
+  },
+  "let's explore the island!": {
+    "f": "l3-open-s-explore.mp3",
+    "d": 2.64
+  },
+  "collect three pine cones.": {
+    "f": "l3-open-s-cones.mp3",
+    "d": 2.712
+  },
+  "we need two logs.": {
+    "f": "l3-open-s-logs.mp3",
+    "d": 2.352
+  },
+  "a pine cone!": {
+    "f": "l3-open-s-pinecone.mp3",
+    "d": 2.136
+  },
+  "build a birdhouse on the table.": {
+    "f": "l3-open-s-build.mp3",
+    "d": 2.976
+  },
+  "a birdhouse!": {
+    "f": "l3-open-s-birdhouse.mp3",
+    "d": 2.136
+  },
+  "watch the animals.": {
+    "f": "l3-open-s-watch.mp3",
+    "d": 2.376
+  },
+  "a bird!": {
+    "f": "l3-open-s-bird.mp3",
+    "d": 1.896
+  },
+  "the bird likes the birdhouse!": {
+    "f": "l3-open-s-invite.mp3",
+    "d": 2.808
+  },
+  "you finished every quest!": {
+    "f": "l3-open-s-done.mp3",
+    "d": 2.64
+  },
+  "come closer, then tap it.": {
+    "f": "l3-open-s-closer.mp3",
+    "d": 2.88
+  },
+  "pine cone": {
+    "f": "l3-open-w-pine-cone.mp3",
+    "d": 2.016
+  },
+  "birdhouse": {
+    "f": "l3-open-w-birdhouse.mp3",
+    "d": 2.016
+  },
+  "bird": {
+    "f": "l3-open-w-bird.mp3",
+    "d": 1.68
+  },
+  "i can help you.": {
+    "f": "l3-friend-s-help.mp3",
+    "d": 1.992
+  },
+  "look under the trees.": {
+    "f": "l3-friend-s-trees.mp3",
+    "d": 2.28
+  },
+  "we need more wood.": {
+    "f": "l3-friend-s-wood.mp3",
+    "d": 2.16
+  },
+  "let's build it together.": {
+    "f": "l3-friend-s-build.mp3",
+    "d": 2.232
+  },
+  "let's watch the animals.": {
+    "f": "l3-friend-s-watch.mp3",
+    "d": 2.424
+  },
+  "invite the bird home.": {
+    "f": "l3-friend-s-invite.mp3",
+    "d": 2.424
   }
 }

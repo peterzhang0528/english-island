@@ -57,5 +57,5 @@ export default function IslandGame({
     };
   }, [level]);
 
-  return <iframe ref={frame} src={level === 1 ? "/game/index.html" : `/game/day${level}.html`} title={level === 3 ? "第三关 · 和新朋友种花园" : level === 2 ? "第二关 · 给僵尸做蛋糕" : "第一关 · 第一把斧头"} className={className} style={{ width: "100%", height: "100%", border: 0, display: "block" }} allow="autoplay; fullscreen" allowFullScreen />;
+  return <iframe ref={frame} src={level === 1 ? "/game/index.html" : `/game/day${level}.html`} title={level === 3 ? "第三关 · 自由探索小岛" : level === 2 ? "第二关 · 给僵尸做蛋糕" : "第一关 · 第一把斧头"} className={className} style={{ width: "100%", height: "100%", border: 0, display: "block" }} allow="autoplay; fullscreen" allowFullScreen />;
 }
