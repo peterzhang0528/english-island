@@ -1,4 +1,4 @@
-// Chapter 02: a friendly farm, a simple cake, and a first English thank-you.
+// Chapter 02: a moonlit farm, a simple cake, and a first English thank-you.
 import * as THREE from './vendor/three.module.min.js';
 import { createTextures } from './textures.js';
 import { sfx } from './sfx.js';
@@ -21,7 +21,7 @@ renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.shadowMap.autoUpdate = false;
 const scene = new THREE.Scene();
-scene.fog = new THREE.Fog('#dce8ca',28,78);
+scene.fog = new THREE.Fog('#23354c',28,78);
 const camera = new THREE.PerspectiveCamera(57,1,.1,150);
 const world = new THREE.Group(); scene.add(world,camera);
 const T = createTextures(THREE);
@@ -34,7 +34,7 @@ const M = {
  cream:lam('#fff4d5'), white:lam('#fffdf1'), brown:lam('#694e3e'), dark:lam('#29382d'), pink:lam('#edb1a0'),
  red:lam('#cf6750'), leaf:lam('#73a353'), straw:lam('#dcae48'), gold:lam('#ffe083'), cake:lam('#c99156'),
  green:lam('#86ae68'), teal:lam('#55a4a0'), pants:lam('#6475a3'), water:new THREE.MeshLambertMaterial({map:T.water,transparent:true,opacity:.86}),
- cloud:new THREE.MeshBasicMaterial({color:'#fffdf0'})
+ cloud:new THREE.MeshBasicMaterial({color:'#526781'})
 };
 const BOX = new THREE.BoxGeometry(1,1,1), hot = [];
 let seed = 29;
@@ -49,15 +49,24 @@ function instances(positions,material,scale=[1,1,1]) {
  positions.forEach((p,i)=>mesh.setMatrixAt(i,matrix.compose(new THREE.Vector3(...p),q,s)));
  mesh.castShadow=true;mesh.receiveShadow=true;world.add(mesh);return mesh;
 }
-// Soft blue-to-cream sky and the same textured voxel ground as chapter one.
+// Clear moonlight keeps the farm readable beneath a distinctly nighttime sky.
 const skyGeo=new THREE.SphereGeometry(100,24,16),colors=[];
-const top=new THREE.Color('#83b9e5'),horizon=new THREE.Color('#ecedd2');
+const top=new THREE.Color('#071226'),horizon=new THREE.Color('#263d58');
 for(let i=0;i<skyGeo.attributes.position.count;i++){const y=skyGeo.attributes.position.getY(i)/100;const c=horizon.clone().lerp(top,Math.max(0,y));colors.push(c.r,c.g,c.b);}
 skyGeo.setAttribute('color',new THREE.Float32BufferAttribute(colors,3));
 scene.add(new THREE.Mesh(skyGeo,new THREE.MeshBasicMaterial({vertexColors:true,side:THREE.BackSide,fog:false})));
-scene.add(new THREE.HemisphereLight('#f3f4e1','#738a52',1.5));
-const sun=new THREE.DirectionalLight('#fff2ca',2.4);sun.position.set(-14,26,14);sun.castShadow=true;
-sun.shadow.mapSize.set(touch?1024:2048,touch?1024:2048);Object.assign(sun.shadow.camera,{left:-23,right:23,top:23,bottom:-23,near:1,far:65});sun.shadow.bias=-.0004;sun.shadow.normalBias=.04;scene.add(sun);
+scene.add(new THREE.HemisphereLight('#a3bfe5','#2b3949',1.05));
+const moonlight=new THREE.DirectionalLight('#bdceff',1.55);moonlight.position.set(-14,26,14);moonlight.castShadow=true;
+moonlight.shadow.mapSize.set(touch?1024:2048,touch?1024:2048);Object.assign(moonlight.shadow.camera,{left:-23,right:23,top:23,bottom:-23,near:1,far:65});moonlight.shadow.bias=-.0004;moonlight.shadow.normalBias=.04;scene.add(moonlight);
+const moon=new THREE.Group();moon.position.set(-18,15,-42);moon.lookAt(5.8,4.8,4.6);scene.add(moon);
+moon.add(new THREE.Mesh(new THREE.PlaneGeometry(4.6,4.6),new THREE.MeshBasicMaterial({color:'#f4edcb',side:THREE.DoubleSide,fog:false})));
+const craterMaterial=new THREE.MeshBasicMaterial({color:'#d2d8c6',fog:false});
+for(const [x,y,size] of [[-.9,.7,.8],[.8,-.7,.65],[.9,1.3,.4],[-.5,-1.4,.45]]){const crater=new THREE.Mesh(new THREE.PlaneGeometry(size,size),craterMaterial);crater.position.set(x,y,.02);moon.add(crater);}
+// A separate deterministic layout leaves the existing farm's random seed untouched.
+const starsGeometry=new THREE.BufferGeometry(),starPositions=[];
+for(let i=0;i<180;i++){const y=7+i/180*73,angle=i*2.399963229728653,radius=Math.sqrt(85*85-y*y);starPositions.push(Math.cos(angle)*radius,y,Math.sin(angle)*radius);}
+starsGeometry.setAttribute('position',new THREE.Float32BufferAttribute(starPositions,3));
+scene.add(new THREE.Points(starsGeometry,new THREE.PointsMaterial({color:'#e5edff',size:.22,transparent:true,opacity:.9,fog:false,depthWrite:false})));
 const grass=[],dirt=[],path=[],pond=[];
 for(let x=-22;x<=22;x++)for(let z=-23;z<=15;z++){
  const edge=Math.hypot(x,z+5)>16;
@@ -96,7 +105,7 @@ function sign(text,x,y,z,w=2.7,h=.65){
  const c=document.createElement('canvas');c.width=640;c.height=160;const g=c.getContext('2d');g.fillStyle='#f3e6bc';g.fillRect(0,0,640,160);g.strokeStyle='#b7a47c';g.lineWidth=12;g.strokeRect(6,6,628,148);g.fillStyle='#596744';g.font='800 64px Arial, sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillText(text,320,86);
  const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshLambertMaterial({map:t,side:THREE.DoubleSide}));m.position.set(x,y,z);world.add(m);return m;
 }
-sign('SUNNY FARM',-8,3.2,-10.4,3,.65);
+sign('MOONLIT FARM',-8,3.2,-10.4,3,.65);
 // The chicken's wings are hinged so every egg comes with a happy flap.
 const chicken=target(groupAt(-4.6,.5,-3.8),'chicken','CHICKEN');
 box(chicken,M.white,0,.62,0,.78,.65,.95);const chickenHead=new THREE.Group();chickenHead.position.set(0,1,.37);chicken.add(chickenHead);
@@ -135,6 +144,9 @@ for(let i=0;i<8;i++){box(kitchen,i%2?M.cream:M.red,-1.75+i*.5,3.65,-.5,.5,.15,2.
 const table=target(new THREE.Group(),'table','TABLE');table.position.set(0,0,.42);kitchen.add(table);
 box(table,M.table,0,1.08,0,2.4,.48,1.5);for(const x of [-.95,.95])for(const z of [-.52,.52])box(table,M.wood,x,.45,z,.2,.9,.2);
 sign('CAKE CLUB',-.4,3.17,-8.98,2.4,.5);
+// Warm kitchen lanterns sit outside the task groups, preserving their click bounds.
+const lanternGlow=new THREE.MeshBasicMaterial({color:'#ffd48a'});
+for(const x of [-1.9,1.1]){const lantern=groupAt(x,3.05,-8.1);box(lantern,M.brown,0,.23,0,.36,.09,.32);box(lantern,M.brown,0,-.23,0,.36,.09,.32);box(lantern,lanternGlow,0,0,0,.27,.38,.24);for(const side of [-.15,.15])box(lantern,M.brown,side,0,.14,.035,.4,.035);const light=new THREE.PointLight('#ffc884',16,11,2);light.position.set(0,-.2,.3);lantern.add(light);}
 function cakeModel(){const g=new THREE.Group();box(g,M.cream,0,-.35,0,1.35,.1,1.15);box(g,M.cake,0,-.08,0,1.15,.45,.95);box(g,M.white,0,.21,0,1.2,.19,1);for(const x of [-.42,-.12,.2,.43])box(g,M.white,x,.08,.49,.17,.22,.035);for(const x of [-.3,.3])for(const z of [-.23,.23]){box(g,M.red,x,.36,z,.19,.15,.19);box(g,M.leaf,x,.46,z,.12,.04,.11);}return g;}
 const cake=cakeModel();cake.position.set(-.4,2.2,-7.98);cake.visible=false;world.add(cake);target(cake,'table','CAKE');
 // Yesterday's stranger is today's friend: rounded expression, blush and a tiny apron.
