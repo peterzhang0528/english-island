@@ -8,7 +8,7 @@ const numberNames = ["", "一", "二", "三", "四", "五", "六", "七", "八",
 export const dayNames = Object.fromEntries(chapterNumbers.map(id => [id, `第${numberNames[id]}天`])) as Record<Level, string>;
 export const chapters: Record<Level, ChapterInfo> = {
   1: { title: "第一把斧头", subtitle: "森林小匠人", description: "收集原木和石头，亲手做一把斧头。", steps: ["推开木门", "收集原木", "制作木棍", "寻找石头", "合成石斧", "砍倒大树"] },
-  2: { title: "给僵尸做蛋糕", subtitle: "小岛烘焙师", description: "去农场寻找食材，为新朋友烤一个蛋糕。", steps: ["认识新朋友", "寻找鸡蛋", "收集牛奶", "收割小麦", "制作蛋糕", "分享蛋糕"] },
+  2: { title: "给僵尸做蛋糕", subtitle: "小岛烘焙师", description: "去夜晚的农场找食材，在暖灯下为朋友做蛋糕。", steps: ["认识新朋友", "寻找鸡蛋", "收集牛奶", "收割小麦", "制作蛋糕", "分享蛋糕"] },
   3: { title: "和新朋友种花园", subtitle: "小岛园艺师", description: "播下一颗种子，和小蜜蜂一起等花开。", steps: ["重逢新朋友", "松开泥土", "播下种子", "给种子浇水", "迎接阳光", "邀请小蜜蜂"] },
   ...Object.fromEntries(storyChapters.map(chapter => [chapter.id, {title: chapter.title, subtitle: chapter.subtitle, description: chapter.description, steps: ["故事接着开始", ...chapter.stages.map(stage => stage.label)]}]))
 } as Record<Level, ChapterInfo>;
