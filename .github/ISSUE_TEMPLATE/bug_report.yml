@@ -15,6 +15,13 @@ body:
         - 第一关 · 第一把斧头
         - 第二关 · 给僵尸做蛋糕
         - 第三关 · 和新朋友种花园
+        - 第四关 · 把花送过小桥
+        - 第五关 · 集市里的小委托
+        - 第六关 · 跟着脚印找小羊
+        - 第七关 · 白帆带我们出发
+        - 第八关 · 让灯塔亮起来
+        - 第九关 · 雨天也要互相照顾
+        - 第十关 · 我们一起建成的小岛
         - 关卡菜单或网站外层
         - 新增关卡／其他
     validations:
@@ -24,7 +31,7 @@ body:
     attributes:
       label: 试玩地址或版本
       description: 在线试玩可粘贴页面地址；本地开发可填写版本或提交编号。
-      placeholder: 在线地址，或 v0.3.0 / 提交编号
+      placeholder: 在线地址，或 v0.4.0-preview.1 / 提交编号
     validations:
       required: true
   - type: textarea

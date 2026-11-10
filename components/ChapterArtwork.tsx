@@ -1,0 +1,17 @@
+import type { Level } from "../lib/chapters";
+
+export default function ChapterArtwork({ level }: { level: Level }) {
+  const scene = {
+    1: <><path d="m40 8 25 14-25 14-25-14Z" fill="#a8bf79"/><path d="m15 22 25 14v28L15 50Z" fill="#739751"/><path d="m40 36 25-14v28L40 64Z" fill="#4b713f"/><path d="m40 8 12 7-25 14-12-7Z" fill="#c8d79d"/></>,
+    2: <><path d="M12 30 40 15 68 30 40 46Z" fill="#fff5df"/><path d="M12 30 40 46v20L12 50Z" fill="#d7a268"/><path d="M40 46 68 30v20L40 66Z" fill="#bf814c"/><path d="M12 30 40 46v8L12 38Z" fill="#fff7ea"/><path d="m34 20 8-4 8 5-8 5Z" fill="#d96b50"/></>,
+    3: <><path d="m10 48 30-16 30 16-30 17Z" fill="#d4b388"/><path d="m10 48 30 17v6L10 54Z" fill="#a67f57"/><path d="M40 55V27m0 16L24 34m16 3 15-9" stroke="#64834b" strokeWidth="4"/><path d="M40 12c-13-12-23 7-9 12-14 8 1 23 9 11 8 12 23-3 9-11 14-5 4-24-9-12Z" fill="#d58a78"/><circle cx="40" cy="24" r="7" fill="#edcc70"/></>,
+    4: <><path d="M7 49 38 34 73 50 42 67Z" fill="#9ac8d4"/><path d="M8 35 39 20 71 37 40 52Z" fill="#b2936e"/><path d="M8 35v8l32 17v-8m31-15v8L40 60" fill="#8c714f"/><path d="m17 31 32 17m-22-22 32 17" stroke="#e4cf9e" strokeWidth="3"/><path d="M13 38V20m51 24V25m-51-5 51 5" stroke="#8b6b47" strokeWidth="4"/></>,
+    5: <><path d="M17 32h48v32H17Z" fill="#c29c6e"/><path d="M13 17h54l6 20H7Z" fill="#c77d68"/><path d="m22 17-3 20m18-20v20m14-20 3 20" stroke="#fff0d2" strokeWidth="9"/><path d="M20 41h42v14H20Z" fill="#f7e4ba"/><circle cx="29" cy="47" r="5" fill="#c96754"/><circle cx="44" cy="47" r="5" fill="#a9b56e"/></>,
+    6: <><path d="m14 51 26-14 29 14-27 16Z" fill="#adbd7c"/><path d="M23 42v18m25-16v17" stroke="#77694f" strokeWidth="6"/><path d="M19 24h35v25H19Z" fill="#f6f0d8"/><path d="M52 29h15v19H52Z" fill="#9b8b6e"/><path d="M17 20h29v11H17Zm-4 9h13v13H13Z" fill="#fff9e8"/><circle cx="62" cy="35" r="2" fill="#414e40"/></>,
+    7: <><path d="m7 57 34-13 33 14-34 12Z" fill="#99c4cf"/><path d="M14 44h54L56 60H28Z" fill="#a57d51"/><path d="M40 10v35" stroke="#806f4b" strokeWidth="3"/><path d="m43 12 20 29H43ZM36 21 20 41h16Z" fill="#fff4da"/></>,
+    8: <><path d="m9 59 31-14 30 14-30 11Z" fill="#a8b4a5"/><path d="M29 24h22l6 37H23Z" fill="#f5ebd5"/><path d="m27 39 26 0 2 10H25Z" fill="#c58069"/><path d="M27 14h26v14H27Z" fill="#b8ced0"/><path d="m23 14 17-9 17 9Z" fill="#8d8e7a"/><path d="M33 18h14v8H33Z" fill="#f4da8a"/><path d="m52 17 23-7v19l-23-6" fill="#edce7d" opacity=".45"/></>,
+    9: <><path d="M16 36a25 25 0 0 1 50 0Z" fill="#91aaa7"/><path d="M16 36h50M41 12v45c0 10-12 10-12 2" stroke="#776f58" strokeWidth="3" fill="none"/><path d="M41 12c-11 8-12 16-12 24h24c0-9-3-18-12-24Z" fill="#d9d0a7"/><path d="M11 48v6m53-7v6M21 60v6m35-4v6" stroke="#a6bec4" strokeWidth="3"/></>,
+    10: <><path d="M9 16q31 16 62 0" fill="none" stroke="#8e8f6a" strokeWidth="2"/><path d="m12 18 12 5-10 10Zm20 7 13 1-7 11Zm22-2 13-4-2 13Z" fill="#d29578"/><path d="m13 51 27-13 29 13-28 15Z" fill="#b59670"/><path d="M29 38h24v15H29Z" fill="#e3b786"/><path d="M27 36h28v7H27Z" fill="#fff0d8"/><path d="M40 27v9" stroke="#c18466" strokeWidth="3"/><path d="m40 21-3 5 3 4 3-4Z" fill="#e8c76e"/></>,
+  };
+  return <svg viewBox="0 0 80 72" aria-hidden="true">{scene[level]}</svg>;
+}

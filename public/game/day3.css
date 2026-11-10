@@ -44,3 +44,5 @@
  .standalone #task-action{top:auto}.standalone-tools{top:10px;right:12px}
 }
 @media(max-height:500px) and (min-width:701px){.garden-journal{width:165px;padding:10px}.garden-journal>p{margin-bottom:8px}.garden-journal>p>span,.garden-journal small{display:none}.garden-journal ol{gap:5px}.day-three .loot{bottom:110px}}
+
+.sum-links{flex-wrap:wrap}

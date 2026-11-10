@@ -2,58 +2,61 @@
 
 [![CI](https://github.com/peterzhang0528/english-island/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/peterzhang0528/english-island/actions/workflows/ci.yml)
 
-在一个小小的方块世界里，通过行动学英语：砍树、收集材料、分享蛋糕，再和新朋友一起种花、邀请蜜蜂。
+十天，一起把小岛变成家。用一个个小动作学英语：做工具、分享蛋糕、照顾花园，再带着朋友和前一天的发现走向下一段故事。
 
-欢迎叶老师、杨老师和同学们一起建设这座小岛。你可以提出新故事、纠正一句英文、体验手机操作，或者亲手制作下一关。一个清楚的反馈，也是一次有价值的贡献。
+欢迎叶老师、杨老师和同学们一起共创。你可以提出一个故事、纠正一句英语、试玩后记录一个不容易操作的地方，也可以亲手制作下一关。
 
-**[在线试玩](https://english-island-zhang-1109.lulabs.chatgpt.site) · [第一关](https://english-island-zhang-1109.lulabs.chatgpt.site/?level=1) · [第二关](https://english-island-zhang-1109.lulabs.chatgpt.site/?level=2) · [第三关](https://english-island-zhang-1109.lulabs.chatgpt.site/?level=3)**
+**[在线试玩已发布版本](https://english-island-zhang-1109.lulabs.chatgpt.site) · [正式版本与源码下载](https://github.com/peterzhang0528/english-island/releases) · [问题和关卡提案](https://github.com/peterzhang0528/english-island/issues/new/choose)**
 
-[参与贡献](CONTRIBUTING.md) · [开发新关卡](docs/ADDING_LEVELS.md) · [配音维护](docs/AUDIO.md) · [反馈协作流程](docs/FEEDBACK_LOOP.md) · [更新记录](CHANGELOG.md) · [素材与许可说明](THIRD_PARTY_NOTICES.md)
+本分支包含十关连续故事的开发预览。实际线上内容以 Release 为准；PR 通过检查后仍需维护者确认合并与发布。
 
-[查看 Issues](https://github.com/peterzhang0528/english-island/issues) · [反馈问题或提出新关卡](https://github.com/peterzhang0528/english-island/issues/new/choose) · [查看 Pull Requests](https://github.com/peterzhang0528/english-island/pulls)
+[贡献指南](CONTRIBUTING.md) · [十关故事线](docs/STORY.md) · [开发关卡](docs/ADDING_LEVELS.md) · [配音维护](docs/AUDIO.md) · [反馈协作](docs/FEEDBACK_LOOP.md) · [更新记录](CHANGELOG.md) · [素材与许可](THIRD_PARTY_NOTICES.md)
 
-## 先来玩一关
+## 十段相连的冒险
 
-| 关卡 | 小小的任务 | 会遇到的英语 |
+| 关卡 | 今天的故事 | 带到下一段旅途的发现 |
 | --- | --- | --- |
-| 01 · 第一把斧头 | 推门、收集木材与石头、合成石斧、砍树 | TREE、LOG、PLANK、STICK、STONE、AXE |
-| 02 · 给僵尸做蛋糕 | 鸡蛋、牛奶、三束麦子，做蛋糕送给友善的新朋友 | CHICKEN、EGG、COW、MILK、WHEAT、CAKE、FRIEND |
-| 03 · 和新朋友种花园 | 松土、播种、浇水、打开遮阳棚，花开后邀请蜜蜂 | SOIL、DIG、SEED、PLANT、WATER、SUN、GROW、FLOWER、BEE |
+| 01 | 第一把斧头 | 学会制作工具，为建设小岛迈出第一步 |
+| 02 | 给僵尸做蛋糕 | 用食物认识一位友善的新朋友 |
+| 03 | 和新朋友种花园 | 一起照顾花园，准备把鲜花送出去 |
+| 04 | 把花送过小桥 | 把第三关种出的花，送到第五关的集市。 |
+| 05 | 集市里的小委托 | 地图通向第六关的牧场，也画着远处的海湾。 |
+| 06 | 跟着脚印找小羊 | 第七关会把这份谢礼变成小船的白帆。 |
+| 07 | 白帆带我们出发 | 小船会停靠在第八关的灯塔码头。 |
+| 08 | 让灯塔亮起来 | 第九关里，这束光会陪朋友们度过雨天。 |
+| 09 | 雨天也要互相照顾 | 第十关，所有旅途中认识的朋友都会出现。 |
+| 10 | 我们一起建成的小岛 | 记住每一位朋友，也欢迎和大家一起共创下一段故事。 |
 
-听 JJ 的英文，看中文提示，点击金色光圈中的目标。也可以按空格或点击动作按钮；拖动画面可以环顾。单词可以反复点读，通关后可以保存自己的冒险卡片。第二关使用小岛的简化蛋糕配方；第三关每个动作照顾整座花床，并用成长记录展示进度。
+前情回顾会解释我们为什么来到这里；结尾会把下一关的故事接起来。花园里的花、修好的桥、牧场送的羊毛、白帆小船和点亮的灯塔会反复出现，最后成为庆典的一部分。关卡可自由选择，收藏只记录已完成的冒险，不会把新玩家挡在后面的故事外。
 
-## 五分钟开始贡献
+每关提供双语提示、单词点读、点击／动作按钮／空格操作，以及可下载的冒险卡。拖动可以环顾，打开帮助会暂停场景和旁白。
 
-1. **有想法或发现问题？** 打开[新建 Issue](https://github.com/peterzhang0528/english-island/issues/new/choose)，选择「新关卡提案」或「问题反馈」。新关卡先写故事、单词和几个动作，就可以开始讨论。
-2. **想改代码？** Fork 本仓库，将自己的 Fork 克隆到电脑，然后运行下面的命令。
-3. **完成一次小改动后**，按 [贡献指南](CONTRIBUTING.md) [提交 Pull Request](https://github.com/peterzhang0528/english-island/compare)，让大家一起体验和检查。
+## 一起探索 AI 可以放在哪里
 
-游戏中的反馈按钮会把当前关卡、阶段和版本带入 GitHub 问题表单。老师与维护者如何接收、分派和复验问题，见 [反馈协作流程](docs/FEEDBACK_LOOP.md)；企业微信通知的接入状态以该文档为准。
+目前游戏没有接入实时 AI 服务。我们想和老师、同学、开发者一起讨论：AI 能在哪一个具体时刻，让开口说英语、理解故事或设计关卡变得更有趣？
 
-### 完整网站
+你可以描述一小段体验，比如「找到小羊后，我想用自己的英语问候它」，再写出希望游戏怎样回应，以及怎样判断这个帮助有用。通过 [AI 共创点子表单](https://github.com/peterzhang0528/english-island/issues/new?template=ai_idea.yml) 分享，或者先在 PR 中讨论。普通新关卡想法仍使用「新关卡提案」。
 
-需要 **Node.js 22.13.0 或更新版本**及 npm。仓库的 `.nvmrc` 指定最低开发版本；CI 使用 Node.js 22。普通克隆默认使用 portable 运行方式，不需要登录 Sites，也不需要云服务密钥。
+## 本地开始
 
-在已克隆的 `english-island` 目录中运行：
+需要 Node.js 22.13.0 或更新版本及 npm。普通克隆默认使用 portable 运行方式，不需要云服务密钥或登录 Sites。
 
 ```sh
 npm ci
 npm run dev
 ```
 
-默认打开 [本地首页](http://localhost:5173/)，也可以直达 [第一关](http://localhost:5173/?level=1)、[第二关](http://localhost:5173/?level=2) 或 [第三关](http://localhost:5173/?level=3)。若端口占用，以终端实际输出的地址为准。
+默认打开 [本地首页](http://localhost:5173/)。用 `?level=1` 至 `?level=10` 直达关卡，例如 [第四关](http://localhost:5173/?level=4) 或 [第十关](http://localhost:5173/?level=10)。若端口被占用，以终端输出为准。
 
-### 只研究游戏场景
-
-安装了 Python 3 的同学可以直接启动静态游戏，不必安装网站依赖：
+只研究游戏场景时，也可以用 Python 3 启动静态资源：
 
 ```sh
 python3 -m http.server 8080 --directory public
 ```
 
-打开 [森林关卡](http://localhost:8080/game/index.html)、[农场关卡](http://localhost:8080/game/day2.html) 或 [花园关卡](http://localhost:8080/game/day3.html)。静态入口不包含外层网站的完整关卡菜单与进度栏；不要直接双击 HTML，模块和音频需要通过 HTTP 加载。
+前三关分别位于 `/game/index.html`、`/game/day2.html`、`/game/day3.html`；第四至十关使用 `/game/story.html?level=4` 等入口。静态入口不包含完整网站的外层菜单与进度条。请通过 HTTP 加载，不要直接双击 HTML。
 
-## 改动后的检查
+## 检查与提交
 
 ```sh
 npm run typecheck
@@ -61,36 +64,30 @@ npm test
 npm run build
 ```
 
-GitHub Actions 会对提交到 `main` 的代码和 Pull Request 执行安装、类型检查、自动测试和构建。CI 不会自动发布网站。
+自动检查覆盖本地资源、全体文案录音、十关入口、语音队列与暂停、任务重复操作保护、剧情阶段顺序，以及真实 Three.js 几何在桌面和手机尺寸下的点击目标。测试中的浏览器和音频边界使用替代接口；几何测试不能代替真实浏览器的画面、听感和完整通关。
 
-`npm test` 检查所有关卡的本地资源与配音覆盖、语音队列／取消／暂停／回退、农场和花园的动作保护，以及真实 Three.js 场景在不同视口下的射线命中。语音测试使用替代音频接口；这些检查没有启动真实浏览器。
+请实际试玩受影响的关卡，并在 PR 中如实记录设备、验证步骤、没有验证的部分。GitHub Actions 负责检查和构建，不会自动部署。自动反馈任务最多对明确、可复现的问题提交修复 PR，合并与发布由维护者逐次确认。
 
-自动检查之外，请亲自玩过受影响的关卡，检查手机布局、声音、静音、帮助暂停、连续点击与通关卡片。没有运行的检查请在 PR 中直说；构建成功不等于浏览器完整通关。[具体检查方法](docs/ADDING_LEVELS.md#验证你的关卡)
-
-## 从哪里开始读代码
+## 从哪里读代码
 
 | 路径 | 内容 |
 | --- | --- |
-| `app/page.tsx`、`app/globals.css` | 网站入口、关卡菜单、进度与设置 |
-| `components/IslandGame.tsx` | iframe 加载与网站／游戏消息桥 |
-| `public/game/index.html`、`js/world.js` | 第一关页面与场景 |
-| `public/game/day2.html`、`js/world2.js` | 第二关页面与场景 |
-| `public/game/day3.html`、`js/world3.js` | 第三关页面与场景 |
-| `public/game/js/voice.js`、`sfx.js` | 共享配音队列、静音、暂停与音效 |
-| `public/game/audio/voice.json` | 英文文本到本地音频的索引 |
-| `public/game/js/textures.js`、`vendor/` | 贴图生成与本地 Three.js |
-| `tests/` | 自动检查；以 `npm test` 为统一入口 |
-| `docs/ADDING_LEVELS.md` | 第四关及后续关卡的接入方法 |
-| `docs/AUDIO.md` | JJ 参考声线、音频清单与试听验收 |
+| `lib/chapters.ts` | 十关菜单、有效关卡与入口路径 |
+| `app/page.tsx`、`components/IslandGame.tsx` | 网站菜单、进度和 iframe 消息桥 |
+| `public/game/index.html`、`day2.html`、`day3.html` | 前三关的独立场景 |
+| `public/game/story-chapters.json` | 第四至十关的故事、五步任务、双语词句和纪念物 |
+| `public/game/js/world-story.js` | 共享故事流程、输入、暂停、配音和冒险卡 |
+| `public/game/js/story-scenes.js` | 七个不同的方块场景和实际动作动画 |
+| `public/game/js/voice.js`、`sfx.js` | 共享配音和音效 |
+| `public/game/audio/voice.json` | 全部英语文本到本地配音的索引 |
+| `tests/` | 以 `npm test` 运行的自动检查 |
 
-网站外层使用 React、TypeScript 和 vinext/Vite；游戏本体使用浏览器 ES 模块和 Three.js。两者通过消息通信，开发一个关卡时不必把场景改写成 React 组件。
+## JJ 的声音
 
-## 关于 JJ 的声音
+第一关原有 32 段配音保留。第二、三关及故事续篇以第一关声音为参考生成，并复用已有词句。因为原始 voice ID 不可得，这是近似声线匹配，不能保证完全一致。已有文件不会因增加关卡而重新编码。新增配音请遵循 [配音维护指南](docs/AUDIO.md)。
 
-第一关原有 32 段配音保留，第二关 27 段按第一关参考声音重新生成，第三关沿用同一参考方案并复用已有词句。由于原始 voice ID 不可得，声线属于近似匹配，不承诺完全一致。新关卡请按 [配音维护指南](docs/AUDIO.md) 延续同一参考声音，避免提示句突然切换成设备的系统声音。
+## 反馈与共创
 
-## 一起把小岛做大
+游戏右上角的反馈按钮会带入当前关卡、阶段和版本。没有 GitHub 账号的同学，可以把反馈交给老师整理。每条 Issue 关联修复 PR 和发布版本，避免同一条反馈反复开工。WorkBuddy 与企业微信的接力方法见 [反馈协作](docs/FEEDBACK_LOOP.md)；仓库内容不代表通知通道已经由代码自动接通。
 
-我们欢迎完整的新关卡，也欢迎小贡献：让一个目标更容易点中、修正一条字幕、补充一个语音测试，或写清楚一次复现步骤。请保持讨论友善，反馈作品本身，并在引用素材时保留来源。
-
-本项目第一关改编自提供的外部参考站点，后续关卡和工程化工作在此基础上继续开发。**公开仓库不代表全部素材都采用 MIT 许可**；外部代码、素材、AI 配音和第三方库的来源及适用范围见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+本项目第一关改编自提供的外部参考站点，后续实现包含 AI 辅助开发。公开仓库不代表全部素材都采用 MIT 许可；来源和使用范围见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。

@@ -1,0 +1,949 @@
+[
+  {
+    "id": 4,
+    "title": "把花送过小桥",
+    "subtitle": "小岛修桥师",
+    "description": "用木板和绳子修好小桥，把花园的花送去集市。",
+    "recap": "第三天，我们和朋友种出了花园。小蜜蜂带来消息：河对岸的集市需要鲜花，可小桥少了几块木板。",
+    "opening": {
+      "en": "Our flowers need a bridge!",
+      "zh": "想把花送给大家，先一起修好这座小桥！"
+    },
+    "stages": [
+      {
+        "id": "planks",
+        "label": "寻找木板",
+        "word": "PLANK",
+        "instruction": {
+          "en": "Find three planks.",
+          "zh": "找来三块木板。点一下堆好的木板。"
+        },
+        "result": {
+          "en": "Three planks for our bridge.",
+          "zh": "三块木板，正好补上小桥的缺口。"
+        }
+      },
+      {
+        "id": "rope",
+        "label": "系好绳子",
+        "word": "ROPE",
+        "instruction": {
+          "en": "Tie the rope.",
+          "zh": "把绳子系牢，让木板连在一起。"
+        },
+        "result": {
+          "en": "The planks stay together!",
+          "zh": "木板牢牢连在一起啦！"
+        }
+      },
+      {
+        "id": "hammer",
+        "label": "敲牢木板",
+        "word": "HAMMER",
+        "instruction": {
+          "en": "Tap the hammer.",
+          "zh": "拿起小锤子，把木板敲牢。"
+        },
+        "result": {
+          "en": "Tap, tap! Strong and safe.",
+          "zh": "叩、叩！小桥结实又稳当。"
+        }
+      },
+      {
+        "id": "bridge",
+        "label": "走过小桥",
+        "word": "BRIDGE",
+        "instruction": {
+          "en": "Step onto the bridge.",
+          "zh": "踏上修好的桥，试着走到对岸。"
+        },
+        "result": {
+          "en": "We can cross the river!",
+          "zh": "我们可以过河啦！"
+        }
+      },
+      {
+        "id": "cart",
+        "label": "推走花车",
+        "word": "CART",
+        "instruction": {
+          "en": "Push the flower cart.",
+          "zh": "推着装满鲜花的小车，去河对岸。"
+        },
+        "result": {
+          "en": "Our flowers are ready for the market.",
+          "zh": "花园的花准备好去集市了。"
+        }
+      }
+    ],
+    "ending": {
+      "en": "We built a bridge together!",
+      "zh": "我们一起修好了一座桥！"
+    },
+    "next": {
+      "en": "Let's take our flowers to the market!",
+      "zh": "下一站，带着花车去热闹的集市。"
+    },
+    "coreWords": [
+      {
+        "en": "PLANK",
+        "zh": "木板"
+      },
+      {
+        "en": "ROPE",
+        "zh": "绳子"
+      },
+      {
+        "en": "HAMMER",
+        "zh": "锤子"
+      },
+      {
+        "en": "BRIDGE",
+        "zh": "桥"
+      },
+      {
+        "en": "CART",
+        "zh": "小推车"
+      },
+      {
+        "en": "FRIEND",
+        "zh": "朋友"
+      },
+      {
+        "en": "TREE",
+        "zh": "树"
+      },
+      {
+        "en": "WATER",
+        "zh": "水"
+      },
+      {
+        "en": "FLOWER",
+        "zh": "花"
+      },
+      {
+        "en": "CLOUD",
+        "zh": "云"
+      }
+    ],
+    "reward": {
+      "name": "鲜花小推车",
+      "description": "把第三关种出的花，送到第五关的集市。"
+    },
+    "palette": {
+      "sky": "#a7d3e9",
+      "accent": "#739762",
+      "paper": "#f7f4e8"
+    }
+  },
+  {
+    "id": 5,
+    "title": "集市里的小委托",
+    "subtitle": "小岛送花员",
+    "description": "用花园的鲜花换来旅途食物，也收到一张特别的地图。",
+    "recap": "我们推着花车过了新修的小桥。集市上的朋友正等着鲜花，还想请我们帮一个忙。",
+    "opening": {
+      "en": "Welcome to the market!",
+      "zh": "欢迎来到集市！先把花送到朋友的小摊吧。"
+    },
+    "stages": [
+      {
+        "id": "flowers",
+        "label": "送出鲜花",
+        "word": "FLOWER",
+        "instruction": {
+          "en": "Give our flowers to the shopkeeper.",
+          "zh": "把花园的花送给店主。"
+        },
+        "result": {
+          "en": "Thank you for the lovely flowers!",
+          "zh": "谢谢你带来这么漂亮的花！"
+        }
+      },
+      {
+        "id": "basket",
+        "label": "拿起篮子",
+        "word": "BASKET",
+        "instruction": {
+          "en": "Pick up the basket.",
+          "zh": "拿起篮子，装一点路上的食物。"
+        },
+        "result": {
+          "en": "A basket for our food.",
+          "zh": "这个篮子用来装我们的食物。"
+        }
+      },
+      {
+        "id": "apple",
+        "label": "装好苹果",
+        "word": "APPLE",
+        "instruction": {
+          "en": "Put an apple in the basket.",
+          "zh": "把一个红苹果放进篮子。"
+        },
+        "result": {
+          "en": "A red apple for our journey.",
+          "zh": "一个红苹果，留给路上的我们。"
+        }
+      },
+      {
+        "id": "bread",
+        "label": "带上面包",
+        "word": "BREAD",
+        "instruction": {
+          "en": "Take a loaf of bread.",
+          "zh": "带上一条面包，和朋友一起分享。"
+        },
+        "result": {
+          "en": "Bread for our hungry friends.",
+          "zh": "面包送给饿肚子的小伙伴。"
+        }
+      },
+      {
+        "id": "map",
+        "label": "打开地图",
+        "word": "MAP",
+        "instruction": {
+          "en": "Open the map.",
+          "zh": "打开店主交给你的地图。"
+        },
+        "result": {
+          "en": "A little sheep is missing!",
+          "zh": "原来有一只小羊走丢了！"
+        }
+      }
+    ],
+    "ending": {
+      "en": "Let's help the little sheep.",
+      "zh": "我们去帮小羊找到回家的路。"
+    },
+    "next": {
+      "en": "Follow the path beyond the market.",
+      "zh": "跟着地图，从集市后面的小路出发。"
+    },
+    "coreWords": [
+      {
+        "en": "FLOWER",
+        "zh": "花"
+      },
+      {
+        "en": "BASKET",
+        "zh": "篮子"
+      },
+      {
+        "en": "APPLE",
+        "zh": "苹果"
+      },
+      {
+        "en": "BREAD",
+        "zh": "面包"
+      },
+      {
+        "en": "MAP",
+        "zh": "地图"
+      },
+      {
+        "en": "FRIEND",
+        "zh": "朋友"
+      },
+      {
+        "en": "TREE",
+        "zh": "树"
+      },
+      {
+        "en": "WATER",
+        "zh": "水"
+      },
+      {
+        "en": "CLOUD",
+        "zh": "云"
+      }
+    ],
+    "reward": {
+      "name": "寻羊地图",
+      "description": "地图通向第六关的牧场，也画着远处的海湾。"
+    },
+    "palette": {
+      "sky": "#b8d9e9",
+      "accent": "#bd9060",
+      "paper": "#fbf3e5"
+    }
+  },
+  {
+    "id": 6,
+    "title": "跟着脚印找小羊",
+    "subtitle": "小岛寻路员",
+    "description": "沿着地图和小脚印找到小羊，让它吃饱，再收到一份软软的谢礼。",
+    "recap": "集市朋友画的地图带我们来到牧场。草地上有一串小脚印，面包篮也陪着我们一起走。",
+    "opening": {
+      "en": "The map leads to the meadow.",
+      "zh": "跟着地图，我们来到一片安静的草地。"
+    },
+    "stages": [
+      {
+        "id": "footprints",
+        "label": "寻找脚印",
+        "word": "FOOTPRINT",
+        "instruction": {
+          "en": "Look for the footprints.",
+          "zh": "低头找一找草地上的小脚印。"
+        },
+        "result": {
+          "en": "Small footprints in the grass.",
+          "zh": "小脚印藏在草地里，指向那扇门。"
+        }
+      },
+      {
+        "id": "gate",
+        "label": "打开栅栏",
+        "word": "GATE",
+        "instruction": {
+          "en": "Open the gate.",
+          "zh": "打开牧场的栅栏门。"
+        },
+        "result": {
+          "en": "The path is open!",
+          "zh": "小路通了，我们继续往前走。"
+        }
+      },
+      {
+        "id": "sheep",
+        "label": "找到小羊",
+        "word": "SHEEP",
+        "instruction": {
+          "en": "Find the little sheep.",
+          "zh": "在树边找到迷路的小羊。"
+        },
+        "result": {
+          "en": "There you are, little sheep!",
+          "zh": "原来你在这里呀，小羊！"
+        }
+      },
+      {
+        "id": "hay",
+        "label": "喂饱小羊",
+        "word": "HAY",
+        "instruction": {
+          "en": "Give the sheep some hay.",
+          "zh": "把干草送给小羊，让它吃饱。"
+        },
+        "result": {
+          "en": "Yummy hay! The sheep is happy.",
+          "zh": "香香的干草，小羊开心啦。"
+        }
+      },
+      {
+        "id": "wool",
+        "label": "收下羊毛",
+        "word": "WOOL",
+        "instruction": {
+          "en": "Pick up the soft wool.",
+          "zh": "收下牧场朋友准备的软羊毛。"
+        },
+        "result": {
+          "en": "Thank you! Here is some wool.",
+          "zh": "谢谢你找回小羊！这份羊毛送给你。"
+        }
+      }
+    ],
+    "ending": {
+      "en": "Our little friend is safe.",
+      "zh": "我们的小伙伴平安回家了。"
+    },
+    "next": {
+      "en": "Let's make a sail with the wool.",
+      "zh": "下一站，把羊毛织成一张小船帆。"
+    },
+    "coreWords": [
+      {
+        "en": "FOOTPRINT",
+        "zh": "脚印"
+      },
+      {
+        "en": "GATE",
+        "zh": "栅栏门"
+      },
+      {
+        "en": "SHEEP",
+        "zh": "羊"
+      },
+      {
+        "en": "HAY",
+        "zh": "干草"
+      },
+      {
+        "en": "WOOL",
+        "zh": "羊毛"
+      },
+      {
+        "en": "FRIEND",
+        "zh": "朋友"
+      },
+      {
+        "en": "TREE",
+        "zh": "树"
+      },
+      {
+        "en": "WATER",
+        "zh": "水"
+      },
+      {
+        "en": "FLOWER",
+        "zh": "花"
+      },
+      {
+        "en": "CLOUD",
+        "zh": "云"
+      }
+    ],
+    "reward": {
+      "name": "一篮软羊毛",
+      "description": "第七关会把这份谢礼变成小船的白帆。"
+    },
+    "palette": {
+      "sky": "#bfdfed",
+      "accent": "#8aaa63",
+      "paper": "#f5f7e7"
+    }
+  },
+  {
+    "id": 7,
+    "title": "白帆带我们出发",
+    "subtitle": "小岛船员",
+    "description": "把牧场的谢礼变成白帆，乘着小船去海湾里的小岛。",
+    "recap": "小羊回家了。牧场的朋友把羊毛织成白帆，我们带着白帆和旅途食物来到码头。",
+    "opening": {
+      "en": "Let's sail across the bay!",
+      "zh": "一起乘小船，去海湾对面的岛看看！"
+    },
+    "stages": [
+      {
+        "id": "wood",
+        "label": "搬来木料",
+        "word": "WOOD",
+        "instruction": {
+          "en": "Put the wood on the dock.",
+          "zh": "把准备好的木料搬到码头。"
+        },
+        "result": {
+          "en": "Wood for a little boat.",
+          "zh": "这些木料可以做一条小船。"
+        }
+      },
+      {
+        "id": "sail",
+        "label": "升起白帆",
+        "word": "SAIL",
+        "instruction": {
+          "en": "Raise the wool sail.",
+          "zh": "升起用羊毛织成的白色船帆。"
+        },
+        "result": {
+          "en": "Look! A white sail.",
+          "zh": "看，一张洁白的小船帆！"
+        }
+      },
+      {
+        "id": "boat",
+        "label": "登上小船",
+        "word": "BOAT",
+        "instruction": {
+          "en": "Step into the boat.",
+          "zh": "和老朋友一起登上小船。"
+        },
+        "result": {
+          "en": "All aboard, my friend!",
+          "zh": "朋友们，都上船啦！"
+        }
+      },
+      {
+        "id": "wind",
+        "label": "迎接微风",
+        "word": "WIND",
+        "instruction": {
+          "en": "Catch the wind.",
+          "zh": "让船帆迎着风，小船就能前进。"
+        },
+        "result": {
+          "en": "The wind is pushing our boat.",
+          "zh": "风正轻轻推着我们的小船。"
+        }
+      },
+      {
+        "id": "island",
+        "label": "驶向小岛",
+        "word": "ISLAND",
+        "instruction": {
+          "en": "Sail to the island.",
+          "zh": "跟着航线，驶向海湾里的小岛。"
+        },
+        "result": {
+          "en": "Look! A lighthouse on the island.",
+          "zh": "看，小岛上有一座灯塔。"
+        }
+      }
+    ],
+    "ending": {
+      "en": "We crossed the bay together.",
+      "zh": "我们一起穿过了海湾。"
+    },
+    "next": {
+      "en": "Let's help the lighthouse shine.",
+      "zh": "下一站，让小岛上的灯塔亮起来。"
+    },
+    "coreWords": [
+      {
+        "en": "WOOD",
+        "zh": "木头"
+      },
+      {
+        "en": "SAIL",
+        "zh": "船帆"
+      },
+      {
+        "en": "BOAT",
+        "zh": "船"
+      },
+      {
+        "en": "WIND",
+        "zh": "风"
+      },
+      {
+        "en": "ISLAND",
+        "zh": "岛"
+      },
+      {
+        "en": "FRIEND",
+        "zh": "朋友"
+      },
+      {
+        "en": "TREE",
+        "zh": "树"
+      },
+      {
+        "en": "WATER",
+        "zh": "水"
+      },
+      {
+        "en": "FLOWER",
+        "zh": "花"
+      },
+      {
+        "en": "CLOUD",
+        "zh": "云"
+      }
+    ],
+    "reward": {
+      "name": "白帆小船",
+      "description": "小船会停靠在第八关的灯塔码头。"
+    },
+    "palette": {
+      "sky": "#a6d7ec",
+      "accent": "#729eae",
+      "paper": "#eff7f6"
+    }
+  },
+  {
+    "id": 8,
+    "title": "让灯塔亮起来",
+    "subtitle": "小岛守灯人",
+    "description": "登上灯塔、找到钥匙、点亮灯光，为海上的朋友指路。",
+    "recap": "我们的白帆小船靠岸了。灯塔守护着来往的小船，可今天它的灯还没有亮。",
+    "opening": {
+      "en": "The lighthouse is dark.",
+      "zh": "灯塔还是暗的，我们一起帮它亮起来。"
+    },
+    "stages": [
+      {
+        "id": "stairs",
+        "label": "登上台阶",
+        "word": "STAIRS",
+        "instruction": {
+          "en": "Climb the stairs.",
+          "zh": "沿着台阶慢慢向上走。"
+        },
+        "result": {
+          "en": "Up, up! One step at a time.",
+          "zh": "向上，向上！一步一步来。"
+        }
+      },
+      {
+        "id": "key",
+        "label": "找到钥匙",
+        "word": "KEY",
+        "instruction": {
+          "en": "Find the little key.",
+          "zh": "找一找门旁边的小钥匙。"
+        },
+        "result": {
+          "en": "A key for the lighthouse door.",
+          "zh": "这把钥匙能打开灯塔的门。"
+        }
+      },
+      {
+        "id": "door",
+        "label": "打开塔门",
+        "word": "DOOR",
+        "instruction": {
+          "en": "Open the door.",
+          "zh": "用钥匙打开灯塔的门。"
+        },
+        "result": {
+          "en": "We found the lantern!",
+          "zh": "我们找到灯塔里的灯了！"
+        }
+      },
+      {
+        "id": "light",
+        "label": "点亮灯光",
+        "word": "LIGHT",
+        "instruction": {
+          "en": "Turn on the light.",
+          "zh": "打开灯，让亮光照向海面。"
+        },
+        "result": {
+          "en": "The light shows the way home.",
+          "zh": "灯光为小船照亮回家的路。"
+        }
+      },
+      {
+        "id": "bell",
+        "label": "敲响钟声",
+        "word": "BELL",
+        "instruction": {
+          "en": "Ring the bell.",
+          "zh": "敲一敲钟，告诉大家灯塔亮了。"
+        },
+        "result": {
+          "en": "Ding, ding! The boats are safe.",
+          "zh": "叮，叮！小船们找到方向啦。"
+        }
+      }
+    ],
+    "ending": {
+      "en": "Our lighthouse is shining!",
+      "zh": "我们的灯塔亮起来了！"
+    },
+    "next": {
+      "en": "Clouds are coming. Let's help our friends.",
+      "zh": "云慢慢飘来了，回去看看朋友们吧。"
+    },
+    "coreWords": [
+      {
+        "en": "STAIRS",
+        "zh": "台阶"
+      },
+      {
+        "en": "KEY",
+        "zh": "钥匙"
+      },
+      {
+        "en": "DOOR",
+        "zh": "门"
+      },
+      {
+        "en": "LIGHT",
+        "zh": "灯光"
+      },
+      {
+        "en": "BELL",
+        "zh": "钟"
+      },
+      {
+        "en": "FRIEND",
+        "zh": "朋友"
+      },
+      {
+        "en": "TREE",
+        "zh": "树"
+      },
+      {
+        "en": "WATER",
+        "zh": "水"
+      },
+      {
+        "en": "FLOWER",
+        "zh": "花"
+      },
+      {
+        "en": "CLOUD",
+        "zh": "云"
+      }
+    ],
+    "reward": {
+      "name": "温暖的灯光",
+      "description": "第九关里，这束光会陪朋友们度过雨天。"
+    },
+    "palette": {
+      "sky": "#b8cbdc",
+      "accent": "#c0a16b",
+      "paper": "#f6f0e7"
+    }
+  },
+  {
+    "id": 9,
+    "title": "雨天也要互相照顾",
+    "subtitle": "小岛互助员",
+    "description": "在灯塔的光里修好小屋、搬好食物、分享雨伞，收到庆典邀请。",
+    "recap": "灯塔亮着，我们顺着熟悉的航线回到小岛。一场小雨来了，集市的朋友正在照顾自己的小摊。",
+    "opening": {
+      "en": "A rainy day on our island!",
+      "zh": "小岛下雨了，我们一起帮朋友照顾小屋。"
+    },
+    "stages": [
+      {
+        "id": "cloud",
+        "label": "看看雨云",
+        "word": "CLOUD",
+        "instruction": {
+          "en": "Look at the clouds.",
+          "zh": "抬头看看雨云，找到需要帮助的小屋。"
+        },
+        "result": {
+          "en": "The wind moved the roof.",
+          "zh": "风把小屋的一块屋顶吹歪了。"
+        }
+      },
+      {
+        "id": "roof",
+        "label": "修好屋顶",
+        "word": "ROOF",
+        "instruction": {
+          "en": "Fix the little roof.",
+          "zh": "把准备好的屋顶板放回原位。"
+        },
+        "result": {
+          "en": "A dry home for our friends.",
+          "zh": "朋友们又有干爽的小屋啦。"
+        }
+      },
+      {
+        "id": "box",
+        "label": "搬好食物",
+        "word": "BOX",
+        "instruction": {
+          "en": "Carry the box inside.",
+          "zh": "把装着食物的箱子搬进屋里。"
+        },
+        "result": {
+          "en": "The food is warm and dry.",
+          "zh": "食物在屋里，温暖又干爽。"
+        }
+      },
+      {
+        "id": "umbrella",
+        "label": "分享雨伞",
+        "word": "UMBRELLA",
+        "instruction": {
+          "en": "Share the umbrella.",
+          "zh": "把雨伞撑开，和朋友一起躲雨。"
+        },
+        "result": {
+          "en": "Friends stay dry together.",
+          "zh": "撑同一把伞，朋友们一起不淋雨。"
+        }
+      },
+      {
+        "id": "letter",
+        "label": "打开来信",
+        "word": "LETTER",
+        "instruction": {
+          "en": "Open the letter.",
+          "zh": "雨停了，打开刚送到的来信。"
+        },
+        "result": {
+          "en": "You are invited to our island party!",
+          "zh": "邀请你来参加小岛庆典！"
+        }
+      }
+    ],
+    "ending": {
+      "en": "We helped our friends through the rain.",
+      "zh": "下雨的时候，我们也能互相照顾。"
+    },
+    "next": {
+      "en": "Let's bring everyone to the party.",
+      "zh": "下一站，带着所有朋友一起去庆典。"
+    },
+    "coreWords": [
+      {
+        "en": "CLOUD",
+        "zh": "云"
+      },
+      {
+        "en": "ROOF",
+        "zh": "屋顶"
+      },
+      {
+        "en": "BOX",
+        "zh": "箱子"
+      },
+      {
+        "en": "UMBRELLA",
+        "zh": "雨伞"
+      },
+      {
+        "en": "LETTER",
+        "zh": "信"
+      },
+      {
+        "en": "FRIEND",
+        "zh": "朋友"
+      },
+      {
+        "en": "TREE",
+        "zh": "树"
+      },
+      {
+        "en": "WATER",
+        "zh": "水"
+      },
+      {
+        "en": "FLOWER",
+        "zh": "花"
+      }
+    ],
+    "reward": {
+      "name": "庆典邀请函",
+      "description": "第十关，所有旅途中认识的朋友都会出现。"
+    },
+    "palette": {
+      "sky": "#b8c8d2",
+      "accent": "#8da3a5",
+      "paper": "#f0f3ec"
+    }
+  },
+  {
+    "id": 10,
+    "title": "我们一起建成的小岛",
+    "subtitle": "小岛共创伙伴",
+    "description": "带着十天的发现布置庆典，和一路认识的朋友分享快乐。",
+    "recap": "我们有了斧头和桥、蛋糕和花园、白帆和灯塔，也找回了小羊。雨后的今天，朋友们决定办一场属于大家的庆典。",
+    "opening": {
+      "en": "Welcome to our island party!",
+      "zh": "欢迎来到小岛庆典！这一次，每位朋友都来了。"
+    },
+    "stages": [
+      {
+        "id": "flag",
+        "label": "升起彩旗",
+        "word": "FLAG",
+        "instruction": {
+          "en": "Raise the flag.",
+          "zh": "升起庆典的彩旗，欢迎远道而来的朋友。"
+        },
+        "result": {
+          "en": "Our island is full of friends!",
+          "zh": "我们的小岛，到处都是朋友！"
+        }
+      },
+      {
+        "id": "table",
+        "label": "布置餐桌",
+        "word": "TABLE",
+        "instruction": {
+          "en": "Set the table.",
+          "zh": "布置餐桌，把花园的花放在中间。"
+        },
+        "result": {
+          "en": "Flowers from our little garden.",
+          "zh": "这些花，就是第三天种出的花。"
+        }
+      },
+      {
+        "id": "cake",
+        "label": "分享蛋糕",
+        "word": "CAKE",
+        "instruction": {
+          "en": "Share the cake.",
+          "zh": "端上一起做的蛋糕，每个朋友都有一份。"
+        },
+        "result": {
+          "en": "A cake for every friend!",
+          "zh": "每位朋友，都有一份甜甜的蛋糕！"
+        }
+      },
+      {
+        "id": "music",
+        "label": "奏响音乐",
+        "word": "MUSIC",
+        "instruction": {
+          "en": "Play the music.",
+          "zh": "奏响音乐，和朋友们一起跳舞。"
+        },
+        "result": {
+          "en": "Clap, clap! Let's dance together.",
+          "zh": "拍拍手，一起跳舞！"
+        }
+      },
+      {
+        "id": "friends",
+        "label": "邀请合影",
+        "word": "FRIEND",
+        "instruction": {
+          "en": "Gather our friends.",
+          "zh": "邀请所有朋友站到一起，留下庆典合影。"
+        },
+        "result": {
+          "en": "We made this island together!",
+          "zh": "这座小岛，是我们一起建成的！"
+        }
+      }
+    ],
+    "ending": {
+      "en": "Ten adventures. One big family!",
+      "zh": "十段冒险，一个温暖的大家庭！"
+    },
+    "next": {
+      "en": "What shall we build next?",
+      "zh": "接下来想建什么？把你的故事也带到小岛来吧。"
+    },
+    "coreWords": [
+      {
+        "en": "FLAG",
+        "zh": "旗子"
+      },
+      {
+        "en": "TABLE",
+        "zh": "桌子"
+      },
+      {
+        "en": "CAKE",
+        "zh": "蛋糕"
+      },
+      {
+        "en": "MUSIC",
+        "zh": "音乐"
+      },
+      {
+        "en": "FRIEND",
+        "zh": "朋友"
+      },
+      {
+        "en": "TREE",
+        "zh": "树"
+      },
+      {
+        "en": "WATER",
+        "zh": "水"
+      },
+      {
+        "en": "FLOWER",
+        "zh": "花"
+      },
+      {
+        "en": "CLOUD",
+        "zh": "云"
+      }
+    ],
+    "reward": {
+      "name": "十关冒险合影",
+      "description": "记住每一位朋友，也欢迎和大家一起共创下一段故事。"
+    },
+    "palette": {
+      "sky": "#e6d3c6",
+      "accent": "#b58c6a",
+      "paper": "#fff6e9"
+    }
+  }
+]
