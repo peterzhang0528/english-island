@@ -8,7 +8,7 @@
 
 **[在线试玩已发布版本](https://english-island-zhang-1109.lulabs.chatgpt.site) · [正式版本与源码下载](https://github.com/peterzhang0528/english-island/releases) · [问题和关卡提案](https://github.com/peterzhang0528/english-island/issues/new/choose)**
 
-本分支包含十关连续故事的开发预览。实际线上内容以 Release 为准；PR 通过检查后仍需维护者确认合并与发布。
+本仓库包含十关连续故事。线上运行版本以部署记录与公网验收结果为准；合并、上线与版本记录按[开发与发布流程](docs/DEVELOPMENT.md)执行。
 
 [贡献指南](CONTRIBUTING.md) · [十关故事线](docs/STORY.md) · [开发关卡](docs/ADDING_LEVELS.md) · [配音维护](docs/AUDIO.md) · [反馈协作](docs/FEEDBACK_LOOP.md) · [更新记录](CHANGELOG.md) · [素材与许可](THIRD_PARTY_NOTICES.md)
 
@@ -32,6 +32,8 @@
 每关提供双语提示、单词点读、点击／动作按钮／空格操作，以及可下载的冒险卡。拖动可以环顾，打开帮助会暂停场景和旁白。
 
 ## 一起探索 AI 可以放在哪里
+
+同学们可以直接口头或在约定的群里反馈，由维护者整理、查重后登记；不需要先学会 GitHub。有代码改动的贡献者按[贡献指南](CONTRIBUTING.md)提交 PR。
 
 目前游戏没有接入实时 AI 服务。我们想和老师、同学、开发者一起讨论：AI 能在哪一个具体时刻，让开口说英语、理解故事或设计关卡变得更有趣？
 
