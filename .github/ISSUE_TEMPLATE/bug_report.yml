@@ -1,0 +1,64 @@
+name: 问题反馈
+description: 记录卡住的步骤、声音问题或不容易操作的地方。
+title: "[问题] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        谢谢你帮小岛变得更好！请先看看是否已有相同问题。
+        不需要提供学生真实姓名、联系方式或私人聊天记录；截图请只保留游戏内容。
+  - type: dropdown
+    id: chapter
+    attributes:
+      label: 出现在哪一关？
+      options:
+        - 第一关 · 第一把斧头
+        - 第二关 · 给僵尸做蛋糕
+        - 关卡菜单或网站外层
+        - 新增关卡／其他
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: 试玩地址或版本
+      description: 在线试玩可粘贴页面地址；本地开发可填写版本或提交编号。
+      placeholder: 在线地址，或 v0.2.0 / 提交编号
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 怎样再次遇到这个问题？
+      description: 从进入页面开始，按顺序描述点击或按键。
+      placeholder: |
+        1. 打开第二关并开始
+        2. 收集鸡蛋后打开帮助
+        3. 关闭帮助，再点击奶牛
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际发生了什么？
+      description: 如果与声音有关，请写出当时的英文、是否静音，以及是没有声音还是音色发生变化。
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 你期待发生什么？
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: 设备与浏览器
+      placeholder: 例如 iPhone / Safari，或 Windows / Chrome；若知道版本也请补充
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 截图、录屏或补充信息（可选）
+      description: 可以拖入文件；日志只保留相关错误，去除个人路径、账号和密钥。

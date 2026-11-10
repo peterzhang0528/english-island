@@ -1,0 +1,60 @@
+name: 新关卡提案
+description: 写一个故事、几句英语和几个动作，一起把它做成下一关。
+title: "[新关卡] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        欢迎叶老师、杨老师和同学们提出新冒险！不用先会写代码，故事和学习目标同样重要。
+        先看看已有提案，再用下面的几个问题说明你的想法。
+  - type: input
+    id: name
+    attributes:
+      label: 关卡名字
+      placeholder: 例如 给花园送一场小雨
+    validations:
+      required: true
+  - type: textarea
+    id: story
+    attributes:
+      label: 玩家要帮助谁、完成什么？
+      description: 用几句话描述开场、目标和完成时的小惊喜。
+    validations:
+      required: true
+  - type: textarea
+    id: learning
+    attributes:
+      label: 想学会哪些单词和句子？
+      placeholder: |
+        SEED 种子、WATER 水、FLOWER 花
+        Let's plant a seed! 我们来种一颗种子！
+    validations:
+      required: true
+  - type: textarea
+    id: actions
+    attributes:
+      label: 玩家一步步做什么？
+      description: 写出每一步的点击目标、反馈和完成条件；优先沿用当前的六个进度节点。
+      placeholder: 打招呼 → 找种子 → 松土 → 播种 → 浇水 → 花开并分享
+    validations:
+      required: true
+  - type: textarea
+    id: assets
+    attributes:
+      label: 场景、配音和素材想法（可选）
+      description: 是否可复用现有方块、角色和 JJ 声线？如引用图片或声音，请附来源与许可信息。
+  - type: dropdown
+    id: participation
+    attributes:
+      label: 你希望怎样参与？
+      options:
+        - 我先贡献想法，欢迎同学一起实现
+        - 我可以补充英语、故事或试玩反馈
+        - 我准备实现代码，希望先讨论方案
+    validations:
+      required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: 你觉得怎样算做好了？（可选）
+      description: 例如手机也容易点中、能独立通关、所有提示都有统一声线、卡片记录正确。

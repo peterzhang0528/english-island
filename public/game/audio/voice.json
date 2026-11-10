@@ -128,111 +128,111 @@
     "d": 2.96
   },
   "hello, my friend!": {
-    "f": "l2-s-hello-friend.mp3",
-    "d": 1.503
+    "f": "l2-jj-s-hello-friend.mp3",
+    "d": 1.542
   },
   "i'm hungry.": {
-    "f": "l2-s-hungry.mp3",
-    "d": 0.76
+    "f": "l2-jj-s-hungry.mp3",
+    "d": 1.113
   },
   "let's make a cake!": {
-    "f": "l2-s-make-cake.mp3",
-    "d": 1.198
+    "f": "l2-jj-s-make-cake.mp3",
+    "d": 1.715
   },
   "look! a chicken. tap the chicken!": {
-    "f": "l2-s-look-chicken.mp3",
-    "d": 2.568
+    "f": "l2-jj-s-look-chicken.mp3",
+    "d": 2.594
   },
   "an egg! thank you, chicken!": {
-    "f": "l2-s-egg.mp3",
-    "d": 2.12
+    "f": "l2-jj-s-egg.mp3",
+    "d": 2.427
   },
   "find the cow. we need milk!": {
-    "f": "l2-s-find-cow.mp3",
-    "d": 2.089
+    "f": "l2-jj-s-find-cow.mp3",
+    "d": 2.162
   },
   "milk! thank you, cow!": {
-    "f": "l2-s-milk.mp3",
-    "d": 2.127
+    "f": "l2-jj-s-milk.mp3",
+    "d": 1.977
   },
   "we need three bundles of wheat.": {
-    "f": "l2-s-three-wheat.mp3",
-    "d": 1.742
+    "f": "l2-jj-s-three-wheat.mp3",
+    "d": 1.808
   },
   "one!": {
-    "f": "l2-s-one.mp3",
-    "d": 0.465
+    "f": "l2-jj-s-one.mp3",
+    "d": 1.106
   },
   "two!": {
-    "f": "l2-s-two.mp3",
-    "d": 0.406
+    "f": "l2-jj-s-two.mp3",
+    "d": 0.595
   },
   "three!": {
-    "f": "l2-s-three.mp3",
-    "d": 0.474
+    "f": "l2-jj-s-three.mp3",
+    "d": 0.932
   },
   "put the egg, milk, and wheat on the table.": {
-    "f": "l2-s-ingredients.mp3",
-    "d": 2.758
+    "f": "l2-jj-s-ingredients.mp3",
+    "d": 2.585
   },
   "mix, mix, mix!": {
-    "f": "l2-s-mix.mp3",
-    "d": 1.895
+    "f": "l2-jj-s-mix.mp3",
+    "d": 1.455
   },
   "a cake! we made a cake!": {
-    "f": "l2-s-cake.mp3",
-    "d": 1.865
+    "f": "l2-jj-s-cake.mp3",
+    "d": 2.246
   },
   "give the cake to our hungry friend.": {
-    "f": "l2-s-give-cake.mp3",
-    "d": 1.942
+    "f": "l2-jj-s-give-cake.mp3",
+    "d": 2.165
   },
   "yummy! thank you!": {
-    "f": "l2-s-yummy.mp3",
-    "d": 1.407
+    "f": "l2-jj-s-yummy.mp3",
+    "d": 1.468
   },
   "you're welcome, my friend!": {
-    "f": "l2-s-welcome.mp3",
-    "d": 1.662
+    "f": "l2-jj-s-welcome.mp3",
+    "d": 1.294
   },
   "what else can you find?": {
-    "f": "l2-s-find-more.mp3",
-    "d": 1.451
+    "f": "l2-jj-s-find-more.mp3",
+    "d": 1.115
   },
   "zombie": {
-    "f": "l2-w-zombie.mp3",
-    "d": 0.586
+    "f": "l2-jj-w-zombie.mp3",
+    "d": 0.766
   },
   "hungry": {
-    "f": "l2-w-hungry.mp3",
-    "d": 0.551
+    "f": "l2-jj-w-hungry.mp3",
+    "d": 1.026
   },
   "chicken": {
-    "f": "l2-w-chicken.mp3",
-    "d": 0.541
+    "f": "l2-jj-w-chicken.mp3",
+    "d": 1.019
   },
   "egg": {
-    "f": "l2-w-egg.mp3",
-    "d": 0.321
+    "f": "l2-jj-w-egg.mp3",
+    "d": 0.506
   },
   "cow": {
-    "f": "l2-w-cow.mp3",
-    "d": 0.488
+    "f": "l2-jj-w-cow.mp3",
+    "d": 0.682
   },
   "milk": {
-    "f": "l2-w-milk.mp3",
-    "d": 0.455
+    "f": "l2-jj-w-milk.mp3",
+    "d": 0.681
   },
   "wheat": {
-    "f": "l2-w-wheat.mp3",
-    "d": 0.465
+    "f": "l2-jj-w-wheat.mp3",
+    "d": 0.68
   },
   "cake": {
-    "f": "l2-w-cake.mp3",
-    "d": 0.499
+    "f": "l2-jj-w-cake.mp3",
+    "d": 1.021
   },
   "friend": {
-    "f": "l2-w-friend.mp3",
-    "d": 0.533
+    "f": "l2-jj-w-friend.mp3",
+    "d": 0.933
   }
 }

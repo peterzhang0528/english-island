@@ -1,10 +1,10 @@
 import { sfx } from './sfx.js';
 
-// Bundled narration is preferred; the browser voice is a complete offline fallback.
+// Authored dialogue uses bundled narration to keep JJ's voice consistent.
 const BASE = new URL('../audio/', import.meta.url);
 let manifest = {};
 const buffers = new Map();
-const ready = fetch(new URL('voice.json', BASE)).then(r => r.ok ? r.json() : {}).catch(() => ({})).then(value => { manifest = value; });
+const ready = fetch(new URL('voice.json', BASE), { cache: 'no-cache' }).then(r => r.ok ? r.json() : {}).catch(() => ({})).then(value => { manifest = value; });
 let active = null;
 let queue = [];
 let generation = 0;
@@ -32,8 +32,10 @@ function timedPlay(text, buffer, job) {
   return new Promise(resolve => {
     let finished = false;
     let source = null;
-    const duration = buffer ? buffer.duration * 1000 : Math.min(7000, 500 + text.length * 55);
-    const silent = sfx.muted || (!buffer && !('speechSynthesis' in window));
+    const recording = manifest[text.trim().toLowerCase()];
+    const duration = buffer ? buffer.duration * 1000 : recording?.d > 0 ? recording.d * 1000 : Math.min(7000, 500 + text.length * 55);
+    // Keep subtitle timing when a known recording fails, instead of changing speaker.
+    const silent = sfx.muted || (!buffer && (recording || !('speechSynthesis' in window)));
     let remaining = silent ? duration : buffer ? duration + 250 : duration + 1800;
     let started = performance.now();
     let timer;
