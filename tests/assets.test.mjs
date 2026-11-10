@@ -5,9 +5,9 @@ import { fileURLToPath } from 'node:url';
 import { gameURL, parseGameScript, readGameFile, ts } from './helpers/source.mjs';
 
 const chapters = readdirSync(gameURL)
-  .filter(name => name === 'index.html' || name === 'story.html' || /^day\d+\.html$/.test(name))
+  .filter(name => name === 'index.html' || name === 'story.html' || name === 'wish.html' || /^day\d+\.html$/.test(name))
   .sort()
-  .map(page => ({ page, script: page === 'index.html' ? 'js/world.js' : page === 'story.html' ? 'js/world-story.js' : `js/world${page.match(/^day(\d+)/)[1]}.js` }));
+  .map(page => ({ page, script: page === 'index.html' ? 'js/world.js' : page === 'story.html' ? 'js/world-story.js' : page === 'wish.html' ? 'js/world-wish.js' : `js/world${page.match(/^day(\d+)/)[1]}.js` }));
 
 test('all chapters have complete local resource and module dependencies', () => {
   assert.ok(chapters.some(chapter => chapter.page === 'index.html'), 'The first chapter must exist');

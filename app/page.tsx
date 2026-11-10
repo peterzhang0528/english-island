@@ -7,7 +7,7 @@ import ChapterArtwork from "../components/ChapterArtwork";
 import { chapters, chapterNumbers, dayNames, isLevel, type Level } from "../lib/chapters";
 import { version as gameVersion } from "../package.json";
 
-type GameStatus = { level?: Level; ready?: boolean; step?: number; words?: string[]; muted?: boolean; completed?: boolean; busy?: boolean };
+type GameStatus = { level?: Level; ready?: boolean; step?: number; words?: string[]; muted?: boolean; completed?: boolean; busy?: boolean; mode?: string; bonusCompleted?: boolean; steps?: string[] };
 function Icon({ name }: { name: string }) {
   const paths: Record<string, React.ReactNode> = {
     sound: <><path d="M11 5 6 9H3v6h3l5 4V5Z"/><path d="M15 8a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></>,
@@ -22,6 +22,8 @@ function Icon({ name }: { name: string }) {
 }
 export default function Home() {
   const [level, setLevel] = useState<Level>(1);
+  const [wishOpen, setWishOpen] = useState(false);
+  const wishRef = useRef(false);
   const [completedLevels, setCompletedLevels] = useState<number[]>([]);
   const chapterDialog = useRef<HTMLDialogElement>(null);
   const levelRef = useRef<Level>(1);
@@ -30,19 +32,31 @@ export default function Home() {
   const [chapterOpen, setChapterOpen] = useState(false);
   const restartCancel = useRef<HTMLButtonElement>(null);
   const selectLevel = (next: Level) => {
-    if (next === levelRef.current) { chapterDialog.current?.close(); return; }
+    if (next === levelRef.current && !wishRef.current) { chapterDialog.current?.close(); return; }
+    wishRef.current = false; setWishOpen(false);
     levelRef.current = next;
     setLevel(next);
     setStatus(previous => ({ step: 0, muted: previous.muted }));
     const url = new URL(window.location.href); url.searchParams.set("level", String(next));
+    url.searchParams.delete("bonus");
     window.history.replaceState(null, "", url);
     try { localStorage.setItem("island-last-level", String(next)); } catch {}
     chapterDialog.current?.close();
+  };
+  const selectWish = (open: boolean) => {
+    if (levelRef.current !== 10 || wishRef.current === open) return;
+    wishRef.current = open; setWishOpen(open);
+    setStatus(previous => ({ step: 0, muted: previous.muted }));
+    const url = new URL(window.location.href);
+    url.searchParams.set("level", "10");
+    if (open) url.searchParams.set("bonus", "wish"); else url.searchParams.delete("bonus");
+    window.history.replaceState(null, "", url);
   };
   useEffect(() => {
     let requested = new URL(window.location.href).searchParams.get("level");
     try { requested ||= localStorage.getItem("island-last-level"); } catch {}
     const restored = Number(requested); if (isLevel(restored)) { levelRef.current = restored; setLevel(restored); }
+    if (restored === 10 && new URL(window.location.href).searchParams.get("bonus") === "wish") { wishRef.current = true; setWishOpen(true); }
     try {
       const stored: unknown = JSON.parse(localStorage.getItem("island-completed-levels") || "[]");
       if (Array.isArray(stored)) setCompletedLevels(stored.filter(isLevel));
@@ -50,8 +64,9 @@ export default function Home() {
     const listener = (e: Event) => {
       const detail = (e as CustomEvent<GameStatus>).detail;
       if (detail.level && detail.level !== levelRef.current) return;
+      if ((detail.mode === "wish") !== wishRef.current) return;
       setStatus(s => ({ ...s, ...detail }));
-      if (detail.completed) setCompletedLevels(previous => {
+      if (detail.completed && !wishRef.current) setCompletedLevels(previous => {
         const next = Array.from(new Set([...previous, levelRef.current]));
         try { localStorage.setItem("island-completed-levels", JSON.stringify(next)); } catch {}
         return next;
@@ -63,21 +78,21 @@ export default function Home() {
   useEffect(() => { if(restartOpen) restartCancel.current?.focus(); },[restartOpen]);
   useEffect(() => {
     window.dispatchEvent(new CustomEvent("island-command", { detail: { command: chapterOpen || restartOpen ? "pause" : "resume" } }));
-  }, [chapterOpen, restartOpen, level]);
+  }, [chapterOpen, restartOpen, level, wishOpen]);
   const command = (command: string) => window.dispatchEvent(new CustomEvent("island-command", { detail: { command } }));
   const current = status.step || 0;
   const chapter = chapters[level];
-  const steps = chapter.steps;
+  const steps = wishOpen ? (Array.isArray(status.steps) && status.steps.length === 4 && status.steps.every(step => typeof step === "string" && step.length <= 24) ? status.steps : ["说出愿望", "探索小地图", "练习英语", "解开谜语"]) : chapter.steps;
   const feedbackUrl = "https://github.com/peterzhang0528/english-island/issues/new?" + new URLSearchParams({
     template: "bug_report.yml",
     title: `[问题][${dayNames[level].replace("天", "关")}] `,
     version: `v${gameVersion}`,
-    reproduce: `当前关卡：${chapter.title}\n当前步骤：${steps[Math.min(current, steps.length - 1)]}${status.completed ? "（已完成）" : ""}\n\n我这样遇到了问题：\n1. `,
+    reproduce: `当前关卡：${wishOpen ? "第十关彩蛋 · 愿望地图" : chapter.title}\n当前步骤：${steps[Math.min(current, steps.length - 1)]}${status.completed || status.bonusCompleted ? "（已完成）" : ""}\n\n我这样遇到了问题：\n1. `,
   }).toString();
   return <main className="island-app">
     <header className="app-header">
       <a className="brand" href="/" aria-label="英语方块岛首页"><span className="brand-mark"><svg viewBox="0 0 40 40" aria-hidden="true"><path fill="#8dac60" d="m20 3 16 9-16 9L4 12Z"/><path fill="#547941" d="m4 12 16 9v17L4 29Z"/><path fill="#385a32" d="m20 21 16-9v17l-16 9Z"/><path fill="#bdcc86" d="m20 3 8 4.5-16 9L4 12Z"/></svg></span><span><strong>英语方块岛</strong><small>THE LITTLE ENGLISH ADVENTURE</small></span></a>
-      <button className="chapter-label chapter-switch" onClick={() => { chapterDialog.current?.showModal(); setChapterOpen(true); }} aria-label="选择关卡" aria-haspopup="dialog"><span className="chapter-dot"/> DAY {String(level).padStart(2, "0")} <span className="chapter-divider">/</span> {chapter.title}<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="m3 4.5 3 3 3-3" stroke="currentColor" strokeWidth="1.5"/></svg></button>
+      <button className="chapter-label chapter-switch" onClick={() => { chapterDialog.current?.showModal(); setChapterOpen(true); }} aria-label="选择关卡" aria-haspopup="dialog"><span className="chapter-dot"/> DAY {String(level).padStart(2, "0")} <span className="chapter-divider">/</span> {wishOpen ? "彩蛋 · 你的愿望地图" : chapter.title}<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="m3 4.5 3 3 3-3" stroke="currentColor" strokeWidth="1.5"/></svg></button>
       <nav className="app-tools" aria-label="游戏设置">
         <a className="icon-button feedback-button" href={feedbackUrl} target="_blank" rel="noopener noreferrer" title="反馈问题" aria-label="反馈问题（在新窗口打开）"><Icon name="feedback"/></a>
         <button className={status.muted ? "icon-button selected" : "icon-button"} onClick={() => command("mute")} title={status.muted ? "开启声音" : "关闭声音"} aria-label={status.muted ? "开启声音" : "关闭声音"} aria-pressed={Boolean(status.muted)}><Icon name={status.muted ? "muted" : "sound"}/></button>
@@ -86,9 +101,9 @@ export default function Home() {
         <span className="toolbar-divider"/><button className="help-button" aria-label="怎么玩" onClick={() => command("help")}><Icon name="help"/><span>怎么玩</span></button>
       </nav>
     </header>
-    <section className="game-shell" aria-label="英语互动冒险"><IslandGame key={level} level={level} onNavigate={selectLevel} /></section>
+    <section className="game-shell" aria-label="英语互动冒险"><IslandGame key={level} level={level} wish={wishOpen} onWishChange={selectWish} onNavigate={selectLevel} /></section>
     <footer className="journey-footer">
-      <div className="journey-caption"><span className="journey-eyebrow">YOUR LITTLE ADVENTURE</span><strong>{status.completed ? `${dayNames[level]}，完成！` : "每一步，都是新发现。"}</strong></div>
+      <div className="journey-caption"><span className="journey-eyebrow">{wishOpen ? "A WORLD FROM YOUR WISH" : "YOUR LITTLE ADVENTURE"}</span><strong>{wishOpen ? status.bonusCompleted ? "这张愿望地图，完成！" : "下一段故事，由你决定。" : status.completed ? `${dayNames[level]}，完成！` : "每一步，都是新发现。"}</strong></div>
       <ol className="journey-steps" aria-label="任务进度">{steps.map((s,i) => <li key={s} className={current > i ? "done" : current === i ? "active" : ""} aria-current={current === i ? "step" : undefined}><span className="step-node">{current > i ? "✓" : `0${i+1}`}</span><span>{s}</span></li>)}</ol>
       <div className="journey-note"><Icon name="leaf"/><span>在玩耍中，<br/>让英语自然发生。</span></div>
     </footer>
@@ -99,7 +114,7 @@ export default function Home() {
       <div className="chapter-options">{chapterNumbers.map(n => <button className={`chapter-option ${n === level ? "current-chapter" : ""}`} key={n} data-level={n} onClick={() => selectLevel(n)}>
         <span className={`chapter-art chapter-art-${n}`} aria-hidden="true"><ChapterArtwork level={n}/></span>
         <span className="chapter-option-content"><span className="chapter-option-kicker">DAY {String(n).padStart(2, "0")} {completedLevels.includes(n) ? "· 已完成 ✓" : n >= 4 ? "· 故事续篇" : ""}</span><strong>{chapters[n].title}</strong><span>{chapters[n].description}</span></span><span className="chapter-option-arrow" aria-hidden="true">{n === level ? "当前" : "→"}</span>
-      </button>)}</div><p className="chapter-dialog-note">切换关卡会从这一关的开头开始，已完成的徽章会保留。你也可以自由选择任意一关。</p><a className="co-create-link" href="https://github.com/peterzhang0528/english-island/issues/new/choose" target="_blank" rel="noopener noreferrer">下一段故事，我们一起共创 ↗</a>
+      </button>)}</div><p className="chapter-dialog-note">切换关卡会从这一关的开头开始，已完成的徽章会保留。你也可以自由选择任意一关。</p>{completedLevels.includes(10) && <button className="wish-return-link" onClick={() => { selectLevel(10); selectWish(true); }}>✦ 再去找 K，创造一张愿望地图</button>}<a className="co-create-link" href="https://github.com/peterzhang0528/english-island/issues/new/choose" target="_blank" rel="noopener noreferrer">下一段故事，我们一起共创 ↗</a>
     </dialog>
     {restartOpen && <div className="modal-backdrop" onClick={() => setRestartOpen(false)}><section className="restart-dialog" role="dialog" aria-modal="true" aria-labelledby="restart-title" onClick={e => e.stopPropagation()} onKeyDown={e => {if(e.key === "Escape") setRestartOpen(false); if(e.key === "Tab") { const buttons = e.currentTarget.querySelectorAll("button"); if(e.shiftKey && document.activeElement === buttons[0]) {e.preventDefault();buttons[1].focus();} else if(!e.shiftKey && document.activeElement === buttons[1]) {e.preventDefault();buttons[0].focus();} }}}><span className="dialog-icon"><Icon name="restart"/></span><h2 id="restart-title">再开始一次冒险？</h2><p>这一局的进度会重新开始，<br/>学过的英语会留在你的记忆里。</p><div><button ref={restartCancel} className="secondary-button" onClick={() => setRestartOpen(false)}>继续这一局</button><button className="primary-button" onClick={() => {command("restart");setRestartOpen(false);setStatus({step:0,muted:status.muted});}}>重新开始</button></div></section></div>}
   </main>;

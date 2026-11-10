@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#eef3e8"><title>英语方块岛 · 和 K 造一张地图</title><link rel="stylesheet" href="./wish.css"></head>
+<body>
+<main class="wish-app" id="wish-app">
+  <header class="wish-header"><button id="wish-exit" class="quiet-button" type="button">← 回到小岛庆典</button><span class="wish-mark">A LITTLE WISH, A NEW WORLD</span><div class="wish-tools"><button id="wish-sound" type="button" aria-label="关闭声音" aria-pressed="false">声音：开</button><button id="wish-help" type="button">怎么玩</button></div></header>
+  <section class="wish-layout">
+    <section class="map-pane" aria-label="你的愿望地图">
+      <canvas id="wish-world" tabindex="0" aria-label="愿望地图。拖动环顾，点击物件；寻找任务也可用找到它按钮完成。"></canvas>
+      <div class="map-placeholder" id="map-placeholder"><div class="dream-island" aria-hidden="true"><svg viewBox="0 0 320 250"><path fill="#b1c793" d="m50 126 111-58 110 58-110 60z"/><path fill="#8d9e73" d="m50 126 111 60v33L50 159z"/><path fill="#647d58" d="m161 186 110-60v33l-110 60z"/><path fill="#e2d6aa" d="m125 89 25-13 108 57-25 14z"/><path fill="#abd0d4" d="m66 118 17-9 109 58-17 10z"/><path fill="#937653" d="M103 80h14v56h-14z"/><path fill="#799c61" d="M79 51h62v46H79z"/><path fill="#9aba7c" d="M91 36h38v22H91z"/><path fill="#547d4f" d="M119 57h22v39h-22z"/><path fill="#f5edcf" d="M187 84h40v41h-40z"/><path fill="#be9278" d="m180 84 27-26 28 26z"/><path fill="#a7bdc5" d="M199 96h10v17h-10z"/><path fill="#769962" d="M148 130h4v18h-4z"/><path fill="#e7b56f" d="M141 120h18v15h-18z"/><path fill="#f4d89b" d="M244 39h7v7h-7zm-9 9h7v7h-7zm18 0h7v7h-7zm-9 9h7v7h-7z"/></svg></div><p class="eyebrow">YOUR IMAGINATION STARTS HERE</p><h1>想象一小步，<br>世界就长出新模样。</h1><p>去哪里、帮助谁，都从你的一句话开始。</p></div>
+      <div class="map-caption" id="map-caption" hidden><span class="source-badge" id="map-source"></span><h1 id="map-title"></h1><p id="map-goal"></p></div>
+      <button class="map-retry" id="map-retry" type="button" hidden>地图没有显示 · 点这里重试</button>
+      <div class="map-discovery" id="map-discovery" role="status" hidden></div>
+      <div class="word-pocket" id="word-pocket" aria-label="发现的英语词" hidden></div>
+      <p class="map-footnote" id="map-footnote">每个小愿望，都值得被认真听见。</p>
+    </section>
+    <aside class="companion-pane" aria-label="和 K 对话，完成地图任务">
+      <header class="companion-header"><span class="k-avatar" aria-hidden="true"><i></i><b>K</b></span><div><p class="eyebrow">YOUR ISLAND DREAM MAKER</p><h2>K · 小岛造梦师</h2></div><span class="companion-dot" aria-hidden="true"></span></header>
+      <div class="companion-scroll" id="companion-scroll">
+        <section id="conversation-panel">
+          <div class="k-greeting"><strong>今天，你想去什么地方？</strong><p>想帮助谁，又想遇见什么？中文、英文都可以。我们可以聊一聊，再把愿望变成一张能玩的地图。</p><span>Where shall we go next?</span></div>
+          <div class="connection-note" id="connection-note" role="status"><span id="connection-text">K 正在准备画纸…</span><button id="check-connection" type="button" hidden>再试一次</button></div>
+          <ol class="chat-history" id="chat-history" aria-label="最近的对话" aria-live="polite"></ol>
+          <form id="wish-form"><label for="wish-message">说说你的小愿望</label><textarea id="wish-message" name="message" rows="3" maxlength="280" placeholder="我想去有星星的海边，帮小羊找到回家的船。" aria-describedby="wish-limit"></textarea><div class="input-meta"><span id="wish-limit">不用填写姓名、电话或学校等私人信息。</span><span id="message-count">0 / 280</span></div><button class="primary-button" id="wish-generate" type="submit" disabled>和 K 一起造地图 <span aria-hidden="true">↗</span></button><button id="wish-cancel" class="text-button" type="button" hidden>停止等待，继续修改</button></form>
+          <p class="inline-feedback" id="wish-error" role="alert" hidden></p>
+          <div class="example-entry"><button id="show-examples" class="secondary-button" type="button">先试玩一张示例地图</button><p>示例是提前做好的小冒险，不是 AI 实时生成。</p></div>
+          <section class="plan-preview" id="plan-preview" aria-labelledby="preview-title" hidden><div class="preview-heading"><span id="preview-source" class="source-badge"></span><span>3 个小任务</span></div><h3 id="preview-title"></h3><p id="preview-goal"></p><ol id="preview-quests"></ol><button id="wish-play" class="primary-button" type="button">就玩这个 →</button><p class="preview-tip">还想改一点？在上面继续告诉 K。</p></section>
+        </section>
+        <section id="quest-panel" hidden><p class="eyebrow" id="quest-progress"></p><h3 id="quest-title" tabindex="-1"></h3><p class="quest-english" id="quest-en"></p><p class="quest-chinese" id="quest-zh"></p><div class="say-word" id="say-word" hidden></div><p class="quest-instruction" id="quest-instruction"></p><button id="find-target" class="primary-button" type="button" hidden>找到它</button><form id="answer-form" hidden><label id="answer-label" for="quest-answer">输入你的答案</label><input id="quest-answer" name="answer" maxlength="80" autocomplete="off" autocapitalize="off" spellcheck="false"><button class="primary-button" id="check-answer" type="submit">试试看 →</button></form><button id="quest-hint" type="button" class="text-button">给我一点提示</button><p id="hint-text" class="hint-text" hidden></p><p id="quest-feedback" class="inline-feedback" role="status"></p><button id="change-idea" type="button" class="secondary-button">换个想法</button></section>
+        <section id="complete-panel" hidden><div class="complete-star" aria-hidden="true">✦</div><p class="eyebrow">A WISH BECAME A LITTLE WORLD</p><h3 tabindex="-1" id="complete-title">你让愿望变成了冒险。</h3><p id="complete-en" class="quest-english"></p><p id="complete-zh" class="quest-chinese"></p><p class="next-question">下一张地图，你想让它变成什么样？</p><button id="new-wish" class="primary-button" type="button">再和 K 聊聊 →</button><button id="complete-exit" class="text-button" type="button">带着发现，回小岛庆典</button></section>
+      </div>
+    </aside>
+  </section>
+  <dialog id="examples-dialog" class="wish-dialog" aria-labelledby="examples-title"><button class="dialog-close" id="examples-close" type="button" aria-label="关闭示例地图">×</button><p class="eyebrow">HANDMADE LITTLE ADVENTURES</p><h2 id="examples-title">挑一张示例地图</h2><p>这些小地图已经提前做好，可以马上试玩；它们不是根据你的输入生成的。</p><div id="example-options" class="example-options"></div><p id="examples-error" role="status"></p></dialog>
+  <dialog id="help-dialog" class="wish-dialog" aria-labelledby="help-title"><button class="dialog-close" id="help-close" type="button" aria-label="关闭玩法">×</button><p class="eyebrow">THREE WAYS TO DISCOVER</p><h2 id="help-title">和 K，一起把愿望走一遍。</h2><ol class="help-list"><li><b>找一找</b><span>点地图里的目标；也可以用“找到它”按钮。</span></li><li><b>说一说，再写一写</b><span>可以先把单词读出声，再输入英语词。这里检查的是输入的文字，不会录音。</span></li><li><b>猜一猜</b><span>看双语谜面，输入答案。需要时可以打开提示，答错也能继续试。</span></li></ol><p>有扬声器图标的单词可以点读。K 的新对话以字幕呈现。打开说明时地图会暂停。</p><button id="help-done" class="primary-button" type="button">知道了，继续冒险</button></dialog>
+  <dialog id="confirm-dialog" class="wish-dialog compact-dialog" aria-labelledby="confirm-title"><p class="eyebrow">KEEP DREAMING</p><h2 id="confirm-title">换一个小愿望？</h2><p id="confirm-description">这张地图的任务会从头开始；你写下的愿望和对话会保留。</p><div class="confirm-actions"><button id="confirm-cancel" class="secondary-button" type="button">继续这一张</button><button id="confirm-accept" class="primary-button" type="button">换个想法</button></div></dialog>
+  <div id="wish-loading" class="wish-loading" role="status">正在请 K 来到小岛…</div><div id="wish-fallback" class="wish-fallback" hidden role="alert"><h2>小愿望暂时没有打开</h2><p>请稍后刷新再试，你也可以先回小岛庆典。</p><a href="./story.html?level=10">回到第十关 →</a></div>
+</main><script type="module" src="./js/bootstrap-wish.js"></script>
+</body></html>
