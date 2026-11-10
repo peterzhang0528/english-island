@@ -17,7 +17,7 @@ for (const guard of ['busy', 'paused', 'help', 'summary']) {
   });
 }
 
-test('story title starts through its action entry, while object clicks and completed action buttons are inert', async () => {
+test('story title starts through its action entry, while object clicks and uncompleted final states are inert', async () => {
   const fixture = storyFixture();
   fixture.state.step = 0;
   await fixture.api.act(fixture.story.targets[0]);
@@ -30,6 +30,55 @@ test('story title starts through its action entry, while object clicks and compl
   assert.equal(fixture.api.targetFor(), null);
   assert.deepEqual(fixture.calls, []);
 });
+
+test('closing the adventure card exposes a reopen action and preserves newly discovered words', () => {
+  const fixture = storyFixture();
+  const { state, sandbox, elements } = fixture;
+  Object.assign(state, { step: 6, completed: true, words: ['PLANK'], sentences: [], elapsed: 60 });
+  sandbox.ui.summary.hidden = false;
+  sandbox.ui.say = { hidden: true };
+  sandbox.ui.journal.style = {};
+  sandbox.ui.pocket = { hidden: false, offsetTop: 12, offsetHeight: 24, children: [], append(chip) { this.children.push(chip); } };
+  sandbox.stage.clientWidth = 368;
+  sandbox.ZH = { PLANK: '木板', TREE: '树' };
+  sandbox.wordChip = word => ({ word });
+  sandbox.configureCollection = () => {};
+  sandbox.explorePhrase = { en: 'What else can you find?', zh: '继续探索。' };
+  sandbox.sfx.pop = () => {};
+  sandbox.lastStatus = '';
+  const chips = { children: [], replaceChildren(...items) { this.children = items; } };
+  elements.set('#sum-words', chips);
+  elements.set('#sum-next', { focus() {} });
+  const api = loadStoryControls(sandbox, ['taskAction', 'closeSummary', 'showSummary', 'learn', 'updateStatus']);
+
+  api.closeSummary();
+  assert.equal(sandbox.ui.summary.hidden, true);
+  assert.equal(elements.get('#task-action').hidden, false);
+  assert.equal(elements.get('#action-label').textContent, '查看冒险卡');
+  assert.equal(api.learn('TREE'), true);
+  api.taskAction();
+  assert.equal(sandbox.ui.summary.hidden, false);
+  assert.equal(elements.get('#task-action').hidden, true);
+  assert.deepEqual(state.words, ['PLANK', 'TREE']);
+  assert.deepEqual(chips.children.map(chip => chip.word), ['PLANK', 'TREE']);
+  assert.match(elements.get('#sum-stats').innerHTML, /<b>2<\/b> 个英语词/);
+  assert.deepEqual(performed(fixture), [], 'Reopening a card must not replay a task');
+});
+
+for (const guard of ['paused', 'busy', 'help', 'summary']) {
+  test(`${guard} prevents the completed story from reopening its card`, () => {
+    const fixture = storyFixture();
+    fixture.state.step = 6;
+    fixture.state.completed = true;
+    fixture.state.busy = guard === 'busy';
+    fixture.sandbox.paused = guard === 'paused';
+    fixture.sandbox.helpDialog.open = guard === 'help';
+    fixture.sandbox.ui.summary.hidden = guard !== 'summary';
+    fixture.api.taskAction();
+    assert.equal(fixture.control.summaries, 0);
+    assert.deepEqual(fixture.calls, []);
+  });
+}
 
 test('production story opening resists reentry and hands off to the first task', async () => {
   const fixture = storyFixture(chapters[0], { realStart: true });
