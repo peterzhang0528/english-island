@@ -8,7 +8,7 @@
 
 **[在线试玩](https://english-island-zhang-1109.lulabs.chatgpt.site) · [第一关](https://english-island-zhang-1109.lulabs.chatgpt.site/?level=1) · [第二关](https://english-island-zhang-1109.lulabs.chatgpt.site/?level=2) · [第三关](https://english-island-zhang-1109.lulabs.chatgpt.site/?level=3)**
 
-[参与贡献](CONTRIBUTING.md) · [开发新关卡](docs/ADDING_LEVELS.md) · [配音维护](docs/AUDIO.md) · [反馈协作流程](docs/FEEDBACK_LOOP.md) · [更新记录](CHANGELOG.md) · [素材与许可说明](THIRD_PARTY_NOTICES.md)
+[参与贡献](CONTRIBUTING.md) · [开发与发布流程](docs/DEVELOPMENT.md) · [开发新关卡](docs/ADDING_LEVELS.md) · [配音维护](docs/AUDIO.md) · [反馈协作流程](docs/FEEDBACK_LOOP.md) · [更新记录](CHANGELOG.md) · [素材与许可说明](THIRD_PARTY_NOTICES.md)
 
 [查看 Issues](https://github.com/peterzhang0528/english-island/issues) · [反馈问题或提出新关卡](https://github.com/peterzhang0528/english-island/issues/new/choose) · [查看 Pull Requests](https://github.com/peterzhang0528/english-island/pulls)
 
@@ -24,7 +24,7 @@
 
 ## 五分钟开始贡献
 
-1. **有想法或发现问题？** 打开[新建 Issue](https://github.com/peterzhang0528/english-island/issues/new/choose)，选择「新关卡提案」或「问题反馈」。新关卡先写故事、单词和几个动作，就可以开始讨论。
+1. **有想法或发现问题？** 可以直接告诉老师、在群里反馈，或打开[新建 Issue](https://github.com/peterzhang0528/english-island/issues/new/choose)。维护者会把口头和群内反馈整理、去重后记录，参与试玩不需要先学 GitHub。新关卡先写故事、单词和几个动作，就可以开始讨论。
 2. **想改代码？** Fork 本仓库，将自己的 Fork 克隆到电脑，然后运行下面的命令。
 3. **完成一次小改动后**，按 [贡献指南](CONTRIBUTING.md) [提交 Pull Request](https://github.com/peterzhang0528/english-island/compare)，让大家一起体验和检查。
 
