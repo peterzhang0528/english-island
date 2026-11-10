@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 
 export type IslandProgress = {
-  level?: 1 | 2;
+  level?: 1 | 2 | 3;
   ready: boolean;
   step: number;
   busy: boolean;
@@ -20,8 +20,8 @@ export default function IslandGame({
   onProgress,
 }: {
   className?: string;
-  level?: 1 | 2;
-  onNavigate?: (level: 1 | 2) => void;
+  level?: 1 | 2 | 3;
+  onNavigate?: (level: 1 | 2 | 3) => void;
   onProgress?: (progress: IslandProgress) => void;
 }) {
   const frame = useRef<HTMLIFrameElement>(null);
@@ -33,7 +33,7 @@ export default function IslandGame({
   useEffect(() => {
     const receive = (event: MessageEvent) => {
       if (event.origin !== window.location.origin || event.source !== frame.current?.contentWindow) return;
-      if (event.data?.type === "island-navigate" && (event.data.level === 1 || event.data.level === 2)) { onNavigateRef.current?.(event.data.level); return; }
+      if (event.data?.type === "island-navigate" && (event.data.level === 1 || event.data.level === 2 || event.data.level === 3)) { onNavigateRef.current?.(event.data.level); return; }
       if (event.data?.type !== "island-status") return;
       if (event.data.level && event.data.level !== level) return;
       event.data.level = level;
@@ -57,5 +57,5 @@ export default function IslandGame({
     };
   }, [level]);
 
-  return <iframe ref={frame} src={level === 2 ? "/game/day2.html" : "/game/index.html"} title={level === 2 ? "第二关 · 给僵尸做蛋糕" : "第一关 · 第一把斧头"} className={className} style={{ width: "100%", height: "100%", border: 0, display: "block" }} allow="autoplay; fullscreen" allowFullScreen />;
+  return <iframe ref={frame} src={level === 1 ? "/game/index.html" : `/game/day${level}.html`} title={level === 3 ? "第三关 · 和新朋友种花园" : level === 2 ? "第二关 · 给僵尸做蛋糕" : "第一关 · 第一把斧头"} className={className} style={{ width: "100%", height: "100%", border: 0, display: "block" }} allow="autoplay; fullscreen" allowFullScreen />;
 }

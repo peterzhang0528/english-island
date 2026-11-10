@@ -4,12 +4,13 @@ import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import { gameURL, parseGameScript, readGameFile, ts } from './helpers/source.mjs';
 
-const chapters = [
-  { page: 'index.html', script: 'js/world.js' },
-  { page: 'day2.html', script: 'js/world2.js' },
-];
+const chapters = readdirSync(gameURL)
+  .filter(name => name === 'index.html' || /^day\d+\.html$/.test(name))
+  .sort()
+  .map(page => ({ page, script: page === 'index.html' ? 'js/world.js' : `js/world${page.match(/^day(\d+)/)[1]}.js` }));
 
-test('both chapters have complete local resource and module dependencies', () => {
+test('all chapters have complete local resource and module dependencies', () => {
+  assert.ok(chapters.some(chapter => chapter.page === 'index.html'), 'The first chapter must exist');
   const visited = new Set();
   function visit(url) {
     if (visited.has(url.href)) return;
@@ -65,6 +66,9 @@ for (const chapter of chapters) {
     inspect(ast);
     if (chapter.page === 'day2.html') {
       for (const name of ['egg', 'milk', 'wheat']) assert.ok(ids.has(`ingredient-${name}`));
+    }
+    if (chapter.page === 'day3.html') {
+      for (const name of ['soil', 'seed', 'water', 'sun', 'bee']) assert.ok(ids.has(`journal-${name}`));
     }
   });
 }

@@ -282,6 +282,7 @@ async function makeCard(){const button=$('#sum-card');button.disabled=true;butto
  const url=c.toDataURL('image/png');$('#sum-img').src=url;$('#sum-img').hidden=false;const link=$('#sum-dl');link.href=url;link.download=`english-island-day-two-${Date.now()}.png`;link.hidden=false;button.textContent='卡片已生成 ↓';sfx.ding();$('#sum-img').scrollIntoView({behavior:reduced?'auto':'smooth',block:'nearest'});
  }catch(error){console.error(error);button.textContent='生成失败，点击重试';}finally{button.disabled=false;}}
 function goFirst(){voice.stop();if(parent!==window)parent.postMessage({type:'island-navigate',level:1},location.origin);else location.href='./index.html';}
+$('#sum-next').addEventListener('click',()=>{voice.stop();if(parent!==window)parent.postMessage({type:'island-navigate',level:3},location.origin);else location.href='./day3.html';});
 $('#sum-card').addEventListener('click',()=>void makeCard());$('#sum-again').addEventListener('click',()=>location.reload());$('#sum-first').addEventListener('click',goFirst);$('#back-level').addEventListener('click',goFirst);
 $('#sum-close').addEventListener('click',()=>{ui.summary.hidden=true;canvas.focus({preventScroll:true});void say('What else can you find?','拖动看看四周，点小鸡、奶牛、花朵和水，继续发现英语。',{remember:false});updateStatus();});
 // Help, explicit pause and browser visibility compose without resuming each other.

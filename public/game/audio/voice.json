@@ -234,5 +234,97 @@
   "friend": {
     "f": "l2-jj-w-friend.mp3",
     "d": 0.933
+  },
+  "let's grow a garden!": {
+    "f": "l3-jj-s-garden.mp3",
+    "d": 1.715
+  },
+  "first, dig the soil.": {
+    "f": "l3-jj-s-dig-soil.mp3",
+    "d": 1.721
+  },
+  "dig, dig, dig!": {
+    "f": "l3-jj-s-dig.mp3",
+    "d": 1.715
+  },
+  "soft soil! ready for a seed.": {
+    "f": "l3-jj-s-soft-soil.mp3",
+    "d": 2.412
+  },
+  "plant a seed in the soil.": {
+    "f": "l3-jj-s-plant-seed.mp3",
+    "d": 1.553
+  },
+  "a tiny seed!": {
+    "f": "l3-jj-s-tiny-seed.mp3",
+    "d": 1.205
+  },
+  "now, give it some water.": {
+    "f": "l3-jj-s-give-water.mp3",
+    "d": 1.715
+  },
+  "water, water! a little drink.": {
+    "f": "l3-jj-s-little-drink.mp3",
+    "d": 2.591
+  },
+  "let the sunshine in!": {
+    "f": "l3-jj-s-sunshine.mp3",
+    "d": 1.113
+  },
+  "hello, sun!": {
+    "f": "l3-jj-s-hello-sun.mp3",
+    "d": 1.455
+  },
+  "grow, grow, grow!": {
+    "f": "l3-jj-s-grow.mp3",
+    "d": 2.246
+  },
+  "a flower! our garden is growing!": {
+    "f": "l3-jj-s-flower.mp3",
+    "d": 2.759
+  },
+  "look! a bee. welcome to our garden!": {
+    "f": "l3-jj-s-bee.mp3",
+    "d": 3.122
+  },
+  "a flower for you, little bee.": {
+    "f": "l3-jj-s-flower-bee.mp3",
+    "d": 1.875
+  },
+  "flowers help our little friends.": {
+    "f": "l3-jj-s-little-friends.mp3",
+    "d": 2.158
+  },
+  "we grew a garden together!": {
+    "f": "l3-jj-s-together.mp3",
+    "d": 1.466
+  },
+  "garden": {
+    "f": "l3-jj-w-garden.mp3",
+    "d": 0.779
+  },
+  "soil": {
+    "f": "l3-jj-w-soil.mp3",
+    "d": 1.035
+  },
+  "dig": {
+    "f": "l3-jj-w-dig.mp3",
+    "d": 0.507
+  },
+  "seed": {
+    "f": "l3-jj-w-seed.mp3",
+    "d": 1.019
+  },
+  "plant": {
+    "f": "l3-jj-w-plant.mp3",
+    "d": 0.417
+  },
+  "grow": {
+    "f": "l3-jj-w-grow.mp3",
+    "d": 0.589
+  },
+  "bee": {
+    "f": "l3-jj-w-bee.mp3",
+    "d": 0.765
   }
 }

@@ -1,7 +1,7 @@
 {
   "name": "english-island",
-  "version": "0.2.0",
-  "description": "A two-chapter 3D English-learning adventure with local narration and voxel worlds.",
+  "version": "0.3.0",
+  "description": "A three-chapter 3D English-learning adventure with local narration and voxel worlds.",
   "private": true,
   "engines": {
     "node": ">=22.13.0"
