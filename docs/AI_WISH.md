@@ -57,6 +57,6 @@ AI 返回结构化的故事与地图方案，游戏把它画成可交互的方�
 
 [查看手机任务截图](screenshots/wish-mobile.jpg)
 
-本功能在独立开发分支中，基于十关预览。合并、部署、版本发布均等待维护者针对这次改动确认。
+本功能的 `v0.5.0` 发布候选基于已发布的十关 `v0.4.0`，保留第二关夜景及开发发布流程。真实模型联调和部署尚未完成；实际验收、授权范围与发布结果按[开发与发布流程](DEVELOPMENT.md)记录，不能用示例试玩代替真实生成验收。
 
 接口格式依据：[OpenAI Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs)。

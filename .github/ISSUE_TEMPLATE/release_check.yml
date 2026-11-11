@@ -1,0 +1,57 @@
+name: 发布验收（维护者）
+description: 记录一次发布的范围、验收、批准和实际线上结果。
+title: "[Release check] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        这份清单用于维护者跟进发布。创建或勾选清单不等于获得合并、部署或创建 Release 的授权。
+        请按 docs/DEVELOPMENT.md 记录真实证据，不贴密钥或私人聊天记录。
+  - type: textarea
+    id: scope
+    attributes:
+      label: 本次发布范围
+      description: 写清对应 PR、待验收的提交 SHA、依赖顺序和玩家可见变化；版本号尚未确定时写待定。
+    validations:
+      required: true
+  - type: input
+    id: live_before
+    attributes:
+      label: 当前线上版本与地址
+      description: 区分目前同学们能玩的版本和待发布版本。
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 验收证据与剩余事项
+      description: 每项写已完成、未完成或不适用及原因。列明测试对应的提交、CI、设备与实际试玩步骤；音频或 AI 改动需专门验收。
+      value: |
+        - [ ] 范围、依赖与冲突已核对
+        - [ ] 当前候选提交的类型检查、测试、构建通过（附 CI）
+        - [ ] 受影响关卡的电脑与手机实际试玩完成
+        - [ ] 声音、暂停／静音、重玩与通关卡按影响范围核对
+        - [ ] 涉及 AI 时，真实服务的自由输入、连续修改、失败提示已验证
+        - [ ] 已知限制和回退方案已记录
+    validations:
+      required: true
+  - type: textarea
+    id: approval
+    attributes:
+      label: 项目负责人确认
+      description: 记录确认时间、对应 PR／SHA、具体操作范围及可核对的记录。聊天确认只摘要，不公开私人对话。没有确认就写待确认。
+      value: 待确认
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: 合并、部署与发布结果（执行后填写）
+      value: |
+        - 合并后的 main SHA：待执行
+        - 实际部署 SHA／发布平台回执：待执行
+        - 线上地址与验证时间：待执行
+        - 线上关卡数量、入口及受影响功能试玩：待执行
+        - 版本号／标签／Release 链接：待确认或不适用
+        - 失败与回退结果：无；若需回退，先取得本次确认
+        - 群通知：未发送；如另行获准发送，记录 WorkBuddy 对「AI小学活动通知群」的实际回执

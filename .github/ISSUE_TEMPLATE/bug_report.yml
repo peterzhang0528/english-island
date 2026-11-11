@@ -31,7 +31,7 @@ body:
     attributes:
       label: 试玩地址或版本
       description: 在线试玩可粘贴页面地址；本地开发可填写版本或提交编号。
-      placeholder: 在线地址，或 v0.4.0-preview.1 / 提交编号
+      placeholder: 在线地址，或 v0.4.0 / 提交编号
     validations:
       required: true
   - type: textarea
