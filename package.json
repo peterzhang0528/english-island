@@ -1,6 +1,6 @@
 {
   "name": "english-island",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "A ten-chapter 3D English-learning story adventure with local narration and voxel worlds.",
   "private": true,
   "engines": {
