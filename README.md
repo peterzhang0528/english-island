@@ -8,7 +8,7 @@
 
 **[在线试玩已发布版本](https://english-island-zhang-1109.lulabs.chatgpt.site) · [正式版本与源码下载](https://github.com/peterzhang0528/english-island/releases) · [问题和关卡提案](https://github.com/peterzhang0528/english-island/issues/new/choose)**
 
-`v0.5.0` 在十关主线基础上增加 AI 愿望地图，已完成真实模型生成、修改及 Chrome 完整任务验收。线上运行版本以部署记录与公网验收结果为准；合并、上线与版本记录按[开发与发布流程](docs/DEVELOPMENT.md)执行。
+`v0.5.1` 在十关主线基础上增加 AI 愿望地图，已完成真实模型生成、修改及 Chrome 完整任务验收。线上运行版本以部署记录与公网验收结果为准；合并、上线与版本记录按[开发与发布流程](docs/DEVELOPMENT.md)执行。
 
 [贡献指南](CONTRIBUTING.md) · [十关故事线](docs/STORY.md) · [开发关卡](docs/ADDING_LEVELS.md) · [配音维护](docs/AUDIO.md) · [AI 愿望地图](docs/AI_WISH.md) · [反馈协作](docs/FEEDBACK_LOOP.md) · [更新记录](CHANGELOG.md) · [素材与许可](THIRD_PARTY_NOTICES.md)
 

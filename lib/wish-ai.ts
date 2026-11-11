@@ -113,7 +113,8 @@ export function createWishHandlers(options:HandlerOptions={}) {
       const timeout=setTimeout(()=>{timedOut=true;controller.abort();},options.timeoutMs ?? TIMEOUT_MS);
       try {
         const upstream=await send(OPENAI_URL,{
-          method:'POST', redirect:'error', signal:controller.signal,
+          // Workers supports manual/follow only. Reject non-2xx below without forwarding the secret.
+          method:'POST', redirect:'manual', signal:controller.signal,
           headers:{'Content-Type':'application/json','Authorization':`Bearer ${config.key}`},
           body:JSON.stringify({model:config.model,store:false,max_output_tokens:4096,instructions:INSTRUCTIONS,input:[{role:'user',content:[{type:'input_text',text:JSON.stringify(valid.value)}]}],text:{format:{type:'json_schema',name:'wish_plan',strict:true,schema:WISH_PLAN_SCHEMA}}}),
         });
