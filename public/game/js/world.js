@@ -129,9 +129,9 @@ rocks.push(block(M.stone, 6, groundY(6, -8) + 1.5, -8, "rock", "STONE"));
   merged(FL.R, M.flowerR, "flower", "FLOWER", {}, cross); merged(FL.Y, M.flowerY, "flower", "FLOWER", {}, cross); merged(FL.B, M.flowerB, "flower", "FLOWER", {}, cross);
   const tg = merged(TG, M.tall, "block", "GRASS", {}, cross.clone().scale(0.8, 0.8, 0.8)); tg.castShadow = false; }
 
-// 门：立在草地上的一扇门（童话式入口，推开就走进去）
-const hinge = new THREE.Group(); hinge.position.set(-0.5, 1.5, 2); world.add(hinge);
-const door = new THREE.Mesh(new THREE.BoxGeometry(1, 2, 0.18), [M.planks, M.planks, M.planks, M.planks, M.door, M.door]); door.position.x = 0.5; door.castShadow = true; hinge.add(door); tag(door, "door", "DOOR");
+// 门：立在门框朝向玩家的一侧。合页在门柱外，门板略小于门洞，推开时不嵌入门柱或草地。
+const hinge = new THREE.Group(); hinge.position.set(-0.5, 1.5, 2.55); world.add(hinge);
+const door = new THREE.Mesh(new THREE.BoxGeometry(0.94, 1.96, 0.1), [M.planks, M.planks, M.planks, M.planks, M.door, M.door]); door.position.set(0.5, 0, 0.05); door.castShadow = true; hinge.add(door); tag(door, "door", "DOOR");
 for (const y of [1, 2]) { block(M.log, -1, y, 2); block(M.log, 1, y, 2); } for (const x of [-1, 0, 1]) block(M.planks, x, 3, 2);
 
 // 羊、云、太阳、蝴蝶、花粉
