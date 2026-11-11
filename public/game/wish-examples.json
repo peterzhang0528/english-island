@@ -1,0 +1,358 @@
+{
+  "version": 1,
+  "source": "preset",
+  "notice": "预设试玩地图，不是实时 AI 生成。",
+  "examples": [
+    {
+      "id": "lighthouse",
+      "title": {
+        "en": "The Lighthouse Letter",
+        "zh": "灯塔的来信"
+      },
+      "description": {
+        "en": "Find the light, name a boat, and solve the hidden treasure riddle.",
+        "zh": "寻找灯塔，写出小船的英文，解开宝箱谜语。"
+      },
+      "plan": {
+        "version": 1,
+        "reply": {
+          "en": "This ready-made adventure is yours to try. Follow three little clues!",
+          "zh": "这是可以直接试玩的预设冒险。跟着三个小线索出发吧！"
+        },
+        "seed": 2841,
+        "title": {
+          "en": "The Lighthouse Letter",
+          "zh": "灯塔的来信"
+        },
+        "biome": "beach",
+        "weather": "clear",
+        "goal": {
+          "en": "Find the light, name a boat, and solve the hidden treasure riddle.",
+          "zh": "寻找灯塔，写出小船的英文，解开宝箱谜语。"
+        },
+        "objects": [
+          {
+            "id": "beacon",
+            "kind": "lighthouse",
+            "word": "LIGHTHOUSE",
+            "labelZh": "灯塔"
+          },
+          {
+            "id": "sailboat",
+            "kind": "boat",
+            "word": "BOAT",
+            "labelZh": "小船"
+          },
+          {
+            "id": "treasure",
+            "kind": "chest",
+            "word": "CHEST",
+            "labelZh": "宝箱"
+          },
+          {
+            "id": "smallkey",
+            "kind": "key",
+            "word": "KEY",
+            "labelZh": "钥匙"
+          },
+          {
+            "id": "shorestone",
+            "kind": "stone",
+            "word": "STONE",
+            "labelZh": "海边石头"
+          },
+          {
+            "id": "homeflag",
+            "kind": "flag",
+            "word": "FLAG",
+            "labelZh": "小旗"
+          }
+        ],
+        "quests": [
+          {
+            "id": "findlight",
+            "kind": "find",
+            "targetId": "beacon",
+            "prompt": {
+              "en": "Find the lighthouse. It helps boats get home.",
+              "zh": "找到灯塔，它能帮助小船回家。"
+            },
+            "hint": {
+              "en": "Look for the tall tower with a light.",
+              "zh": "找一找顶端有光的高塔。"
+            },
+            "answer": "lighthouse"
+          },
+          {
+            "id": "nameboat",
+            "kind": "say",
+            "targetId": "sailboat",
+            "prompt": {
+              "en": "Type the English word for this boat. You can say it aloud too!",
+              "zh": "把小船的英文单词打出来，也可以自己大声读一遍！"
+            },
+            "hint": {
+              "en": "It starts with B. The word is BOAT.",
+              "zh": "它以 B 开头，单词是 BOAT。"
+            },
+            "answer": "boat"
+          },
+          {
+            "id": "treasureriddle",
+            "kind": "riddle",
+            "targetId": "treasure",
+            "prompt": {
+              "en": "I am a box with a lid. I keep treasure safe. What am I?",
+              "zh": "我是一只有盖子的箱子，替你保管宝藏。我是什么？"
+            },
+            "hint": {
+              "en": "Look at the treasure box. Its word is CHEST.",
+              "zh": "看看装宝藏的箱子，它的英文是 CHEST。"
+            },
+            "answer": "chest"
+          }
+        ],
+        "ending": {
+          "en": "You followed the light and found the treasure. A wonderful little voyage!",
+          "zh": "你跟着灯光找到了宝藏，完成了一次美妙的小航行！"
+        }
+      }
+    },
+    {
+      "id": "snow_sheep",
+      "title": {
+        "en": "A Sheep Under the Stars",
+        "zh": "星空下的小羊"
+      },
+      "description": {
+        "en": "Meet a sheep, name a warm house, and solve a key riddle.",
+        "zh": "和小羊见面，写出小屋的英文，再猜一猜钥匙的谜语。"
+      },
+      "plan": {
+        "version": 1,
+        "reply": {
+          "en": "This ready-made adventure is yours to try. Follow three little clues!",
+          "zh": "这是可以直接试玩的预设冒险。跟着三个小线索出发吧！"
+        },
+        "seed": 19427,
+        "title": {
+          "en": "A Sheep Under the Stars",
+          "zh": "星空下的小羊"
+        },
+        "biome": "snow",
+        "weather": "stars",
+        "goal": {
+          "en": "Meet a sheep, name a warm house, and solve a key riddle.",
+          "zh": "和小羊见面，写出小屋的英文，再猜一猜钥匙的谜语。"
+        },
+        "objects": [
+          {
+            "id": "snowfriend",
+            "kind": "sheep",
+            "word": "SHEEP",
+            "labelZh": "雪地小羊"
+          },
+          {
+            "id": "warmhome",
+            "kind": "house",
+            "word": "HOUSE",
+            "labelZh": "温暖小屋"
+          },
+          {
+            "id": "doorkey",
+            "kind": "key",
+            "word": "KEY",
+            "labelZh": "小钥匙"
+          },
+          {
+            "id": "snowtree",
+            "kind": "tree",
+            "word": "TREE",
+            "labelZh": "雪地树木"
+          },
+          {
+            "id": "pathstone",
+            "kind": "stone",
+            "word": "STONE",
+            "labelZh": "路边石头"
+          },
+          {
+            "id": "northflag",
+            "kind": "flag",
+            "word": "FLAG",
+            "labelZh": "星光小旗"
+          }
+        ],
+        "quests": [
+          {
+            "id": "findfriend",
+            "kind": "find",
+            "targetId": "snowfriend",
+            "prompt": {
+              "en": "Find the sheep waiting in the snow.",
+              "zh": "找到在雪地里等你的小羊。"
+            },
+            "hint": {
+              "en": "Look for a fluffy white animal.",
+              "zh": "找一只毛茸茸的白色小动物。"
+            },
+            "answer": "sheep"
+          },
+          {
+            "id": "namehome",
+            "kind": "say",
+            "targetId": "warmhome",
+            "prompt": {
+              "en": "Type the English word for this house.",
+              "zh": "把这座小屋的英文单词打出来。"
+            },
+            "hint": {
+              "en": "It starts with H. The word is HOUSE.",
+              "zh": "它以 H 开头，单词是 HOUSE。"
+            },
+            "answer": "house"
+          },
+          {
+            "id": "keyriddle",
+            "kind": "riddle",
+            "targetId": "doorkey",
+            "prompt": {
+              "en": "I am small. I turn in a lock to open a door. What am I?",
+              "zh": "我很小，转一转门锁就能打开门。我是什么？"
+            },
+            "hint": {
+              "en": "The little key can help. Its word is KEY.",
+              "zh": "小钥匙能帮忙，它的英文是 KEY。"
+            },
+            "answer": "key"
+          }
+        ],
+        "ending": {
+          "en": "The sheep has a warm home. Your words lit up this snowy night!",
+          "zh": "小羊有了温暖的家，你的单词点亮了这个雪夜！"
+        }
+      }
+    },
+    {
+      "id": "rainy_farm",
+      "title": {
+        "en": "Rainy Farm Picnic",
+        "zh": "雨中农场野餐"
+      },
+      "description": {
+        "en": "Find a flower, name the cake, and solve the bridge riddle.",
+        "zh": "找到小花，写出蛋糕的英文，再解开桥的谜语。"
+      },
+      "plan": {
+        "version": 1,
+        "reply": {
+          "en": "This ready-made adventure is yours to try. Follow three little clues!",
+          "zh": "这是可以直接试玩的预设冒险。跟着三个小线索出发吧！"
+        },
+        "seed": 56003,
+        "title": {
+          "en": "Rainy Farm Picnic",
+          "zh": "雨中农场野餐"
+        },
+        "biome": "farm",
+        "weather": "rain",
+        "goal": {
+          "en": "Find a flower, name the cake, and solve the bridge riddle.",
+          "zh": "找到小花，写出蛋糕的英文，再解开桥的谜语。"
+        },
+        "objects": [
+          {
+            "id": "redflower",
+            "kind": "flower",
+            "word": "FLOWER",
+            "labelZh": "红色小花"
+          },
+          {
+            "id": "picniccake",
+            "kind": "cake",
+            "word": "CAKE",
+            "labelZh": "野餐蛋糕"
+          },
+          {
+            "id": "riverbridge",
+            "kind": "bridge",
+            "word": "BRIDGE",
+            "labelZh": "小木桥"
+          },
+          {
+            "id": "farmhouse",
+            "kind": "house",
+            "word": "HOUSE",
+            "labelZh": "农场小屋"
+          },
+          {
+            "id": "farmsheep",
+            "kind": "sheep",
+            "word": "SHEEP",
+            "labelZh": "农场小羊"
+          },
+          {
+            "id": "appletree",
+            "kind": "tree",
+            "word": "TREE",
+            "labelZh": "大树"
+          },
+          {
+            "id": "picnicflag",
+            "kind": "flag",
+            "word": "FLAG",
+            "labelZh": "野餐小旗"
+          }
+        ],
+        "quests": [
+          {
+            "id": "findflower",
+            "kind": "find",
+            "targetId": "redflower",
+            "prompt": {
+              "en": "Find the flower enjoying the rain.",
+              "zh": "找到正在雨中生长的小花。"
+            },
+            "hint": {
+              "en": "Look for the little plant with bright petals.",
+              "zh": "找一找有鲜艳花瓣的小植物。"
+            },
+            "answer": "flower"
+          },
+          {
+            "id": "namecake",
+            "kind": "say",
+            "targetId": "picniccake",
+            "prompt": {
+              "en": "Type the English word for this yummy cake.",
+              "zh": "把这块美味蛋糕的英文单词打出来。"
+            },
+            "hint": {
+              "en": "It starts with C. The word is CAKE.",
+              "zh": "它以 C 开头，单词是 CAKE。"
+            },
+            "answer": "cake"
+          },
+          {
+            "id": "bridgeriddle",
+            "kind": "riddle",
+            "targetId": "riverbridge",
+            "prompt": {
+              "en": "I help you cross water without getting wet. You walk over me. What am I?",
+              "zh": "我帮你走过水面而不湿脚，你从我上面经过。我是什么？"
+            },
+            "hint": {
+              "en": "Look at the bridge. Its word is BRIDGE.",
+              "zh": "看看那座桥，它的英文是 BRIDGE。"
+            },
+            "answer": "bridge"
+          }
+        ],
+        "ending": {
+          "en": "A flower, a cake, and a bridge: your rainy picnic is ready!",
+          "zh": "小花、蛋糕和小桥都找到了，雨天的野餐也可以很快乐！"
+        }
+      }
+    }
+  ]
+}

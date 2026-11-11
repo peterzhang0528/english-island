@@ -8,9 +8,9 @@
 
 **[在线试玩已发布版本](https://english-island-zhang-1109.lulabs.chatgpt.site) · [正式版本与源码下载](https://github.com/peterzhang0528/english-island/releases) · [问题和关卡提案](https://github.com/peterzhang0528/english-island/issues/new/choose)**
 
-本仓库包含十关连续故事。线上运行版本以部署记录与公网验收结果为准；合并、上线与版本记录按[开发与发布流程](docs/DEVELOPMENT.md)执行。
+`v0.5.0` 在十关主线基础上增加 AI 愿望地图，已完成真实模型生成、修改及 Chrome 完整任务验收。线上运行版本以部署记录与公网验收结果为准；合并、上线与版本记录按[开发与发布流程](docs/DEVELOPMENT.md)执行。
 
-[贡献指南](CONTRIBUTING.md) · [十关故事线](docs/STORY.md) · [开发关卡](docs/ADDING_LEVELS.md) · [配音维护](docs/AUDIO.md) · [反馈协作](docs/FEEDBACK_LOOP.md) · [更新记录](CHANGELOG.md) · [素材与许可](THIRD_PARTY_NOTICES.md)
+[贡献指南](CONTRIBUTING.md) · [十关故事线](docs/STORY.md) · [开发关卡](docs/ADDING_LEVELS.md) · [配音维护](docs/AUDIO.md) · [AI 愿望地图](docs/AI_WISH.md) · [反馈协作](docs/FEEDBACK_LOOP.md) · [更新记录](CHANGELOG.md) · [素材与许可](THIRD_PARTY_NOTICES.md)
 
 ## 十段相连的冒险
 
@@ -35,7 +35,9 @@
 
 同学们可以直接口头或在约定的群里反馈，由维护者整理、查重后登记；不需要先学会 GitHub。有代码改动的贡献者按[贡献指南](CONTRIBUTING.md)提交 PR。
 
-目前游戏没有接入实时 AI 服务。我们想和老师、同学、开发者一起讨论：AI 能在哪一个具体时刻，让开口说英语、理解故事或设计关卡变得更有趣？
+第十关庆典后，新的方块伙伴 K 会出现。玩家可以用中文或英文描述想去的地方、想帮助的朋友，预览并修改愿望，再进入包含寻找、英语表达和谜语任务的小地图。地图的地形主题、天气、物件与任务随生成方案变化。
+
+自由对话与生成需要服务器配置模型服务。未配置时页面会明确告知，并提供单独标注的示例地图试玩；示例不是实时 AI 生成。本版本已用 `gpt-4o-mini` 验证三个不同愿望和一次后续修改，并在 Chrome 完成一张实时生成地图的三个任务。英语任务检查输入文字，不提供语音识别；原有 200 段 JJ 录音保持不变。验收环境与验证范围见 [AI 愿望地图](docs/AI_WISH.md)。欢迎和老师、同学、开发者一起讨论怎样让 AI 更好地帮助开口表达、理解故事与共创关卡。
 
 你可以描述一小段体验，比如「找到小羊后，我想用自己的英语问候它」，再写出希望游戏怎样回应，以及怎样判断这个帮助有用。通过 [AI 共创点子表单](https://github.com/peterzhang0528/english-island/issues/new?template=ai_idea.yml) 分享，或者先在 PR 中讨论。普通新关卡想法仍使用「新关卡提案」。
 
@@ -55,6 +57,8 @@ npm run dev
 ```sh
 python3 -m http.server 8080 --directory public
 ```
+
+第十关彩蛋可用 `?level=10&bonus=wish` 直接预览；完整体验从第十关通关后的 K 入口进入。
 
 前三关分别位于 `/game/index.html`、`/game/day2.html`、`/game/day3.html`；第四至十关使用 `/game/story.html?level=4` 等入口。静态入口不包含完整网站的外层菜单与进度条。请通过 HTTP 加载，不要直接双击 HTML。
 

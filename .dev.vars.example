@@ -1,0 +1,4 @@
+# Local-only configuration. Copy to .dev.vars (ignored by Git).
+# Configure the key through the secure OpenAI Developers flow; never commit it.
+OPENAI_API_KEY=""
+OPENAI_MODEL="gpt-4o-mini"

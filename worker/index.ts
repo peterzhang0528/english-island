@@ -1,6 +1,7 @@
 import handler from "vinext/server/fetch-handler";
 import { runWithConnectorBinding } from "../lib/connector-context";
 import type { ConnectorBinding } from "../lib/connector-contract.mjs";
+import { runWithWishEnvironment } from "../lib/wish-runtime";
 
 const worker = {
   fetch(request: Request, env: Cloudflare.Env, ctx: ExecutionContext<{ CONNECTORS?: ConnectorBinding }>) {
@@ -23,7 +24,7 @@ const worker = {
         },
       };
     }
-    return runWithConnectorBinding(binding, () => handler.fetch(request, env, ctx));
+    return runWithWishEnvironment(env, () => runWithConnectorBinding(binding, () => handler.fetch(request, env, ctx)), request.cf ? request.headers.get("cf-connecting-ip") ?? undefined : undefined);
   },
 };
 

@@ -342,14 +342,21 @@ function festivalScene(c) {
   const modelBoat=c.boat(.55,1.2,0,memories,.25);modelBoat.userData.sail.visible=true;
   const modelBridge=group(0,1.3,.3,memories);for(let i=0;i<5;i++)box(modelBridge,M.wood,-.4+i*.2,0,0,.18,.08,.4);
   const confetti=group(0,7,-4);for(let i=0;i<54;i++){const paper=box(confetti,[M.coral,M.gold,M.teal,M.violet][i%4],(c.random()-.5)*10,c.random()*3,(c.random()-.5)*5,.1,.16,.035);paper.rotation.z=c.random()*Math.PI;}confetti.visible=false;
+  // A new friend arrives only after the final celebration. It is an optional portal, never a sixth task.
+  const wishPortal=group(-3.8,.5,1.4);wishPortal.name='wish-portal-k';wishPortal.userData.wishPortal=true;wishPortal.visible=false;c.hotspots.push(wishPortal);
+  box(wishPortal,M.teal,0,.75,0,.9,.8,.68);box(wishPortal,M.cream,0,1.5,0,1.05,.8,.83);
+  box(wishPortal,M.dark,-.22,1.57,.43,.12,.13,.05);box(wishPortal,M.dark,.22,1.57,.43,.12,.13,.05);box(wishPortal,M.coral,0,1.35,.44,.2,.06,.04);
+  box(wishPortal,M.gold,0,2.04,0,.07,.28,.07);const wishStar=new THREE.Mesh(new THREE.OctahedronGeometry(.21),M.glow);wishStar.position.y=2.32;wishPortal.add(wishStar);
+  box(wishPortal,M.teal,-.65,.9,0,.23,.52,.3).rotation.z=-.5;box(wishPortal,M.teal,.65,.9,0,.23,.52,.3).rotation.z=.5;
+  for(const x of[-.25,.25])box(wishPortal,M.navy,x,.18,.03,.27,.36,.42);
   let dancing=false,playing=false;
   mark(flag,0,[5,3,7]);mark(table,1,[6,5,8]);mark(cake,2);mark(music,3,[-5,3.7,7.5]);mark(friends,4,[7,7,8]);
   actions[0]=async({tween})=>{await tween(1.5,k=>cloth.position.y=1+k*3.25);};
   actions[1]=async({tween})=>{covering.visible=true;covering.scale.x=.05;await tween(1.2,k=>covering.scale.x=5.5*Math.max(.01,k));table.children.slice(6).forEach(object=>object.visible=true);};
   actions[2]=async({tween})=>{await move(cake,[0,1.76,-4.2],tween,1.7,.9);const slices=[-1.8,0,1.8].map(x=>{const slice=group(0,2.05,-4.2);box(slice,M.brown,0,.1,0,.5,.2,.45);box(slice,M.cream,0,.25,0,.54,.09,.48);box(slice,M.red,0,.35,0,.15,.15,.15);return{slice,to:V(x,1.8,-3.45)};});await Promise.all(slices.map(({slice,to})=>move(slice,to,tween,1,.35)));cake.scale.setScalar(.76);};
   actions[3]=async({tween})=>{playing=true;await tween(1.5,(_k,r)=>disc.rotation.y=r*Math.PI*10);};
-  actions[4]=async({tween,burst})=>{const homes=people.map(p=>p.position.clone());await tween(2.1,(k,r)=>people.forEach((p,i)=>{p.position.lerpVectors(homes[i],V((i-1.5)*1.5,0,i%2?1.8:.5),k);p.position.y=Math.abs(Math.sin(r*Math.PI*4))*.14;p.userData.arms[1].rotation.z=-.9-k*.3;}));people.forEach(p=>p.position.y=0);dancing=true;confetti.visible=true;burst?.(V(0,4.6,-4),36,M.gold);await tween(2,(_k,r)=>{confetti.position.y=7-r*4;confetti.children.forEach((p,i)=>p.rotation.z+=.06*(i%2?1:-1));});};
-  c.animated.push((time,dt)=>{if(playing)disc.rotation.y-=dt*5;if(dancing)people.forEach((p,i)=>{p.position.y=Math.abs(Math.sin(time*2.4+i))*.12;p.userData.arms[1].rotation.z=-1+Math.sin(time*3+i)*.18;});});
+  actions[4]=async({tween,burst})=>{const homes=people.map(p=>p.position.clone());await tween(2.1,(k,r)=>people.forEach((p,i)=>{p.position.lerpVectors(homes[i],V((i-1.5)*1.5,0,i%2?1.8:.5),k);p.position.y=Math.abs(Math.sin(r*Math.PI*4))*.14;p.userData.arms[1].rotation.z=-.9-k*.3;}));people.forEach(p=>p.position.y=0);dancing=true;confetti.visible=true;burst?.(V(0,4.6,-4),36,M.gold);await tween(2,(_k,r)=>{confetti.position.y=7-r*4;confetti.children.forEach((p,i)=>p.rotation.z+=.06*(i%2?1:-1));});wishPortal.visible=true;};
+  c.animated.push((time,dt)=>{if(wishPortal.visible){wishPortal.position.y=.5+Math.sin(time*1.8)*.06;wishStar.rotation.y=time*.4;}if(playing)disc.rotation.y-=dt*5;if(dancing)people.forEach((p,i)=>{p.position.y=Math.abs(Math.sin(time*2.4+i))*.12;p.userData.arms[1].rotation.z=-1+Math.sin(time*3+i)*.18;});});
   c.intro={pos:[12,9,13],look:[0,2,-5],fov:58};c.finishShot={pos:[11,9,12],look:[0,2.2,-5],fov:58};
 }
 

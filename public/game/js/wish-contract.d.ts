@@ -1,0 +1,15 @@
+export type Bilingual = { en: string; zh: string };
+export type WishKind = 'tree'|'flower'|'sheep'|'boat'|'house'|'bridge'|'lighthouse'|'cake'|'flag'|'stone'|'key'|'chest';
+export type WishQuest = { id:string; kind:'find'|'say'|'riddle'; targetId:string; prompt:Bilingual; hint:Bilingual; answer:string };
+export type WishPlan = { version:1; seed:number; title:Bilingual; reply:Bilingual; biome:'forest'|'beach'|'snow'|'night'|'farm'; weather:'clear'|'rain'|'stars'; goal:Bilingual; objects:Array<{id:string;kind:WishKind;word:string;labelZh:string}>; quests:WishQuest[]; ending:Bilingual };
+export type WishRequest = { message:string; history:Array<{role:'user'|'assistant';content:string}>; previousPlan?:WishPlan };
+export const WISH_VERSION:1;
+export const OBJECT_WORDS:Readonly<Record<WishKind,string>>;
+export const BIOMES:readonly WishPlan['biome'][];
+export const WEATHER:readonly WishPlan['weather'][];
+export const QUEST_KINDS:readonly WishQuest['kind'][];
+export const WISH_PLAN_SCHEMA:Record<string,unknown>;
+export function validateWishPlan(value:unknown):{ok:true;plan:WishPlan}|{ok:false;errors:string[]};
+export function validateWishRequest(value:unknown):{ok:true;value:WishRequest}|{ok:false;errors:string[]};
+export function normalizeWishAnswer(value:unknown):string;
+export function isWishAnswerCorrect(quest:WishQuest,input:unknown):boolean;
