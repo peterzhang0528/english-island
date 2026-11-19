@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#bfe0e6"><title>英语方块岛 · 伙伴小岛 Buddy Island</title><link rel="stylesheet" href="./buddies.css"></head>
+<body>
+<main class="buddy-app" id="buddy-app" lang="en">
+  <canvas id="buddy-world" tabindex="0" aria-label="Buddy Island. Walk with W A S D or the arrow keys. Drag to look around."></canvas>
+  <header class="hud-top">
+    <a class="hud-pill" id="buddy-exit" href="/">← Exit</a>
+    <div class="hud-mid"><span class="mode-badge" id="mode-badge" hidden></span><strong id="round-title"></strong></div>
+    <div class="hud-tools"><span class="hud-pill" id="stage-badge" hidden></span><span class="hud-pill" id="session-clock" hidden>0:00</span><button class="hud-pill" id="mic-button" type="button" hidden aria-pressed="true">Mic on</button><button class="hud-pill" id="sound-button" type="button" hidden aria-pressed="false">Sound on</button><button class="hud-pill end-button" id="end-button" type="button" hidden>End</button></div>
+  </header>
+  <p class="goal" id="goal" role="status" hidden></p>
+  <div class="bubble bubble-mia" id="bubble-mia" hidden></div>
+  <div class="bubble bubble-leo" id="bubble-leo" hidden></div>
+  <section class="talk" id="talk" aria-label="Conversation" hidden>
+    <ol class="caption-log" id="caption-log" aria-live="polite"></ol>
+    <p class="player-line" id="player-line" hidden></p>
+    <div class="chip-row" id="chip-row" hidden><span class="chip-label" id="chip-label"></span><div class="chips" id="chips"></div></div>
+  </section>
+  <div class="word-pocket" id="word-pocket" aria-label="Words you met" hidden></div>
+  <div class="stick" id="stick" aria-hidden="true" hidden><i id="stick-knob"></i></div>
+
+  <section class="panel" id="start-panel" lang="zh-CN" aria-labelledby="start-title">
+    <div class="panel-card">
+      <p class="eyebrow">BUDDY ISLAND · 伙伴小岛</p>
+      <h1 id="start-title">和 Mia、Leo 一起玩</h1>
+      <div class="kids" aria-hidden="true"><span class="kid kid-mia"><i></i>Mia</span><span class="kid kid-leo"><i></i>Leo</span><span class="kid kid-you"><i></i>You</span></div>
+      <p>Mia 和 Leo 是两个在美国长大的小朋友。他们只会说英文，听不懂中文。就像刚转学到美国：先听，跟着他们跑；想说的时候，再用英文开口。</p>
+      <fieldset class="stage-pick" id="stage-pick"><legend>现在的你</legend>
+        <label><input type="radio" name="stage" value="1"><span><b>先听</b>Just listen</span></label>
+        <label><input type="radio" name="stage" value="2"><span><b>说单词</b>Say words</span></label>
+        <label><input type="radio" name="stage" value="3"><span><b>说句子</b>Say sentences</span></label>
+      </fieldset>
+      <p class="connection-note" id="connection-note" role="status">正在看看 Mia 和 Leo 在不在线…</p>
+      <button class="primary-button" id="start-live" type="button" disabled>开始 · 和 Mia、Leo 说话</button>
+      <p class="fine-print" id="live-fine-print">会用到麦克风，建议戴耳机。实时语音由 OpenAI GPT-Live 生成，按分钟计费，一次最长 12 分钟。</p>
+      <button class="secondary-button" id="start-demo" type="button">试玩演示</button>
+      <p class="fine-print">演示里的台词是提前写好的，由浏览器朗读，不是 AI，也听不到你说话。</p>
+      <p class="fine-print">W A S D 或方向键走动，拖动画面转视角；手机用左下角的摇杆。</p>
+    </div>
+  </section>
+  <section class="panel" id="end-panel" aria-labelledby="end-title" hidden>
+    <div class="panel-card">
+      <p class="eyebrow">SEE YOU NEXT TIME</p>
+      <h2 id="end-title" tabindex="-1">Bye! See you next time!</h2>
+      <p id="end-summary"></p>
+      <div class="end-words" id="end-words"></div>
+      <p class="fine-print" id="end-note" lang="zh-CN" hidden></p>
+      <button class="primary-button" id="play-again" type="button">Play again</button>
+      <a class="secondary-button" href="/">← Back to English Island</a>
+    </div>
+  </section>
+  <div class="buddy-loading" id="buddy-loading" role="status" lang="zh-CN">正在打开伙伴小岛…</div>
+  <div class="buddy-fallback" id="buddy-fallback" role="alert" lang="zh-CN" hidden><h2>伙伴小岛暂时没有打开</h2><p>请稍后刷新再试。</p><a href="/">回到英语方块岛</a></div>
+</main><script type="module" src="./js/bootstrap-buddies.js"></script>
+</body></html>
