@@ -1,6 +1,7 @@
 // Shared by the browser and the server route. The server owns the personas and
 // the model settings; the browser may only pick a buddy and the player's stage.
 export const BUDDY_IDS = Object.freeze(['mia', 'leo']);
+export const CLASS_CODE_HEADER = 'x-buddy-class-code';
 export const BUDDIES = Object.freeze({
   mia: Object.freeze({ id: 'mia', name: 'Mia', voice: 'gleam', color: '#e98a6b' }),
   leo: Object.freeze({ id: 'leo', name: 'Leo', voice: 'meridian', color: '#5f93c9' }),

@@ -1,3 +1,4 @@
+.class-entry{display:grid;gap:6px}.class-entry div{display:flex;gap:8px}.class-entry input{flex:1;min-width:0;border:1px solid var(--line);border-radius:8px;padding:8px}.class-entry label{font-size:13px}
 :root{color-scheme:light;--ink:#2f4338;--muted:#6f8073;--paper:#fbfaf2;--line:#dfe6d6;--green:#54794d;--mia:#e98a6b;--leo:#5f93c9;--you:#d9a91f;font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;color:var(--ink);background:#bfe0e6}
 *{box-sizing:border-box}[hidden]{display:none!important}html,body{margin:0;height:100%;overflow:hidden}button,input{font:inherit}button{border:0;cursor:pointer;touch-action:manipulation}button:disabled{cursor:default;opacity:.5}a{color:inherit}
 button,a{-webkit-tap-highlight-color:transparent}button:focus-visible,a:focus-visible,input:focus-visible+span,canvas:focus-visible{outline:3px solid #a8ba82;outline-offset:2px}

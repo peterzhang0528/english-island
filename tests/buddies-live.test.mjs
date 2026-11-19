@@ -55,10 +55,14 @@ test('notes keep speakers apart and cannot be broken out of by a transcript', ()
 });
 
 test('start opens one WebRTC session per kid through the server and never sends session.start', async () => {
-  const { env, live, mia, leo } = await started({}, { stage: 2 });
+  const { env, live, mia, leo } = await started({}, { stage: 2, classCode: 'unit-test-class-code' });
   assert.equal(live.state, 'live'); assert.equal(env.peers.length, 2);
   assert.deepEqual(env.requests.map(request => request.body), [{ buddy: 'mia', sdp: offer, stage: 2 }, { buddy: 'leo', sdp: offer, stage: 2 }]);
   for (const request of env.requests) { assert.equal(request.url, '/api/buddies'); assert.equal(request.init.method, 'POST'); assert.ok(!JSON.stringify(request.init.headers).match(/authorization|bearer/i), 'no key in the browser'); }
+  for (const { init } of env.requests) {
+    assert.equal(init.headers['x-buddy-class-code'], 'unit-test-class-code');
+    assert.equal(init.redirect, 'error'); assert.equal(init.mode, 'same-origin');
+  }
   for (const peer of [mia, leo]) {
     assert.deepEqual(peer.log, ['track', 'channel:oai-events', 'offer'], 'the events channel exists before the offer');
     assert.equal(peer.remote.type, 'answer'); assert.deepEqual(peer.sent, []);

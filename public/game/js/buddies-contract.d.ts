@@ -1,3 +1,4 @@
+export const CLASS_CODE_HEADER: 'x-buddy-class-code';
 export type BuddyId = 'mia'|'leo';
 export type BuddyStage = 1|2|3;
 export type BuddyInfo = { id:BuddyId; name:string; voice:string; color:string };

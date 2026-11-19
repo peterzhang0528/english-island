@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readFileSync } from 'node:fs';
 import vm from 'node:vm';
+import { timingSafeEqual } from 'node:crypto';
 import { AsyncLocalStorage } from 'node:async_hooks';
 import { ts } from './helpers/source.mjs';
 import * as contract from '../public/game/js/buddies-contract.js';
@@ -11,20 +12,21 @@ const quietConsole = { error() {}, warn() {}, log() {} };
 function load(relative, modules) {
   const exports = {}, source = readFileSync(new URL(relative, import.meta.url), 'utf8');
   const code = ts.transpileModule(source, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
-  vm.runInNewContext(code, { exports, require: name => { assert.ok(name in modules, name); return modules[name]; }, Request, Response, Headers, AbortController, URL, TextDecoder, Uint8Array, JSON, Object, Number, Map, fetch, setTimeout, clearTimeout, Date, console: quietConsole, process: { env: {} } });
+  vm.runInNewContext(code, { exports, require: name => { assert.ok(name in modules, name); return modules[name]; }, Buffer, Request, Response, Headers, AbortController, URL, TextDecoder, Uint8Array, JSON, Object, Number, Map, fetch, setTimeout, clearTimeout, Date, console: quietConsole, process: { env: {} } });
   return exports;
 }
 const runtime = load('../lib/wish-runtime.ts', { 'node:async_hooks': { AsyncLocalStorage } });
 const wish = load('../lib/wish-ai.ts', { '../public/game/js/wish-contract.js': wishContract, './wish-runtime': runtime });
-const { createBuddyHandlers, buddyInstructions, DEFAULT_LIVE_MODEL, MAX_BUDDY_REQUEST_BYTES } = load('../lib/buddies-live.ts', { '../public/game/js/buddies-contract.js': contract, './wish-ai': wish, './wish-runtime': runtime });
+const { createBuddyHandlers, buddyInstructions, DEFAULT_LIVE_MODEL, MAX_BUDDY_REQUEST_BYTES } = load('../lib/buddies-live.ts', { 'node:crypto': { timingSafeEqual }, '../public/game/js/buddies-contract.js': contract, './wish-ai': wish, './wish-runtime': runtime });
 const route = load('../app/api/buddies/route.ts', { '../../../lib/buddies-live': { createBuddyHandlers } });
 
+const classCode = 'unit-test-class-code';
 const offer = 'v=0\r\no=- 1 2 IN IP4 127.0.0.1\r\ns=-\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111\r\n';
 const answer = 'v=0\r\no=- 9 9 IN IP4 127.0.0.1\r\ns=-\r\nm=audio 9 UDP/TLS/RTP/SAVPF 111\r\n';
 const body = (overrides = {}) => ({ buddy: 'mia', sdp: offer, stage: 1, ...overrides });
-const req = (value = body(), headers = {}, signal) => new Request('https://island.example/api/buddies', { method: 'POST', headers: { origin: 'https://island.example', 'content-type': 'application/json', ...headers }, body: typeof value === 'string' ? value : JSON.stringify(value), signal });
+const req = (value = body(), headers = {}, signal) => new Request('https://island.example/api/buddies', { method: 'POST', headers: { [contract.CLASS_CODE_HEADER]: classCode, origin: 'https://island.example', 'content-type': 'application/json', ...headers }, body: typeof value === 'string' ? value : JSON.stringify(value), signal });
 const created = () => Response.json({ id: 'live_1', transport: { type: 'webrtc', sdp: answer } }, { status: 201 });
-const fixture = (overrides = {}) => createBuddyHandlers({ getEnvironment: () => ({ OPENAI_API_KEY: 'test-only-secret' }), fetchImpl: async () => created(), ...overrides });
+const fixture = (overrides = {}) => createBuddyHandlers({ getEnvironment: () => ({ OPENAI_API_KEY: 'test-only-secret', BUDDY_CLASS_CODE: classCode }), fetchImpl: async () => created(), ...overrides });
 
 test('without a key GET is unavailable, POST is 503 and nothing is sent upstream', async () => {
   let calls = 0;
@@ -34,8 +36,31 @@ test('without a key GET is unavailable, POST is 503 and nothing is sent upstream
   const post = await h.POST(req()); assert.equal(post.status, 503); assert.equal((await post.json()).error.code, 'LIVE_UNAVAILABLE');
   assert.equal(calls, 0);
   assert.deepEqual(await (await route.GET()).json(), { available: false });
-  assert.deepEqual(await (await fixture().GET()).json(), { available: true });
-  assert.deepEqual(await (await fixture({ getEnvironment: () => ({ OPENAI_API_KEY: 'k', OPENAI_LIVE_MODEL: 'bad model!' }) }).GET()).json(), { available: false });
+  assert.deepEqual(await (await fixture().GET(req())).json(), { available: true });
+  assert.deepEqual(await (await fixture({ getEnvironment: () => ({ OPENAI_API_KEY: 'k', BUDDY_CLASS_CODE: classCode, OPENAI_LIVE_MODEL: 'bad model!' }) }).GET()).json(), { available: false });
+});
+
+test('classroom Live fails closed and never creates a session on a missing, stale, or incorrect pass', async () => {
+  let calls = 0;
+  const env = { OPENAI_API_KEY: 'test-key', BUDDY_CLASS_CODE: classCode };
+  const handlers = fixture({ getEnvironment: () => env, fetchImpl: async () => { calls++; return created(); } });
+  for (const invalid of ['', 'incorrect-test-code', classCode.slice(0, -1) + 'x']) {
+    const request = req(body(), { [contract.CLASS_CODE_HEADER]: invalid });
+    const get = await handlers.GET(request);
+    assert.deepEqual(await get.json(), { available: false, classCodeRequired: true });
+    assert.equal(get.headers.get('cache-control'), 'no-store');
+    assert.equal((await handlers.POST(request)).status, 403);
+  }
+  assert.deepEqual(await (await route.GET(req())).json(), { available: false });
+  assert.deepEqual(await runtime.runWithWishEnvironment(env, async () => (await route.GET(req())).json()), { available: true });
+  env.BUDDY_CLASS_CODE = 'rotated-class-code';
+  assert.equal((await handlers.POST(req())).status, 403);
+  for (const badConfig of ['', 'weak', 'contains whitespace!']) {
+    env.BUDDY_CLASS_CODE = badConfig;
+    assert.deepEqual(await (await handlers.GET(req())).json(), { available: false });
+    assert.equal((await handlers.POST(req())).status, 503);
+  }
+  assert.equal(calls, 0);
 });
 
 test('a session is created at the fixed GPT-Live endpoint with the server-owned persona and voice', async () => {
@@ -46,6 +71,7 @@ test('a session is created at the fixed GPT-Live endpoint with the server-owned 
     assert.equal(response.status, 201); assert.equal(response.headers.get('cache-control'), 'no-store');
     assert.deepEqual(await response.json(), { buddy, voice, sdp: answer });
   }
+  assert.ok(!JSON.stringify(calls).includes(classCode), 'never relay the pass to OpenAI');
   const [mia, leo] = calls.map(call => JSON.parse(call.init.body));
   assert.equal(calls[0].url, 'https://api.openai.com/v1/live/sessions');
   assert.equal(calls[0].init.method, 'POST'); assert.equal(calls[0].init.redirect, 'manual');
@@ -55,7 +81,7 @@ test('a session is created at the fixed GPT-Live endpoint with the server-owned 
   assert.equal(mia.session.audio.output.voice, 'gleam'); assert.equal(leo.session.audio.output.voice, 'meridian');
   assert.equal(mia.session.instructions, buddyInstructions('mia', 1)); assert.equal(leo.session.instructions, buddyInstructions('leo', 3));
   assert.notEqual(mia.session.instructions, leo.session.instructions);
-  const custom = []; await fixture({ getEnvironment: () => ({ OPENAI_API_KEY: 'k', OPENAI_LIVE_MODEL: 'gpt-live-1-mini' }), fetchImpl: async (_url, init) => { custom.push(JSON.parse(init.body)); return created(); } }).POST(req());
+  const custom = []; await fixture({ getEnvironment: () => ({ OPENAI_API_KEY: 'k', BUDDY_CLASS_CODE: classCode, OPENAI_LIVE_MODEL: 'gpt-live-1-mini' }), fetchImpl: async (_url, init) => { custom.push(JSON.parse(init.body)); return created(); } }).POST(req());
   assert.equal(custom[0].session.model, 'gpt-live-1-mini');
 });
 

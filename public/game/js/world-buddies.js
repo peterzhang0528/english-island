@@ -1,7 +1,7 @@
 // Buddy Island page: wires the director (rules), the 3D world and the voices together.
 // Live mode: Mia and Leo are GPT-Live sessions. Demo mode: the scripted lines are read by the
 // browser's own speech voice and are always labelled as a demo.
-import { BUDDIES, BUDDY_IDS, STAGES } from './buddies-contract.js';
+import { BUDDIES, BUDDY_IDS, CLASS_CODE_HEADER, STAGES } from './buddies-contract.js';
 import { createBuddyDirector } from './buddies-game.js';
 import { BuddyLiveError, createBuddyLive } from './buddies-live.js';
 import { createBuddyWorld } from './buddies-world.js';
@@ -26,6 +26,8 @@ export async function initBuddyUI() {
   const view = window, synth = view.speechSynthesis ?? null;
   const goal = $('#goal'), log = $('#caption-log'), chipRow = $('#chip-row'), chips = $('#chips'), pocket = $('#word-pocket'), note = $('#connection-note');
   const startLive = $('#start-live'), startDemo = $('#start-demo'), micButton = $('#mic-button'), soundButton = $('#sound-button'), playerLine = $('#player-line');
+  const classEntry = $('#class-entry'), codeInput = $('#class-code');
+  let classCode = '';
   const bubbles = { mia: $('#bubble-mia'), leo: $('#bubble-leo') };
   let mode = null, director = null, live = null, stage = readStage(view.localStorage), muted = false, ended = false;
   let elapsed = 0, startedAt = 0, hiddenSince = 0, goodbye = false, phrases = [], cue = null, demoTalking = null, playerLineTimer = 0;
@@ -153,12 +155,13 @@ export async function initBuddyUI() {
   startDemo.addEventListener('click', () => begin('demo'));
   startLive.addEventListener('click', async () => {
     startLive.disabled = startDemo.disabled = true; note.classList.remove('warn'); note.textContent = '正在接通 Mia 和 Leo…（请允许使用麦克风）';
-    const session = createBuddyLive({ stage, on: onLive });
+    const session = createBuddyLive({ stage, on: onLive, classCode });
     try { await session.start(); live = session; begin('live'); }
     catch (error) {
       note.classList.add('warn');
       note.textContent = `没有接通：${error instanceof BuddyLiveError && error.code !== 'failed' && error.message ? error.message.replace(/[。.]+$/u, '') : '语音会话没有建立'}。可以再试一次，或先试玩演示。`;
       startLive.disabled = startDemo.disabled = false;
+      if (error?.code === 'CLASS_CODE_REQUIRED') { classCode = ''; startLive.disabled = true; classEntry.hidden = false; codeInput.focus(); }
     }
   });
   micButton.addEventListener('click', () => { const on = live.setMic(!live.micOn); micButton.setAttribute('aria-pressed', String(on)); micButton.textContent = on ? 'Mic on' : 'Mic off'; renderChips(); });
@@ -186,14 +189,24 @@ export async function initBuddyUI() {
   stick.addEventListener('pointermove', event => { if (event.pointerId === stickPointer) moveStick(event); });
   stick.addEventListener('pointerup', releaseStick); stick.addEventListener('pointercancel', releaseStick);
 
-  // Ask the server whether voice sessions are configured. The key itself never leaves the server.
-  let available = false;
-  try { const response = await fetch('/api/buddies', { headers: { accept: 'application/json' } }); available = response.ok && (await response.json())?.available === true; } catch {}
   const supported = !!view.RTCPeerConnection && !!(view.AudioContext ?? view.webkitAudioContext);
-  if (available && supported) { note.textContent = 'Mia 和 Leo 在线，可以开始了。'; startLive.disabled = false; }
-  else {
-    note.classList.add('warn');
-    note.textContent = available ? '这个浏览器不支持实时语音，可以先试玩演示。' : '实时语音还没有接通（服务器没有配置 OpenAI Key）。可以先试玩演示。';
+  async function checkAccess(code = '') {
+    const submit = classEntry.querySelector('button');
+    submit.disabled = true;
+    try {
+      const response = await fetch('/api/buddies', { mode: 'same-origin', redirect: 'error', cache: 'no-store', headers: { accept: 'application/json', ...(code ? { [CLASS_CODE_HEADER]: code } : {}) } });
+      if (!response.ok) throw Error();
+      const status = await response.json();
+      classEntry.hidden = status.classCodeRequired !== true || !supported;
+      startLive.disabled = status.available !== true || !supported;
+      if (!supported) note.textContent = '这个浏览器不支持实时语音，可以先试玩演示。';
+      else if (!startLive.disabled) { classCode = code; codeInput.value = ''; note.textContent = 'Mia 和 Leo 在线，可以开始了。'; }
+      else if (!classEntry.hidden) note.textContent = code ? '口令不对，请向老师确认。' : '输入老师给的口令可以打开实时语音；演示不需要口令。';
+      else note.textContent = '班内实时语音暂未开放，可以先试玩演示。';
+    } catch { startLive.disabled = true; note.textContent = '暂时连不上语音服务，稍后再试或先试玩演示。'; }
+    finally { submit.disabled = false; }
   }
+  classEntry.addEventListener('submit', event => { event.preventDefault(); void checkAccess(codeInput.value.trim()); });
+  await checkAccess();
   return { world, get mode() { return mode; }, get director() { return director; } };
 }

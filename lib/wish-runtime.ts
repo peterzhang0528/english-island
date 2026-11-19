@@ -1,6 +1,6 @@
 import { AsyncLocalStorage } from 'node:async_hooks';
 
-export type WishEnvironment = { OPENAI_API_KEY?: string; OPENAI_MODEL?: string; OPENAI_LIVE_MODEL?: string };
+export type WishEnvironment = { OPENAI_API_KEY?: string; OPENAI_MODEL?: string; OPENAI_LIVE_MODEL?: string; BUDDY_CLASS_CODE?: string };
 const environments = new AsyncLocalStorage<{ environment: WishEnvironment; clientAddress?: string }>();
 
 export function runWithWishEnvironment<T>(environment: WishEnvironment, run: () => T, clientAddress?: string): T {
@@ -15,6 +15,7 @@ export function getWishEnvironment(): WishEnvironment {
     OPENAI_API_KEY: env?.OPENAI_API_KEY ?? process.env.OPENAI_API_KEY,
     OPENAI_MODEL: env?.OPENAI_MODEL ?? process.env.OPENAI_MODEL,
     OPENAI_LIVE_MODEL: env?.OPENAI_LIVE_MODEL ?? process.env.OPENAI_LIVE_MODEL,
+    BUDDY_CLASS_CODE: env?.BUDDY_CLASS_CODE ?? process.env.BUDDY_CLASS_CODE,
   };
 }
 

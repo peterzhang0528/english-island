@@ -1,4 +1,5 @@
-import { BUDDIES, STAGE_NOTES, validateBuddySessionRequest, type BuddyId, type BuddyStage } from '../public/game/js/buddies-contract.js';
+import { timingSafeEqual } from 'node:crypto';
+import { BUDDIES, CLASS_CODE_HEADER, STAGE_NOTES, validateBuddySessionRequest, type BuddyId, type BuddyStage } from '../public/game/js/buddies-contract.js';
 import { BodyLimitError, json, problem, readBounded } from './wish-ai';
 import { getWishClientAddress, getWishEnvironment, type WishEnvironment } from './wish-runtime';
 
@@ -72,7 +73,14 @@ type HandlerOptions = {
 function settings(env: WishEnvironment) {
   const key = typeof env.OPENAI_API_KEY === 'string' ? env.OPENAI_API_KEY.trim() : '';
   const model = env.OPENAI_LIVE_MODEL?.trim() || DEFAULT_LIVE_MODEL;
-  return { key, model, available: !!key && !/[\r\n]/u.test(key) && /^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,99}$/u.test(model) };
+  const classCode = env.BUDDY_CLASS_CODE ?? '';
+  return { key, model, classCode, available: /^[a-zA-Z0-9_-]{16,64}$/u.test(classCode) && !!key && !/[\r\n]/u.test(key) && /^[a-zA-Z0-9][a-zA-Z0-9._:-]{0,99}$/u.test(model) };
+}
+
+function hasClassCode(request: Request | undefined, expected: string) {
+  const supplied = request?.headers.get(CLASS_CODE_HEADER) ?? '';
+  return /^[a-zA-Z0-9_-]{16,64}$/u.test(supplied) && supplied.length === expected.length
+    && timingSafeEqual(Buffer.from(supplied), Buffer.from(expected));
 }
 
 /** Process-local limits are best effort; they do not cap the cost of an open voice session. */
@@ -96,9 +104,16 @@ export function createBuddyHandlers(options: HandlerOptions = {}) {
     bucket.count++; global.count++; return false;
   }
   return {
-    async GET() { return json(200, { available: settings(environment()).available }); },
+    async GET(request?: Request) {
+      const config = settings(environment());
+      if (!config.available) return json(200, { available: false });
+      return json(200, hasClassCode(request, config.classCode) ? { available: true } : { available: false, classCodeRequired: true });
+    },
     async POST(request: Request) {
       if (request.headers.get('origin') !== new URL(request.url).origin) return problem(403, 'ORIGIN_NOT_ALLOWED', '请从游戏页面进入伙伴小岛。');
+      const config = settings(environment());
+      if (!config.available) return problem(503, 'LIVE_UNAVAILABLE', '语音伙伴还没有开通，可以先看试玩演示。');
+      if (!hasClassCode(request, config.classCode)) return problem(403, 'CLASS_CODE_REQUIRED', '请向老师确认班内口令。');
       if (!/^application\/json(?:\s*;|$)/iu.test(request.headers.get('content-type') || '')) return problem(415, 'INVALID_CONTENT_TYPE', '连接请求格式不对，请刷新后再试。');
       const declared = Number(request.headers.get('content-length'));
       if (Number.isFinite(declared) && declared > MAX_BUDDY_REQUEST_BYTES) return problem(413, 'REQUEST_TOO_LARGE', '连接请求太大了，请刷新后再试。');
@@ -115,8 +130,6 @@ export function createBuddyHandlers(options: HandlerOptions = {}) {
       } finally { clearTimeout(inputTimer); request.signal.removeEventListener('abort', cancelInput); }
       const valid = validateBuddySessionRequest(input);
       if (!valid.ok) return problem(400, 'INVALID_REQUEST', '连接请求没有读懂，请刷新后再试。');
-      const config = settings(environment());
-      if (!config.available) return problem(503, 'LIVE_UNAVAILABLE', '语音伙伴还没有开通，可以先看试玩演示。');
       if (limited()) return problem(429, 'RATE_LIMITED', '连接太频繁了，请一分钟后再试。', { 'Retry-After': '60' });
       const { buddy, stage, sdp } = valid.value;
       const controller = new AbortController(); let timedOut = false;

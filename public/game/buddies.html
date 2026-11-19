@@ -32,8 +32,12 @@
         <label><input type="radio" name="stage" value="3"><span><b>说句子</b>Say sentences</span></label>
       </fieldset>
       <p class="connection-note" id="connection-note" role="status">正在看看 Mia 和 Leo 在不在线…</p>
+      <form id="class-entry" class="class-entry" hidden>
+        <label for="class-code">班内口令（向老师领取）</label>
+        <div><input id="class-code" type="password" autocomplete="off" maxlength="64" required spellcheck="false"><button class="secondary-button" type="submit">验证口令</button></div>
+      </form>
       <button class="primary-button" id="start-live" type="button" disabled>开始 · 和 Mia、Leo 说话</button>
-      <p class="fine-print" id="live-fine-print">会用到麦克风，建议戴耳机。实时语音由 OpenAI GPT-Live 生成，按分钟计费，一次最长 12 分钟。</p>
+      <p class="fine-print" id="live-fine-print">Mia 和 Leo 是 AI 游戏角色。开麦后，声音会实时发给 OpenAI 处理；也可以拒绝麦克风，只听不说。请先让家长或老师知情。Live 按分钟计费，一局最长 12 分钟。</p>
       <button class="secondary-button" id="start-demo" type="button">试玩演示</button>
       <p class="fine-print">演示里的台词是提前写好的，由浏览器朗读，不是 AI，也听不到你说话。</p>
       <p class="fine-print">W A S D 或方向键走动，拖动画面转视角；手机用左下角的摇杆。</p>

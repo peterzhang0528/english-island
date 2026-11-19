@@ -8,7 +8,7 @@
 // A model may still answer a note it was only meant to remember. So a kid is audible only while it
 // holds the floor: after the game cues a line, or while the player is talking to that kid.
 // Anything else stays muted, uncaptioned and is not relayed, so the two never talk over each other.
-import { BUDDIES, BUDDY_IDS, STAGE_NOTES, otherBuddy } from './buddies-contract.js';
+import { BUDDIES, BUDDY_IDS, CLASS_CODE_HEADER, STAGE_NOTES, otherBuddy } from './buddies-contract.js';
 
 export const LINE_SILENCE_MS = 900;
 export const UTTERANCE_SILENCE_MS = 1100;
@@ -37,7 +37,7 @@ export class BuddyLiveError extends Error {
  *   { type: 'problem', who, code }      a recoverable server error (for example moderated audio)
  *   { type: 'ended', reason }           a session closed; both are torn down
  */
-export function createBuddyLive({ stage = 1, on = () => {}, endpoint = '/api/buddies', env = globalThis } = {}) {
+export function createBuddyLive({ stage = 1, on = () => {}, endpoint = '/api/buddies', classCode = '', env = globalThis } = {}) {
   const now = () => env.performance.now();
   const kids = Object.fromEntries(BUDDY_IDS.map(id => [id, { id, pc: null, channel: null, gain: null, audio: null, analyser: null, samples: null, text: '', lastDelta: -Infinity, lastSound: -Infinity, speaking: false, hushed: false, floor: -Infinity, seconds: 0, started: false, closed: null, sent: 0 }]));
   const player = { text: '', last: -Infinity, voice: -Infinity };
@@ -144,7 +144,7 @@ export function createBuddyLive({ stage = 1, on = () => {}, endpoint = '/api/bud
     });
     let response, body = null;
     try {
-      response = await env.fetch(endpoint, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ buddy: kid.id, sdp: pc.localDescription.sdp, stage }), signal: controller.signal });
+      response = await env.fetch(endpoint, { method: 'POST', redirect: 'error', mode: 'same-origin', headers: { 'content-type': 'application/json', [CLASS_CODE_HEADER]: classCode }, body: JSON.stringify({ buddy: kid.id, sdp: pc.localDescription.sdp, stage }), signal: controller.signal });
       body = await response.json();
     } catch (error) {
       if (!response) throw new BuddyLiveError(controller.signal.aborted ? 'canceled' : 'network', 'The voice server could not be reached');
