@@ -2,3 +2,7 @@
 # Configure the key through the secure OpenAI Developers flow; never commit it.
 OPENAI_API_KEY=""
 OPENAI_MODEL="gpt-4o-mini"
+# Buddy Island voice companions (GPT-Live). Billed per minute, per companion.
+OPENAI_LIVE_MODEL="gpt-live-1"
+# Server-only; set a random 16–64 character class code to enable paid Live.
+BUDDY_CLASS_CODE=""

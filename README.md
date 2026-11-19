@@ -10,7 +10,7 @@
 
 `v0.5.1` 在十关主线基础上增加 AI 愿望地图，已完成真实模型生成、修改及 Chrome 完整任务验收。线上运行版本以部署记录与公网验收结果为准；合并、上线与版本记录按[开发与发布流程](docs/DEVELOPMENT.md)执行。
 
-[贡献指南](CONTRIBUTING.md) · [十关故事线](docs/STORY.md) · [开发关卡](docs/ADDING_LEVELS.md) · [配音维护](docs/AUDIO.md) · [AI 愿望地图](docs/AI_WISH.md) · [反馈协作](docs/FEEDBACK_LOOP.md) · [更新记录](CHANGELOG.md) · [素材与许可](THIRD_PARTY_NOTICES.md)
+[贡献指南](CONTRIBUTING.md) · [十关故事线](docs/STORY.md) · [开发关卡](docs/ADDING_LEVELS.md) · [配音维护](docs/AUDIO.md) · [AI 愿望地图](docs/AI_WISH.md) · [伙伴小岛](docs/AI_BUDDIES.md) · [反馈协作](docs/FEEDBACK_LOOP.md) · [更新记录](CHANGELOG.md) · [素材与许可](THIRD_PARTY_NOTICES.md)
 
 ## 十段相连的冒险
 
@@ -38,6 +38,8 @@
 第十关庆典后，新的方块伙伴 K 会出现。玩家可以用中文或英文描述想去的地方、想帮助的朋友，预览并修改愿望，再进入包含寻找、英语表达和谜语任务的小地图。地图的地形主题、天气、物件与任务随生成方案变化。
 
 自由对话与生成需要服务器配置模型服务。未配置时页面会明确告知，并提供单独标注的示例地图试玩；示例不是实时 AI 生成。本版本已用 `gpt-4o-mini` 验证三个不同愿望和一次后续修改，并在 Chrome 完成一张实时生成地图的三个任务。英语任务检查输入文字，不提供语音识别；原有 200 段 JJ 录音保持不变。验收环境与验证范围见 [AI 愿望地图](docs/AI_WISH.md)。欢迎和老师、同学、开发者一起讨论怎样让 AI 更好地帮助开口表达、理解故事与共创关卡。
+
+**伙伴小岛**是另一个独立入口：两位只会说英语的小伙伴 Mia 和 Leo 自己玩，也带着玩家玩跟我走、摘苹果、捉迷藏和赛跑。玩家可以先只听、用走动参与，再慢慢说单词和短句。实时语音使用 OpenAI GPT-Live（两个会话、两种音色，按分钟计费），需要服务器配置密钥与班内口令；同学在固定页面输入老师给的口令，其他人只能选择明确标注的固定台词演示。连接方式、费用和验证范围见 [伙伴小岛](docs/AI_BUDDIES.md)。
 
 你可以描述一小段体验，比如「找到小羊后，我想用自己的英语问候它」，再写出希望游戏怎样回应，以及怎样判断这个帮助有用。通过 [AI 共创点子表单](https://github.com/peterzhang0528/english-island/issues/new?template=ai_idea.yml) 分享，或者先在 PR 中讨论。普通新关卡想法仍使用「新关卡提案」。
 
@@ -86,6 +88,7 @@ npm run build
 | `public/game/js/story-scenes.js` | 七个不同的方块场景和实际动作动画 |
 | `public/game/js/voice.js`、`sfx.js` | 共享配音和音效 |
 | `public/game/audio/voice.json` | 全部英语文本到本地配音的索引 |
+| `public/game/buddies.html`、`public/game/js/buddies-*.js`、`lib/buddies-live.ts` | 伙伴小岛：自由走动的小岛、游戏规则和 GPT-Live 语音伙伴 |
 | `tests/` | 以 `npm test` 运行的自动检查 |
 
 ## JJ 的声音

@@ -1,0 +1,12 @@
+export const CLASS_CODE_HEADER: 'x-buddy-class-code';
+export type BuddyId = 'mia'|'leo';
+export type BuddyStage = 1|2|3;
+export type BuddyInfo = { id:BuddyId; name:string; voice:string; color:string };
+export type BuddySessionRequest = { buddy:BuddyId; sdp:string; stage:BuddyStage };
+export const BUDDY_IDS:readonly BuddyId[];
+export const BUDDIES:Readonly<Record<BuddyId,BuddyInfo>>;
+export const STAGES:readonly BuddyStage[];
+export const STAGE_NOTES:Readonly<Record<BuddyStage,string>>;
+export const MAX_SDP_LENGTH:number;
+export function otherBuddy(id:BuddyId):BuddyId;
+export function validateBuddySessionRequest(value:unknown):{ok:true;value:BuddySessionRequest}|{ok:false;errors:string[]};
