@@ -13,7 +13,7 @@ const helpers={
     while(true){const {done,value}=await reader.read();if(done)break;result+=new TextDecoder().decode(value);if(result.length>limit)throw new helpers.BodyLimitError();}return result;
   },
 };
-const modules={'./wish-ai':helpers,'./wish-runtime':{getWishEnvironment:()=>({}),getWishClientAddress:()=>undefined}};
+const modules={'./wish-ai':helpers,'./wish-runtime':{getWishEnvironment:()=>({}),getWishClientAddress:()=>undefined},'./rescue-dialogue.json':{default:JSON.parse(readFileSync(new URL('../lib/rescue-dialogue.json',import.meta.url),'utf8'))}};
 const exports={};
 vm.runInNewContext(ts.transpileModule(readFileSync(new URL('../lib/rescue-ai.ts',import.meta.url),'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText,{exports,require:name=>modules[name],Request,Response,URL,AbortController,setTimeout,clearTimeout,fetch,Date});
 const {createRescueHandlers}=exports;

@@ -221,6 +221,31 @@ test('narration playback, cancellation and pause behavior', async t => {
     await latest;
   });
 
+  await t.test('optional local speech keeps bundled narration first and supports cancellation', async () => {
+    const requests = [], count = started.length;
+    voice.setSpeechProvider(async text => { requests.push(text); return {duration: 0.02, url: 'local-speech'}; });
+    const bundled = voice.say('tree');
+    await until(() => started.length === count + 1, 'bundled audio starts');
+    assert.equal(requests.length, 0);
+    started.at(-1).onended(); await bundled;
+    const live = voice.say('Fog Foxes, we can do this together!');
+    await until(() => started.length === count + 2, 'local speech starts');
+    assert.equal(started.at(-1).buffer.url, 'local-speech');
+    assert.deepEqual(requests, ['Fog Foxes, we can do this together!']);
+    voice.stop(); await live;
+    assert.equal(started.at(-1).stopped, true);
+    voice.setSpeechProvider(null);
+  });
+
+  await t.test('an unavailable local speech provider falls back to browser speech', async () => {
+    voice.setSpeechProvider(async () => { throw Error('local voice offline'); });
+    const count = utterances.length;
+    const speech = voice.say('Local speech can fail without stopping the mission.');
+    await until(() => utterances.length === count + 1, 'browser speech recovers');
+    utterances.at(-1).onend(); await speech;
+    voice.setSpeechProvider(null);
+  });
+
   await t.test('a failed authored recording keeps silent timing instead of switching voices', async () => {
     // Use a fresh playback cache and a short fixture duration; the production text/file are real.
     servedManifest = { ...manifest, cloud: { ...manifest.cloud, d: 0.08 } };

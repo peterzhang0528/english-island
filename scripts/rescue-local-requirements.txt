@@ -1,0 +1,3 @@
+# Optional preview tools only; not deployed or installed by npm.
+llama-cpp-python==0.3.16
+piper-tts==1.3.0

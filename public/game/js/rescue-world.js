@@ -6,7 +6,6 @@ export function createRescueWorld(canvas, state) {
   scene.background = new THREE.Color('#284956');
   scene.fog = new THREE.FogExp2('#385a65', 0.018);
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.8));
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -15,7 +14,7 @@ export function createRescueWorld(canvas, state) {
   scene.add(new THREE.HemisphereLight('#c1e2e5', '#243530', 2.1));
   const sun = new THREE.DirectionalLight('#ffe8b8', 3.1);
   sun.position.set(-12, 28, 8); sun.castShadow = true;
-  sun.shadow.mapSize.set(2048, 2048);
+  sun.shadow.mapSize.set(1024, 1024);
   Object.assign(sun.shadow.camera, { left: -22, right: 22, top: 22, bottom: -22 });
   sun.shadow.bias = -.001; scene.add(sun);
   const materials = new Map();
@@ -132,13 +131,18 @@ export function createRescueWorld(canvas, state) {
     g.rotation.y=Math.atan2(dx,dz);
     person.limbs.forEach((l,i)=>l.rotation.x=Math.sin(time*10+(i%2)*Math.PI)*.4); return false;
   }
+  let needsRender = true;
   const resize = () => {
     const w=canvas.clientWidth,h=canvas.clientHeight,aspect=w/h;
+    // Software WebGL must leave CPU time for local AI and English speech.
+    renderer.setPixelRatio(Math.min(devicePixelRatio,1.5,Math.sqrt(750000/Math.max(1,w*h))));
+    needsRender=true;
     const halfW=aspect<.85?18:17, halfH=halfW/aspect;
     camera.left=-halfW;camera.right=halfW;camera.top=halfH;camera.bottom=-halfH;camera.updateProjectionMatrix();renderer.setSize(w,h,false);
   };
   const observer=new ResizeObserver(resize); observer.observe(canvas); resize();
   function tick(dt, paused=false) {
+    if(paused&&!needsRender)return;
     if (!paused) {
       time+=dt;
       const dx=(keys.has('d')||keys.has('arrowright')?1:0)-(keys.has('a')||keys.has('arrowleft')?1:0);
@@ -176,6 +180,7 @@ export function createRescueWorld(canvas, state) {
       beam.scale.y=from.distanceTo(to)/15;
     }
     renderer.render(scene,camera);
+    needsRender=false;
   }
   return {
     tick, keys,

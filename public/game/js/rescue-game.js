@@ -6,10 +6,14 @@ const $ = selector => document.querySelector(selector);
 const state = createMission();
 let world = null, started = false, paused = false, translated = false, aiAvailable = false, pending = false, sound = true, fallbackStation = 'bridge';
 let lineId = 0, generation = 0, requestController = null, arrivalTime = 0;
+let aiProvider = '', localSpeech = false;
+const radioHistory = [];
+const connectedLabel = () => `${aiProvider==='local'?'Local AI':'Live AI'} replies · mission actions simulated locally`;
 const dialogs = ['#briefing','#guide','#debrief'];
 const isPaused = () => !started || paused || dialogs.some(id=>$(id).open) || document.hidden;
 
 function line(who, text, zh = '', source = 'mission') {
+  if(['you','mia','leo'].includes(who)){radioHistory.push({who,text:text.slice(0,240)});if(radioHistory.length>7)radioHistory.shift();}
   const li=document.createElement('li');li.className=who==='you'?'player':who==='radio'?'system':'';
   const meta=document.createElement('div');meta.className='message-meta';
   const name=document.createElement('span');name.textContent={mia:'Mia',leo:'Leo',you:'You',radio:'Radio'}[who]||who;meta.append(name);
@@ -66,16 +70,19 @@ function result(reply){
 
 async function liveReply(text){
   if(!aiAvailable||pending||isPaused()||state.rescued)return;
-  pending=true;const gen=generation;requestController=new AbortController();
-  const timeout=setTimeout(()=>requestController?.abort(),20000);
+  pending=true;const gen=generation, stage=state.stage;requestController=new AbortController();
+  const timeout=setTimeout(()=>requestController?.abort(),aiProvider==='local'?60000:20000);
   $('#mode-note').textContent='AI radio · squad is replying…';
   try{
-    const response=await fetch('/api/rescue',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text,stage:Math.min(state.stage,3)}),signal:requestController.signal});
+    const payload={message:text,stage:Math.min(stage,3)};
+    if(aiProvider==='local')payload.history=radioHistory.slice(0,-1);
+    const response=await fetch('/api/rescue',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:requestController.signal});
     if(!response.ok)throw Error('radio unavailable');const data=await response.json();
     if(gen!==generation||!started||state.rescued)return;
+    if(stage!==state.stage){$('#mode-note').textContent=connectedLabel();return;}
     if(!Array.isArray(data.lines)||data.lines.length!==2||data.lines.some(l=>!['mia','leo'].includes(l.who)||typeof l.text!=='string'||l.text.length>240))throw Error('invalid reply');
     for(const reply of data.lines)line(reply.who,reply.text,'','ai');
-    $('#mode-note').textContent='Live AI replies · mission actions simulated locally';
+    $('#mode-note').textContent=connectedLabel();
   }catch{
     if(gen!==generation)return;
     $('#mode-note').textContent='AI radio unavailable · mission simulator still works';
@@ -156,6 +163,7 @@ try{const {createRescueWorld}=await import('./rescue-world.js');world=createResc
 $('#loading').hidden=true;$('#briefing').showModal();update();
 let last=performance.now();
 function frame(now){
+  if(now-last<1000/30){requestAnimationFrame(frame);return;}
   const dt=Math.min(.05,(now-last)/1000);last=now;world?.tick(dt,isPaused());
   if(started&&!isPaused()){
     updateAction();
@@ -169,6 +177,15 @@ function frame(now){
   requestAnimationFrame(frame);
 }
 requestAnimationFrame(frame);
-try{const response=await fetch('/api/rescue',{signal:AbortSignal.timeout(5000)});const data=response.ok?await response.json():null;aiAvailable=data?.available===true;}catch{}
-$('#mode-note').textContent=aiAvailable?'Live AI replies · mission actions simulated locally':'Mission simulator · authored English squad dialogue';
-if(aiAvailable)$('#briefing-mode').textContent='AI radio connected. Type in English to get live teammate replies. Mission actions run locally. Text is sent to OpenAI; no microphone is used. Voice uses the shared narration fallback.';
+try{
+  const response=await fetch('/api/rescue',{signal:AbortSignal.timeout(5000)});const data=response.ok?await response.json():null;aiAvailable=data?.available===true;
+  if(aiAvailable){aiProvider=data.provider==='local'?'local':'openai';
+    localSpeech=aiProvider==='local'&&data.speech===true;
+    if(localSpeech)voice.setSpeechProvider(async text=>{
+      const response=await fetch('/api/rescue/voice',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text}),signal:AbortSignal.timeout(15000)});
+      if(!response.ok)throw Error('voice unavailable');return sfx.ctx?.decodeAudioData(await response.arrayBuffer())??null;
+    });
+  }
+}catch{}
+$('#mode-note').textContent=aiAvailable?connectedLabel():'Mission simulator · authored English squad dialogue';
+if(aiAvailable)$('#briefing-mode').textContent=aiProvider==='local'?`Local AI radio connected. Type freely in English: Mia and Leo respond using a model on this preview VM, with recent radio context. No cloud model or microphone. ${localSpeech?'Local neural speech uses one shared English voice.':'Voice uses the shared narration fallback.'} Mission actions still use squad commands.`:'AI radio connected. Type in English to get live teammate replies. Mission actions run locally. Text is sent to OpenAI; no microphone is used. Voice uses the shared narration fallback.';
