@@ -44,3 +44,7 @@ yarn-error.log*
 
 # OS metadata
 .DS_Store
+
+# Optional local AI preview runtime
+__pycache__/
+*.pyc

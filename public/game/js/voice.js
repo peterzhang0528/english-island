@@ -9,6 +9,8 @@ let active = null;
 let queue = [];
 let generation = 0;
 let paused = false;
+// Optional same-origin speech for local previews; bundled narration stays first.
+let speechProvider = null;
 
 async function bufferFor(text) {
   const key = text.trim().toLowerCase();
@@ -67,7 +69,7 @@ async function pump() {
   active = job;
   try {
     await ready;
-    const buffer = await bufferFor(job.text);
+    const buffer = await bufferFor(job.text) ?? (speechProvider && !sfx.muted && !manifest[job.text.trim().toLowerCase()] ? await speechProvider(job.text).catch(() => null) : null);
     if (generation === currentGeneration && active === job) await timedPlay(job.text, buffer, job);
   } catch {} finally {
     job.resolve();
@@ -102,4 +104,4 @@ function setPaused(value) {
   else { active?.resume?.(); window.speechSynthesis?.resume(); }
 }
 
-export const voice = { say, stop, warm, ready, setPaused, has: text => !!manifest[text.trim().toLowerCase()], get speaking() { return !!active; } };
+export const voice = { say, stop, warm, ready, setPaused, setSpeechProvider(provider) { speechProvider = provider; }, has: text => !!manifest[text.trim().toLowerCase()], get speaking() { return !!active; } };
