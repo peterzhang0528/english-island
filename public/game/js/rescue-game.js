@@ -5,7 +5,7 @@ import { sfx } from './sfx.js';
 const $ = selector => document.querySelector(selector);
 const state = createMission();
 let world = null, started = false, paused = false, translated = false, aiAvailable = false, pending = false, sound = true, fallbackStation = 'bridge';
-let lineId = 0, generation = 0, requestController = null, endedTimer = null;
+let lineId = 0, generation = 0, requestController = null, arrivalTime = 0;
 const dialogs = ['#briefing','#guide','#debrief'];
 const isPaused = () => !started || paused || dialogs.some(id=>$(id).open) || document.hidden;
 
@@ -60,7 +60,6 @@ function result(reply){
     line('leo','We did it! Same squad next time?','我们做到了！下次还一起组队？');
     try{localStorage.setItem('island-rescue-completed','true');}catch{}
     $('#command-count').textContent=String(state.calls);
-    endedTimer=setTimeout(()=>{voice.stop();$('#debrief').showModal();syncPause();},3500);
   }
   update();
 }
@@ -138,7 +137,7 @@ $('#start').onclick=()=>{
   update();$('#world').focus();
 };
 $('#again').onclick=()=>{
-  generation++;requestController?.abort();clearTimeout(endedTimer);voice.stop();location.reload();
+  generation++;requestController?.abort();voice.stop();location.reload();
 };
 window.addEventListener('keydown',e=>{
   if(/INPUT|TEXTAREA|BUTTON/.test(document.activeElement?.tagName))return;
@@ -156,7 +155,19 @@ window.addEventListener('pagehide',()=>{generation++;requestController?.abort();
 try{const {createRescueWorld}=await import('./rescue-world.js');world=createRescueWorld($('#world'),state);}catch(error){console.error('Rescue view unavailable',error);$('#world-error').hidden=false;}
 $('#loading').hidden=true;$('#briefing').showModal();update();
 let last=performance.now();
-function frame(now){const dt=Math.min(.05,(now-last)/1000);last=now;world?.tick(dt,isPaused());if(started&&!isPaused())updateAction();requestAnimationFrame(frame);}
+function frame(now){
+  const dt=Math.min(.05,(now-last)/1000);last=now;world?.tick(dt,isPaused());
+  if(started&&!isPaused()){
+    updateAction();
+    // Wait for actual arrival, not wall-clock time: slow devices must see the
+    // boat reach the jetty before a modal pauses the simulation.
+    if(state.rescued&&(world?.rescueArrived||!world)){
+      arrivalTime+=dt;
+      if(arrivalTime>.8){voice.stop();$('#debrief').showModal();syncPause();}
+    }
+  }
+  requestAnimationFrame(frame);
+}
 requestAnimationFrame(frame);
 try{const response=await fetch('/api/rescue',{signal:AbortSignal.timeout(5000)});const data=response.ok?await response.json():null;aiAvailable=data?.available===true;}catch{}
 $('#mode-note').textContent=aiAvailable?'Live AI replies · mission actions simulated locally':'Mission simulator · authored English squad dialogue';

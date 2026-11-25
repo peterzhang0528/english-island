@@ -146,7 +146,9 @@ export function createRescueWorld(canvas, state) {
       if(dx||dz) {
         destination=null;const norm=Math.hypot(dx,dz),p=player.group.position;
         const target={x:p.x+dx/norm*dt*4,z:p.z+dz/norm*dt*4};
-        if(canStand(target.x,target.z)) walk(player,target,dt,4);
+        // Use a full-unit direction target: a frame-sized target falls inside
+        // the NPC arrival tolerance on fast displays and stops keyboard input.
+        if(canStand(target.x,target.z)) walk(player,{x:p.x+dx/norm,z:p.z+dz/norm},dt,4);
       } else if(destination) { if(walk(player,destination,dt,5)) destination=null; }
       else player.limbs.forEach(l=>l.rotation.x=0);
       const miaTarget=state.holding?{x:-1.3,z:2.7}:state.bridge?{x:-3,z:3}:{x:-6.3,z:3.6};
@@ -155,7 +157,9 @@ export function createRescueWorld(canvas, state) {
       if(state.holding && !state.power) mia.limbs[3].rotation.x=-1;
       if(state.power) crank.rotation.z+=dt*2;
       const targetBoat = state.rescued ? {x:9.1,z:3} : {x:12,z:8};
-      boat.position.x+=(targetBoat.x-boat.position.x)*Math.min(1,dt*.45);boat.position.z+=(targetBoat.z-boat.position.z)*Math.min(1,dt*.45);
+      const boatDistance=Math.hypot(targetBoat.x-boat.position.x,targetBoat.z-boat.position.z);
+      const boatStep=boatDistance>0?Math.min(1,dt*1.8/boatDistance):1;
+      boat.position.x+=(targetBoat.x-boat.position.x)*boatStep;boat.position.z+=(targetBoat.z-boat.position.z)*boatStep;
       boat.position.y=-.45+Math.sin(time*1.5)*.08;boat.rotation.z=Math.sin(time*1.1)*.025;
       shipLamp.material=mat(Math.floor(time*2)%3===1?'#d6a466':'#86c9e4',{emissive:Math.floor(time*2)%3===1?'#ac6f31':'#508da9',emissiveIntensity:.8});
       foam.position.x=Math.sin(time*.2)*.3;
@@ -177,6 +181,7 @@ export function createRescueWorld(canvas, state) {
     tick, keys,
     go(station) { if(station!=='bridge'&&!state.bridge)return false; destination={...STATIONS[station]};return true; },
     get station() {const p=player.group.position;return Object.entries(STATIONS).find(([,v])=>Math.hypot(v.x-p.x,v.z-p.z)<1.7)?.[0]??null;},
+    get rescueArrived() {return state.rescued&&Math.hypot(boat.position.x-9.1,boat.position.z-3)<.05;},
     clearKeys(){keys.clear();},
     destroy(){observer.disconnect();renderer.dispose();},
   };
