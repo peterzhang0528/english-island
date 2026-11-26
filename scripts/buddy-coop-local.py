@@ -5,7 +5,7 @@ import json
 import re
 import threading
 import time
-from datetime import date
+from datetime import datetime, timezone
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -32,7 +32,7 @@ SCHEMA = {'type': 'object', 'additionalProperties': False, 'required': ['action'
 
 
 def text_ok(value, limit):
-    return isinstance(value, str) and 0 < len(value.strip()) <= limit and not re.search(r'[<>\x00-\x1f\x7f]', value)
+    return isinstance(value, str) and 0 < len(value.strip()) <= limit and not re.search(r'[\x00-\x1f\x7f]', value)
 
 
 def validate_input(data):
@@ -50,11 +50,11 @@ def validate_input(data):
     for line in history:
         if not isinstance(line, dict) or set(line) != {'who', 'text'} or line['who'] not in (*SPEAKERS, 'you') or not text_ok(line['text'], 240):
             raise ValueError('Invalid history')
-    return {**data, 'profile': PROFILES[profile] if profile is not None and date.today().isoformat() <= '2026-12-03' else None}
+    return {**data, 'profile': PROFILES[profile] if profile is not None and datetime.now(timezone.utc).date().isoformat() <= '2026-12-03' else None}
 
 
 def validate_output(data):
-    if not isinstance(data, dict) or set(data) != {'action', 'who', 'text'} or data['action'] not in ACTIONS or data['who'] not in SPEAKERS or not text_ok(data['text'], 240):
+    if not isinstance(data, dict) or set(data) != {'action', 'who', 'text'} or data['action'] not in ACTIONS or data['who'] not in SPEAKERS or not text_ok(data['text'], 240) or re.search(r'[<>]', data['text']):
         raise ValueError('Invalid model output')
     return {'source': 'ai', 'action': data['action'], 'lines': [{'who': data['who'], 'text': data['text']}]}
 
