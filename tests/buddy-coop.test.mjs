@@ -75,3 +75,11 @@ test('unrecognized chat is honest, not silently treated as success', () => {
   assert.match(messages.at(-1).text, /scripted demo teammate/);
   assert.equal(state.built, false); assert.equal(state.lit, false);
 });
+
+test('recalling a paper bridge after collecting planks does not order construction', () => {
+  const { game, state, messages, walk } = fixture(); game.start();
+  walk(PLACES.timber); game.interact();
+  game.send('Remember the paper bridge we made in class?');
+  assert.equal(state.building, false);
+  assert.match(messages.at(-1).text, /pretend class.*paper bridge/);
+});
