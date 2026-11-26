@@ -15,7 +15,7 @@ function emit({ who, text, source }) {
   const body = document.createElement('div'), name = document.createElement('strong'), p = document.createElement('p');
   name.textContent = (who === 'you' ? game.state.name : TEAM[who].name) + (who === 'you' ? '' : source === 'ai' ? ' · LIVE AI' : ' · SCRIPTED'); p.textContent = text;
   body.append(name, p); article.append(avatar, body); chat.append(article);
-  // Keep this ephemeral log bounded; never persist or transmit messages.
+  // Keep this ephemeral log bounded; transmit context only with live-AI opt-in.
   while (chat.children.length > 50) chat.firstElementChild.remove();
   chat.scrollTop = chat.scrollHeight;
   history.push({ who, text: text.slice(0, 240) });
@@ -23,6 +23,8 @@ function emit({ who, text, source }) {
 }
 function reset(profile = PROFILES[0]) {
   pending?.abort(); pending = null; history.length = 0;
+  input.value = ''; liveAI.checked = false;
+  if (!liveAI.disabled) liveAI.onchange?.();
   keys.clear(); chat.replaceChildren(); world.reset(); finishedShown = false; lastUI = '';
   game = createAdventure({ profile, emit }); updateUI();
 }
