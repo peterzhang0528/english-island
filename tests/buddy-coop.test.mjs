@@ -83,3 +83,13 @@ test('recalling a paper bridge after collecting planks does not order constructi
   assert.equal(state.building, false);
   assert.match(messages.at(-1).text, /pretend class.*paper bridge/);
 });
+
+test('remember-to teamwork reminders remain action requests, not memories', () => {
+  const { game, state, walk, advance } = fixture(); game.start();
+  walk(PLACES.timber); game.interact();
+  game.send('Buddy, remember to build the bridge.');
+  assert.equal(state.building, true);
+  advance();
+  game.send('Nova, remember to hold the switch.');
+  assert.equal(state.goingToSwitch, true);
+});

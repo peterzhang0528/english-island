@@ -88,7 +88,7 @@ export function createAdventure({ profile = PROFILES[0], today, emit = () => {} 
     if (!text) return;
     if (echo) say('you', text);
     const heard = text.normalize('NFKC').toLowerCase().replace(/[’]/g, "'");
-    if (/\b(remember|class|name)\b/.test(heard)) {
+    if (/\b(class|name|remember(?!\s+to\b))\b/.test(heard)) {
       say('buddy', memory ? `Of course, ${state.name}. In our pretend class we were ${memory.classCue.activity}. You said, “${memory.classCue.targetPhrase}”` : `You’re ${state.name}. We’re making new memories on this island today!`);
     } else if (/\b(bridge|build|fix|planks?)\b/.test(heard)) {
       if (state.built) return say('buddy', 'Our bridge is ready. Everyone can cross!');
