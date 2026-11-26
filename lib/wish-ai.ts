@@ -21,15 +21,15 @@ type HandlerOptions = {
   timeoutMs?: number;
   bodyTimeoutMs?: number;
 };
-class BodyLimitError extends Error {}
+export class BodyLimitError extends Error {}
 
-function json(status: number, value: unknown, extraHeaders?: Record<string,string>) {
+export function json(status: number, value: unknown, extraHeaders?: Record<string,string>) {
   return new Response(JSON.stringify(value), { status, headers: { 'Content-Type':'application/json; charset=utf-8', 'Cache-Control':'no-store', 'X-Content-Type-Options':'nosniff', ...extraHeaders } });
 }
 function problem(status: number, code: string, message: string, extraHeaders?: Record<string,string>) {
   return json(status,{error:{code,message}},extraHeaders);
 }
-async function readBounded(body: ReadableStream<Uint8Array> | null, limit: number, signal?: AbortSignal): Promise<string> {
+export async function readBounded(body: ReadableStream<Uint8Array> | null, limit: number, signal?: AbortSignal): Promise<string> {
   if (signal?.aborted) throw new Error('Body read aborted');
   if (!body) return '';
   const reader=body.getReader(); const chunks:Uint8Array[]=[]; let size=0;
