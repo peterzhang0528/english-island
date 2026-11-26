@@ -82,11 +82,11 @@ export function createAdventure({ profile = PROFILES[0], today, emit = () => {} 
       say('pip', !state.wood ? 'See the little stack of planks? Walk to Timber grove, then collect them.' : !state.built ? 'Buddy is ready to help with the bridge. Try asking him!' : !state.lit ? 'Let’s go to the star lantern. Nova can keep its switch on.' : 'The picnic blanket is waiting for our whole team!');
     }
   }
-  function send(raw) {
+  function send(raw, { echo = true } = {}) {
     if (!state.started || state.paused) return;
     const text = String(raw).trim().slice(0, 180);
     if (!text) return;
-    say('you', text);
+    if (echo) say('you', text);
     const heard = text.normalize('NFKC').toLowerCase().replace(/[’]/g, "'");
     if (/\b(bridge|build|fix|planks?)\b/.test(heard)) {
       if (state.built) return say('buddy', 'Our bridge is ready. Everyone can cross!');
